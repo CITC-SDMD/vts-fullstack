@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
-    <title>VTTS</title>
+    <title>Vaw Tracking System</title>
 </head>
 
 <body class="h-full">
@@ -28,7 +28,7 @@
 
                 <div class="mt-10">
                     <div>
-                        <form action="" method="POST" class="space-y-6" autocomplete="off">
+                        <form action="{{ route('auth.login') }}" method="POST" class="space-y-6" autocomplete="off">
                             @csrf
                             <div>
                                 <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
@@ -85,6 +85,7 @@
         </div>
     </div>
 
+    @include('sweetalert::alert')
     <script src="{{ asset('scripts/jquery.min.js') }}"></script>
 </body>
 

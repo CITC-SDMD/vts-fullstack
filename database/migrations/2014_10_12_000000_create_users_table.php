@@ -22,6 +22,10 @@ return new class extends Migration
             $table->string('password');
             $table->timestamps();
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('agency_id')->references('id')->on('referral_agencies')->onUpdate('cascade')->onDelete('cascade');
+        });
     }
 
     /**
