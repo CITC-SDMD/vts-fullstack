@@ -31,7 +31,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-
         Schema::table('clients', function (Blueprint $table) {
             $table->foreign('barangay_id')->references('id')->on('barangays')->onUpdate('cascade')->onDelete('cascade');
         });

@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
 
     protected $fillable = [
         'agency_id',
@@ -21,7 +21,7 @@ class User extends Authenticatable
         'contact_number',
         'agency_address',
         'email',
-        'password'
+        'password',
     ];
 
     public function agency(): BelongsTo
