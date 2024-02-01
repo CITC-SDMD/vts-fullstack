@@ -30,4 +30,6 @@ Route::prefix('dashboard')->group(function () {
 
 Route::prefix('clients')->group(function () {
     Route::get('/', [ClientController::class, 'index'])->name('client.index');
+
+    Route::post('/check', [ClientController::class, 'showByFullname'])->name('client.check');
 });

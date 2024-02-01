@@ -2,18 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClientFullnameRequest;
+use App\Interface\Repositories\BarangayRepositoryInterface;
+use App\Interface\Repositories\ClientRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function __construct()
-    {
+    private $clientRepository;
+
+    private $barangayRepository;
+
+    public function __construct(
+        ClientRepositoryInterface $clientRepository,
+        BarangayRepositoryInterface $barangayRepository
+    ) {
         $this->middleware('auth');
+        $this->clientRepository = $clientRepository;
+        $this->barangayRepository = $barangayRepository;
     }
 
     public function index()
     {
-        return view('pages.clients');
+        $clients = $this->clientRepository->index();
+        $barangays = $this->barangayRepository->index();
+
+        $data = (object) [
+            'clients' => $clients,
+            'barangays' => $barangays,
+            'pagination' => $clients->links('components.pagination')
+        ];
+
+        return view('pages.clients', [
+            'data' => $data
+        ]);
     }
 
     public function create()
@@ -29,6 +51,13 @@ class ClientController extends Controller
     public function show(string $id)
     {
         //
+    }
+
+    public function showByFullname(ClientFullnameRequest $request)
+    {
+        $user = $this->clientRepository->showByFullname($request);
+
+        return $user;
     }
 
     public function edit(string $id)
