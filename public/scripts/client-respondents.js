@@ -5,20 +5,6 @@ $(document).ready(function () {
         allowInput: false,
     });
 
-    $('#new-client-button').click(function () {
-        $('#new-client-modal').toggle('hidden');
-    });
-
-    $('#new-client-close-button').click(function () {
-        $('#new-client-modal').toggle('hidden');
-        $('#new-client-form').trigger('reset');
-    });
-
-    $('#close-complete-client-modal-button').click(function () {
-        $('#complete-client-modal').toggle('hidden');
-        $('#complete-client-form').trigger('reset');
-    });
-
     $('#birthdate').change(function () {
         var dob = $(this).val();
         var birthDate = new Date(dob);
@@ -30,7 +16,24 @@ $(document).ready(function () {
         $('#age').val(age);
     });
 
-    $('#new-client-form').submit(function (event) {
+    $('#respondents-button').addClass('active-button');
+    $('#respondents-aria').addClass('active-aria');
+
+    $('#new-respondent-button').click(function () {
+        $('#new-client-modal').toggle('hidden');
+    });
+
+    $('#new-respondent-close-button').click(function () {
+        $('#new-client-modal').toggle('hidden');
+        $('#new-client-form').trigger('reset');
+    });
+
+    $('#close-complete-respondent-modal-button').click(function () {
+        $('#complete-respondent-modal').toggle('hidden');
+        $('#complete-respondent-form').trigger('reset');
+    });
+
+    $('#new-respondent-form').submit(function (event) {
         event.preventDefault();
         var route = $(this).data('route');
 
@@ -45,14 +48,14 @@ $(document).ready(function () {
             },
             success: function (response) {
                 if (response) {
-                    window.location.href = '/clients/' + response.uuid + '/profile';
+                    console.log(response);
                 } else {
-                    $('#new-client-modal').toggle('hidden');
-                    $('#client-firstname').val($('#firstname').val());
-                    $('#client-middlename').val($('#middlename').val());
-                    $('#client-lastname').val($('#lastname').val());
-                    $('#complete-client-modal').toggle('hidden');
-                    $('#new-client-form').trigger('reset');
+                    $('#new-respondent-modal').toggle('hidden');
+                    $('#respondent-firstname').val($('#firstname').val());
+                    $('#respondent-middlename').val($('#middlename').val());
+                    $('#respondent-lastname').val($('#lastname').val());
+                    $('#complete-respondent-modal').toggle('hidden');
+                    $('#new-respondent-form').trigger('reset');
                 }
             },
             error: function (response) {

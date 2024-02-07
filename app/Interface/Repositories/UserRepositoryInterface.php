@@ -8,7 +8,7 @@ interface UserRepositoryInterface
 
     public function create(object $payload);
 
-    public function showById(int $userId);
+    public function showByUuid(string $uuid);
 
     public function showByEmail(string $email);
 

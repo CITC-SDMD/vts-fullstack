@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Barangay;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
 
 class BarangaySeeder extends Seeder
 {

@@ -5,3 +5,11 @@
 .active-link {
     @apply bg-violet-900 text-white;
 }
+
+.active-button {
+    @apply text-gray-900;
+}
+
+.active-aria {
+    @apply bg-violet-500;
+}

@@ -9,7 +9,23 @@ class ClientRepository implements ClientRepositoryInterface
 {
     public function index()
     {
-        return Client::paginate(config('pagination.paginate'));
+        return Client::with(['barangay'])->paginate(config('pagination.paginate'));
+    }
+
+    public function search(object $payload)
+    {
+        return Client::with(['barangay'])
+            ->where(function ($query) use ($payload) {
+                $query->where('firstname', 'LIKE', "%$payload->search%")
+                    ->orWhere('middlename', 'LIKE', "%$payload->search%")
+                    ->orWhere('lastname', 'LIKE', "%$payload->search%");
+            })
+            ->orWhereHas('barangay', function ($query) use ($payload) {
+                $query->where('brgy_code', 'LIKE', "%$payload->search%")
+                    ->orWhere('brgy_name', 'LIKE', "%$payload->search%");
+            })
+            ->orderBy('id', 'desc')
+            ->paginate(config('pagination.paginate'));
     }
 
     public function create(object $payload)
@@ -35,9 +51,17 @@ class ClientRepository implements ClientRepositoryInterface
         return $client->fresh();
     }
 
-    public function showById(int $clientId)
+    public function showRespondents($respondentIds)
     {
-        return Client::findOrFail($clientId);
+        return Client::whereIn('id', $respondentIds)
+            ->paginate(config('pagination.shortPage'));
+    }
+
+    public function showByUuid(string $uuid)
+    {
+        return Client::with(['barangay', 'respondents', 'respondents.respondent'])
+            ->where('uuid', $uuid)
+            ->first();
     }
 
     public function showByFullname(object $payload)

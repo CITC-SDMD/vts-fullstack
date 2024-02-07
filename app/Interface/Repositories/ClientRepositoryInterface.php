@@ -6,9 +6,13 @@ interface ClientRepositoryInterface
 {
     public function index();
 
+    public function search(object $payload);
+
     public function create(object $payload);
 
-    public function showById(int $clientId);
+    public function showRespondents($respondentIds);
+
+    public function showByUuid(string $uuid);
 
     public function showByFullname(object $payload);
 

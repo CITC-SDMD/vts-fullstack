@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('barangay_id');
+            $table->uuid();
             $table->string('firstname');
             $table->string('middlename');
             $table->string('lastname');

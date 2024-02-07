@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,10 +10,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Client extends Model
 {
-    use HasFactory;
+    use HasFactory, UsesUuid;
 
     protected $fillable = [
         'brgy_id',
+        'uuid',
         'firstname',
         'middlename',
         'lastname',
@@ -33,6 +35,11 @@ class Client extends Model
         'is_4ps_beneficiary' => 'boolean',
     ];
 
+    public function getFullNameAttribute()
+    {
+        return $this->firstname . ' ' . $this->middlename . ' ' . $this->lastname;
+    }
+
     public function barangay(): BelongsTo
     {
         return $this->belongsTo(Barangay::class);
@@ -46,5 +53,10 @@ class Client extends Model
     public function caseProfiles(): HasMany
     {
         return $this->hasMany(CaseProfile::class);
+    }
+
+    public function respondents(): HasMany
+    {
+        return $this->hasMany(Respondent::class, 'complainant_id');
     }
 }

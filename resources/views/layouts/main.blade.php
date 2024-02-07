@@ -13,7 +13,6 @@
 
 <body class="h-full">
     <div>
-        <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
         <div class="relative z-50 hidden" id="sidebar-menu" role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-gray-900/80"></div>
             <div class="fixed inset-0 flex">
@@ -247,12 +246,11 @@
                             </button>
 
                             <div class="absolute hidden right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
-                                role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button"
-                                tabindex="-1">
-                                <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900"
-                                    role="menuitem" tabindex="-1" id="user-menu-item-0">Your profile</a>
-                                <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900"
-                                    role="menuitem" tabindex="-1" id="user-menu-item-1">Sign out</a>
+                                role="menu" aria-orientation="vertical" id="user-menu"
+                                aria-labelledby="user-menu-button" tabindex="-1">
+                                <a href="{{ route('auth.logout') }}"
+                                    class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem"
+                                    tabindex="-1" id="user-menu-item-1">Sign out</a>
                             </div>
                         </div>
                     </div>
@@ -266,6 +264,8 @@
             </main>
         </div>
     </div>
+
+    @include('sweetalert::alert')
 
     <script src="{{ asset('scripts/jquery.min.js') }}"></script>
     <script src="{{ asset('scripts/main.js') }}"></script>

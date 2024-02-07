@@ -20,6 +20,11 @@ class Child extends Model
         'educ_level',
     ];
 
+    public function getFullNameAttribute()
+    {
+        return $this->firstname . ' ' . $this->middlename . ' ' . $this->lastname;
+    }
+
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);

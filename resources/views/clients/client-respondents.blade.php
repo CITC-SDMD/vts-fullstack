@@ -1,124 +1,77 @@
-@extends('layouts.main')
-
-@section('title', 'Clients | VAW Tracking System')
+@extends('clients.client-profile')
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 @endsection
 
-@section('content')
-    <div class="px-4 sm:px-6 lg:px-8">
-        <div class="sm:flex sm:items-center sm:justify-center">
-            <div class="sm:flex-auto">
-                <label for="search" class="block text-sm font-medium leading-6 text-gray-900">Search client</label>
-                <form action="{{ route('client.search') }}" method="post" autocomplete="off">
-                    @csrf
-                    <div class="relative mt-2 flex items-center gap-x-4">
-                        <input type="text" name="search" id="search" required
-                            class="block lg:w-96 w-40 rounded-md border-0 px-3 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-violet-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
-                            placeholder="Search by first name, middle name, or last name">
-                        <button type="sumbmit"
-                            class="inline-flex items-center gap-x-1.5 rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
-                            Search
-                            <svg class="-mr-0.5 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                            </svg>
-                        </button>
-                    </div>
-                </form>
-            </div>
-            <div class="flex items-center justify-center mt-4 md:mt-8 lg:mt-8">
-                <button type="button" id="new-client-button"
-                    class="block rounded-md w-full bg-violet-600 px-3 py-1.5 text-center text-sm font-semibold
-                        text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2
-                        focus-visible:outline-offset-2 focus-visible:outline-violet-600">
-                    Client Intake
-                </button>
-            </div>
-        </div>
-
-        <div class="mt-8 flow-root">
-            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                    <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-300">
-                            <thead class="bg-gray-50">
+@section('client-profile')
+    <div class="flex mt-4 items-center justify-end">
+        <button type="button" id="new-respondent-button"
+            class="block rounded-md bg-violet-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
+            Create Respondent
+        </button>
+    </div>
+    <div class="mt-4 flow-root">
+        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 align-middle">
+                <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col"
+                                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                    Name
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    Contact number
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    Age
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    Sex
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    Civil Status
+                                </th>
+                                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                                    <span class="sr-only">Edit</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                            @foreach ($data->respondents as $respondent)
                                 <tr>
-                                    <th scope="col"
-                                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                        Full name
-                                    </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Barangay Code
-                                    </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Contact number
-                                    </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Age
-                                    </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Sex
-                                    </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Civil Status
-                                    </th>
-                                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                        <span class="sr-only">View</span>
-                                    </th>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                        {{ $respondent->full_name }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        {{ $respondent->contact_no }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        {{ $respondent->age }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        {{ $respondent->sex }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        {{ $respondent->civil_status }}
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <a href="#" class="text-violet-600 hover:text-violet-900">View</a>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200 bg-white">
-                                @foreach ($data->clients as $client)
-                                    <tr>
-                                        <td
-                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                            {{ $client->full_name }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $client->barangay->brgy_code }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $client->contact_no }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $client->age }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $client->sex }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $client->civil_status }}
-                                        </td>
-                                        <td
-                                            class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                            <a href="{{ route('client.show', $client->uuid) }}"
-                                                class="inline-flex gap-x-1 items-center rounded bg-indigo-50 px-4 py-1 text-xs font-semibold text-violet-600 shadow-sm hover:bg-violet-100">
-                                                <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                                </svg>
-                                                View
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                            </tbody>
-                        </table>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="mt-4 flex justify-center gap-x-8">
-        {{ $data->pagination }}
+    <div class="flex items-center justify-center mt-4">
+        {{ $data->respondentsPagination }}
     </div>
 
     <div class="relative z-10 hidden" id="new-client-modal" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -129,7 +82,7 @@
                     class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                     <div class="flex justify-between">
                         <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Client Intake</h3>
-                        <button id="new-client-close-button"
+                        <button id="new-respondent-close-button"
                             class="rounded bg-violet-50 px-2 py-1 text-xs font-semibold text-violet-600 shadow-sm hover:bg-violet-100">
                             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -139,7 +92,7 @@
                         </button>
                     </div>
                     <div class="mt-3 border-b"></div>
-                    <form id="new-client-form" data-csrf="{{ csrf_token() }}" data-route="{{ route('client.check') }}"
+                    <form id="new-respondent-form" data-csrf="{{ csrf_token() }}" data-route="{{ route('client.check') }}"
                         method="post" autocomplete="off">
                         <div class="mt-4 space-y-2">
                             <div>
@@ -185,7 +138,7 @@
         </div>
     </div>
 
-    <div class="relative z-10 hidden" id="complete-client-modal" aria-labelledby="modal-title" role="dialog"
+    <div class="relative z-10 hidden" id="complete-respondent-modal" aria-labelledby="modal-title" role="dialog"
         aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
         <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
@@ -197,7 +150,7 @@
                             <h3 class="text-base font-semibold leading-6 text-gray-900">Create New Client</h3>
                         </div>
                         <div class="flex justify-end">
-                            <button type="button" id="close-complete-client-modal-button"
+                            <button type="button" id="close-complete-respondent-modal-button"
                                 class="rounded bg-violet-50 px-2 py-1 text-xs font-semibold text-violet-600 shadow-sm hover:bg-violet-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -206,7 +159,7 @@
                             </button>
                         </div>
                     </div>
-                    <form action="{{ route('client.store') }}" method="post" id="complete-client-form"
+                    <form action="{{ route('client.store.respondent') }}" method="post" id="complete-respondent-form"
                         autocomplete="off">
                         @csrf
                         <div class="mt-4 lg:grid lg:grid-cols-2 gap-x-4 gap-y-0 pb-4">
@@ -215,11 +168,13 @@
                                     First name<span class="text-red-500">*</span>
                                 </label>
                                 <div>
-                                    <input type="text" name="firstname" id="client-firstname"
+                                    <input type="hidden" name="complainant_id" id="complainant_id"
+                                        value="{{ session('client.id') }}">
+                                    <input type="text" name="firstname" id="respondent-firstname"
                                         class="block w-full rounded-md border-0 px-3 py-1.5
-                                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
-                                        placeholder:text-gray-400 focus:ring-2 focus:ring-inset
-                                        focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                    text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                                    placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                                    focus:ring-violet-600 sm:text-sm sm:leading-6"
                                         required>
                                 </div>
                             </div>
@@ -228,11 +183,11 @@
                                     Middle name<span class="text-red-500">*</span>
                                 </label>
                                 <div>
-                                    <input type="text" name="middlename" id="client-middlename"
+                                    <input type="text" name="middlename" id="respondent-middlename"
                                         class="block w-full rounded-md border-0 px-3 py-1.5
-                                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
-                                        placeholder:text-gray-400 focus:ring-2 focus:ring-inset
-                                        focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                    text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                                    placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                                    focus:ring-violet-600 sm:text-sm sm:leading-6"
                                         required>
                                 </div>
                             </div>
@@ -241,11 +196,11 @@
                                     Last name<span class="text-red-500">*</span>
                                 </label>
                                 <div>
-                                    <input type="text" name="lastname" id="client-lastname"
+                                    <input type="text" name="lastname" id="respondent-lastname"
                                         class="block w-full rounded-md border-0 px-3 py-1.5
-                                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
-                                        placeholder:text-gray-400 focus:ring-2 focus:ring-inset
-                                        focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                    text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                                    placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                                    focus:ring-violet-600 sm:text-sm sm:leading-6"
                                         required>
                                 </div>
                             </div>
@@ -256,9 +211,9 @@
                                 <div>
                                     <input type="text" name="contact_no" id="contact_no"
                                         class="block w-full rounded-md border-0 px-3 py-1.5
-                                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
-                                        placeholder:text-gray-400 focus:ring-2 focus:ring-inset
-                                        focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                    text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                                    placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                                    focus:ring-violet-600 sm:text-sm sm:leading-6"
                                         required>
                                 </div>
                             </div>
@@ -269,9 +224,9 @@
                                 <div>
                                     <input type="text" name="birthdate" id="birthdate"
                                         class="block w-full rounded-md border-0 px-3 py-1.5
-                                    text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
-                                    placeholder:text-gray-400 focus:ring-2 focus:ring-inset
-                                    focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                                placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                                focus:ring-violet-600 sm:text-sm sm:leading-6"
                                         required>
                                 </div>
                             </div>
@@ -282,8 +237,8 @@
                                 <div>
                                     <select id="sex" name="sex"
                                         class="mt-1 block w-full rounded-md border-0 px-2 py-1.5 pr-10
-                                        text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
-                                        focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                    text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
+                                    focus:ring-violet-600 sm:text-sm sm:leading-6"
                                         required>
                                         <option value="" selected disabled>Select option</option>
                                         <option value="male">Male</option>
@@ -298,9 +253,9 @@
                                 <div>
                                     <input type="number" name="age" min="1" id="age"
                                         class="block w-full rounded-md border-0 px-3 py-1.5
-                                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
-                                        placeholder:text-gray-400 focus:ring-2 focus:ring-inset
-                                        focus:ring-violet-600 sm:text-sm sm:leading-6">
+                                    text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                                    placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                                    focus:ring-violet-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div>
@@ -310,8 +265,8 @@
                                 <div>
                                     <select id="civil_status" name="civil_status"
                                         class="mt-1 block w-full rounded-md border-0 px-2 py-1.5 pr-10
-                                        text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
-                                        focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                    text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
+                                    focus:ring-violet-600 sm:text-sm sm:leading-6"
                                         required>
                                         <option value="" selected disabled>Select option</option>
                                         <option value="single">Single</option>
@@ -328,8 +283,8 @@
                                 <div>
                                     <select id="educ_attain" name="educ_attain"
                                         class="mt-1 block w-full rounded-md border-0 px-2 py-1.5 pr-10
-                                        text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
-                                        focus:ring-violet-600 sm:text-sm sm:leading-6">
+                                    text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
+                                    focus:ring-violet-600 sm:text-sm sm:leading-6">
                                         <option value="" selected disabled>Select option</option>
                                         <option value="No formal education">No formal education</option>
                                         <option value="Primary education">Primary education</option>
@@ -349,9 +304,9 @@
                                 <div>
                                     <input type="text" name="occupation" id="occupation"
                                         class="block w-full rounded-md border-0 px-3 py-1.5
-                                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
-                                        placeholder:text-gray-400 focus:ring-2 focus:ring-inset
-                                        focus:ring-violet-600 sm:text-sm sm:leading-6">
+                                    text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                                    placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                                    focus:ring-violet-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div>
@@ -361,8 +316,8 @@
                                 <div>
                                     <select id="barangay_id" name="barangay_id"
                                         class="mt-1 block w-full rounded-md border-0 px-2 py-1.5 pr-10
-                                        text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
-                                        focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                    text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
+                                    focus:ring-violet-600 sm:text-sm sm:leading-6"
                                         required>
                                         <option value="" selected disabled>Select option</option>
                                         @foreach ($data->barangays as $barangay)
@@ -397,8 +352,8 @@
                                 <div>
                                     <select id="civil_status" name="civil_status"
                                         class="mt-1 block w-full rounded-md border-0 px-2 py-1.5 pr-10
-                                        text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
-                                        focus:ring-violet-600 sm:text-sm sm:leading-6">
+                                    text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
+                                    focus:ring-violet-600 sm:text-sm sm:leading-6">
                                         <option value="" selected disabled>Select option</option>
                                         <option value="non-ip">Non-IP</option>
                                         <option value="ip">IP</option>
@@ -413,8 +368,8 @@
                                 <div>
                                     <select id="is_4ps_beneficiary" name="is_4ps_beneficiary"
                                         class="mt-1 block w-full rounded-md border-0 px-2 py-1.5 pr-10
-                                        text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
-                                        focus:ring-violet-600 sm:text-sm sm:leading-6">
+                                    text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
+                                    focus:ring-violet-600 sm:text-sm sm:leading-6">
                                         <option value="" selected disabled>Select option</option>
                                         <option value="1">Member</option>
                                         <option value="0">Non-member</option>
@@ -425,9 +380,9 @@
                         <div class="mt-4 flex justify-center">
                             <button type="submit"
                                 class="rounded-md bg-violet-600 px-6 py-2 text-sm font-semibold
-                                    text-white shadow-sm hover:bg-violet-500 focus-visible:outline
-                                    focus-visible:outline-2 focus-visible:outline-offset-2
-                                    focus-visible:outline-violet-600">
+                                text-white shadow-sm hover:bg-violet-500 focus-visible:outline
+                                focus-visible:outline-2 focus-visible:outline-offset-2
+                                focus-visible:outline-violet-600">
                                 Submit
                             </button>
                         </div>
@@ -440,5 +395,5 @@
 
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="{{ asset('scripts/clients.js') }}"></script>
+    <script src="{{ asset('scripts/client-respondents.js') }}"></script>
 @endsection

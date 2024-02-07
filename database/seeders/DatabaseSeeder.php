@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,7 +18,11 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             AgencySeeder::class,
             UserSeeder::class,
-            ClientSeeder::class
+            ClientSeeder::class,
+            RelationshipSeeder::class,
+            CaseCategorySeeder::class,
+            AbuseCategorySeeder::class,
+            AbuseSubcategorySeeder::class,
         ]);
     }
 }

@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChildController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
+use App\Models\Relationship;
+use App\Models\Respondent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +33,16 @@ Route::prefix('dashboard')->group(function () {
 
 Route::prefix('clients')->group(function () {
     Route::get('/', [ClientController::class, 'index'])->name('client.index');
-
+    Route::get('/{uuid}/profile', [ClientController::class, 'show'])->name('client.show');
+    Route::get('/{uuid}/profile/cases', [ClientController::class, 'showCases'])->name('client.show.cases');
+    Route::get('/{uuid}/profile/respondents', [ClientController::class, 'showRespondents'])->name('client.show.respondents');
+    Route::get('/{uuid}/profile/dependents', [ClientController::class, 'showDependents'])->name('client.show.dependents');
     Route::post('/check', [ClientController::class, 'showByFullname'])->name('client.check');
+    Route::post('/', [ClientController::class, 'store'])->name('client.store');
+    Route::post('/respondent', [ClientController::class, 'storeRespondent'])->name('client.store.respondent');
+    Route::post('/search', [ClientController::class, 'search'])->name('client.search');
+});
+
+Route::prefix('child')->group(function () {
+    Route::post('/', [ChildController::class, 'store'])->name('child.store');
 });

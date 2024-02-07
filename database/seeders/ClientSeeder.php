@@ -6,9 +6,8 @@ use App\Models\Barangay;
 use App\Models\Client;
 use Carbon\Carbon;
 use DateTime;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
 
 class ClientSeeder extends Seeder
 {
@@ -30,7 +29,7 @@ class ClientSeeder extends Seeder
             $randomDate = new DateTime("$randomYear-$randomMonth-$randomDay");
             $formattedRandomDate = $randomDate->format('Y-m-d');
 
-            $randomBirthdate = $faker->dateTimeBetween('-' . $maxBirthYear . ' years', '-18 years');
+            $randomBirthdate = $faker->dateTimeBetween('-'.$maxBirthYear.' years', '-18 years');
             $formattedBirthdate = Carbon::parse($randomBirthdate)->format('Y-m-d');
             $currentAge = Carbon::parse($formattedBirthdate)->diffInYears();
             $barangay = Barangay::inRandomOrder()->first();

@@ -11,11 +11,11 @@ class Respondent extends Model
     use HasFactory;
 
     protected $fillable = [
-        'client_id',
+        'complainant_id',
         'respondent_id',
     ];
 
-    public function client(): BelongsTo
+    public function complainant(): BelongsTo
     {
         return $this->belongsTo(Client::class);
     }

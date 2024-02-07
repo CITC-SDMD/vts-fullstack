@@ -28,9 +28,9 @@ class UserRepository implements UserRepositoryInterface
         return $user->fresh();
     }
 
-    public function showById(int $userId)
+    public function showByUuid(string $uuid)
     {
-        return User::findOrFail($userId);
+        return User::where('uuid', $uuid)->first();
     }
 
     public function showByEmail(string $email)

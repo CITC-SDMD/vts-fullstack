@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('agency_id');
+            $table->uuid();
             $table->string('firstname');
             $table->string('lastname');
             $table->string('contact_number');
