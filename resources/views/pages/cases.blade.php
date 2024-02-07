@@ -1,0 +1,253 @@
+@extends('layouts.main')
+
+@section('title', 'Case Profile | VAW Tracking System')
+
+@section('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
+        integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endsection
+
+@section('content')
+    <div class="px-4 sm:px-6 lg:px-8 lg:mx-20">
+        <div class="sm:flex sm:items-center sm:justify-center">
+            <div class="sm:flex-auto">
+                <label for="search" class="block text-sm font-medium leading-6 text-gray-900">Search cases</label>
+                <form action="#" method="post" autocomplete="off">
+                    @csrf
+                    <div class="relative mt-2 flex items-center gap-x-4">
+                        <input type="text" name="search" id="search"
+                            class="block lg:w-96 w-40 rounded-md border-0 px-3 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            placeholder="Search by case name, client first name, or client last name">
+                        <button type="sumbmit"
+                            class="inline-flex items-center gap-x-1.5 rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
+                            Search
+                            <svg class="-mr-0.5 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="flex items-center justify-center mt-4 md:mt-8 lg:mt-8">
+                <button type="button" id="new-case-button"
+                    class="block rounded-md w-full bg-violet-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
+                    Create new case
+                </button>
+            </div>
+        </div>
+
+        <div class="mt-8 flow-root">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-300">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col"
+                                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                        Case Profile ID
+                                    </th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Case Code
+                                    </th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Complainant
+                                    </th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Respondent
+                                    </th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Case category
+                                    </th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Abuse category
+                                    </th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Abuse Subcategory
+                                    </th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Case created</th>
+                                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                                        <span class="sr-only">Edit</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 bg-white">
+                                @foreach ($cases as $case)
+                                    <tr>
+                                        <td
+                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                            {{ $case->case_profile_id }}
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {{ $case->case_code }}
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {{ $case->complainant->full_name }}
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {{ $case->respondent->full_name }}
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {{ $case->caseCategory->category_name }}
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {{ $case->abuseCategory->abuse_type ?? 'N/A' }}
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {{ $case->abuseSubcategory->type ?? 'N/A' }}
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {{ \Carbon\Carbon::parse($case['created_at'])->format('M d, Y') }}
+                                        </td>
+                                        <td
+                                            class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                            <a href="#" class="text-violet-600 hover:text-violet-900">View
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex items-center justify-center">
+        {{ $casesPagination }}
+    </div>
+
+    <div class="relative z-10 hidden" id="new-case-modal" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div
+                    class="relative transform overflow-hidden h-128 rounded-lg bg-white px-6 pb-4 pt-5 text-left shadow-xl transition-all lg:w-1/2 w-full">
+                    <div class="border-b border-gray-200 pb-2 lg:grid lg:grid-cols-2">
+                        <div class="lg:col-span-1">
+                            <h3 class="text-base font-semibold leading-6 text-gray-900">Create New Case</h3>
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="button" id="new-case-close-button"
+                                class="rounded bg-violet-50 px-2 py-1 text-xs font-semibold text-violet-600 shadow-sm hover:bg-violet-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <form action="#" method="post" id="new-case-form" autocomplete="off">
+                        @csrf
+                        <div class="mt-4 lg:grid lg:grid-cols-2 gap-x-4 gap-y-0 pb-4">
+                            <div>
+                                <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Complainant<span class="text-red-500">*</span>
+                                </label>
+                                <div>
+                                    <select id="complainant_id" name="complainant_id" required>
+                                        <option value="" selected disabled>Select option</option>
+                                        {{-- @foreach (session('clients') as $client)
+                                            <option value="{{ $client['id'] }}">{{ $client['lastname'] }},
+                                                {{ $client['firstname'] }} {{ $client['middlename'] }}</option>
+                                        @endforeach --}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="middlename" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Respondent<span class="text-red-500">*</span>
+                                </label>
+                                <div>
+                                    <select id="respondent_id" name="respondent_id" required>
+                                        <option value="" selected disabled>Select option</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="case_code" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Case name<span class="text-red-500">*</span>
+                                </label>
+                                <div>
+                                    <input type="text" name="case_code" id="case_code"
+                                        class="block w-full rounded-md border-0 px-3 py-1.5
+                                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                                        placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                                        focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                        required>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="relationship_id" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Relationship to respondent<span class="text-red-500">*</span>
+                                </label>
+                                <div>
+                                    <select id="relationship_id" name="relationship_id" required>
+                                        <option value="" selected disabled>Select option</option>
+                                        {{-- @foreach (session('relationships') as $relationship)
+                                            <option value="{{ $relationship['id'] }}">
+                                                {{ $relationship['relationship_type'] }}</option>
+                                        @endforeach --}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-start-1">
+                                <label for="case_category_id" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Case category<span class="text-red-500">*</span>
+                                </label>
+                                <div>
+                                    <select id="case_category_id" name="case_category_id" required>
+                                        <option value="" selected disabled>Select option</option>
+                                        {{-- @foreach (session('caseCategories') as $caseCategory)
+                                            <option value="{{ $caseCategory['id'] }}">
+                                                {{ $caseCategory['category_name'] }}
+                                            </option>
+                                        @endforeach --}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="case_subcategory_id"
+                                    class="hidden casesubcat text-sm font-medium leading-6 text-gray-900">
+                                    Case subcategory
+                                </label>
+                                <div>
+                                    <select id="case_subcategory_id" class="hidden casesubcat"
+                                        name="case_subcategory_id">
+                                        <option value="" selected disabled>Select option</option>
+                                        {{-- @foreach (session('caseSubcategories') as $caseSubcategory)
+                                            <option value="{{ $caseSubcategory['id'] }}">
+                                                {{ $caseSubcategory['value'] }}
+                                            </option>
+                                        @endforeach --}}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-14 flex justify-center">
+                            <button type="submit"
+                                class="rounded-md bg-violet-600 px-6 py-2 text-sm font-semibold
+                                    text-white shadow-sm hover:bg-violet-500 focus-visible:outline
+                                    focus-visible:outline-2 focus-visible:outline-offset-2
+                                    focus-visible:outline-violet-600">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+        integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('scripts/cases.js') }}"></script>
+@endsection

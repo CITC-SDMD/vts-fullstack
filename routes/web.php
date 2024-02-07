@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CaseProfileController;
 use App\Http\Controllers\ChildController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Controller;
@@ -46,4 +47,8 @@ Route::prefix('clients')->group(function () {
 
 Route::prefix('child')->group(function () {
     Route::post('/', [ChildController::class, 'store'])->name('child.store');
+});
+
+Route::prefix('case-profiles')->group(function () {
+    Route::get('/', [CaseProfileController::class, 'index'])->name('caseprofile.index');
 });
