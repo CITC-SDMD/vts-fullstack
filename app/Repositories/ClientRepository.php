@@ -9,7 +9,9 @@ class ClientRepository implements ClientRepositoryInterface
 {
     public function index()
     {
-        return Client::with(['barangay'])->paginate(config('pagination.paginate'));
+        return Client::with(['barangay'])
+            ->orderBy('id', 'desc')
+            ->paginate(config('pagination.paginate'));
     }
 
     public function search(object $payload)
@@ -55,6 +57,12 @@ class ClientRepository implements ClientRepositoryInterface
     {
         return Client::whereIn('id', $respondentIds)
             ->paginate(config('pagination.shortPage'));
+    }
+
+    public function showRespondentList($respondentIds)
+    {
+        return Client::whereIn('id', $respondentIds)
+            ->get();
     }
 
     public function showByUuid(string $uuid)

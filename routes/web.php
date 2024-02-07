@@ -40,6 +40,7 @@ Route::prefix('clients')->group(function () {
     Route::post('/check', [ClientController::class, 'showByFullname'])->name('client.check');
     Route::post('/', [ClientController::class, 'store'])->name('client.store');
     Route::post('/respondent', [ClientController::class, 'storeRespondent'])->name('client.store.respondent');
+    Route::post('/case', [ClientController::class, 'storeCase'])->name('client.store.case');
     Route::post('/search', [ClientController::class, 'search'])->name('client.search');
 });
 

@@ -34,6 +34,12 @@
                                     Case category
                                 </th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    Abuse Category
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    Abuse Subcategory
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                     Case created
                                 </th>
                                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -42,7 +48,7 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
-                            @foreach ($data->cases as $case)
+                            @foreach ($cases as $case)
                                 <tr>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                         {{ $case->case_profile_id }}
@@ -54,7 +60,13 @@
                                         {{ $case->respondent->full_name }}
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        {{ $case->category->category_name }}
+                                        {{ $case->caseCategory->category_name }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        {{ $case->abuseCategory->abuse_type ?? 'N/A' }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        {{ $case->abuseSubcategory->type ?? 'N/A' }}
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                         {{ \Carbon\Carbon::parse($case->created_at)->format('M d, Y') }}
@@ -73,7 +85,7 @@
     </div>
 
     <div class="flex items-center justify-center mt-4">
-        {{ $data->casesPagination }}
+        {!! $casesPagination !!}
     </div>
 
     <div class="relative z-10 hidden" id="new-case-modal" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -81,7 +93,7 @@
         <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
             <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                 <div
-                    class="relative transform overflow-hidden h-128 rounded-lg bg-white px-6 pb-4 pt-5 text-left shadow-xl transition-all lg:w-1/2 w-full">
+                    class="relative transform overflow-hidden h-212 rounded-lg bg-white px-6 pb-4 pt-5 text-left shadow-xl transition-all lg:w-1/2 w-full">
                     <div class="border-b border-gray-200 pb-2 lg:grid lg:grid-cols-2">
                         <div class="lg:col-span-1">
                             <h3 class="text-base font-semibold leading-6 text-gray-900">Create New Case</h3>
@@ -96,7 +108,7 @@
                             </button>
                         </div>
                     </div>
-                    <form action="#" method="post" id="new-case-form" autocomplete="off">
+                    <form action="{{ route('client.store.case') }}" method="post" id="new-case-form" autocomplete="off">
                         @csrf
                         <div class="mt-4 lg:grid lg:grid-cols-2 gap-x-4 gap-y-0 pb-4">
                             <div>
@@ -106,8 +118,8 @@
                                 <div>
                                     <select id="complainant_id" name="complainant_id" required>
                                         <option value="" disabled>Select option</option>
-                                        <option value="{{ session('client.id') }}" selected>
-                                            {{ session('client.full_name') }}</option>
+                                        <option value="{{ $client->id }}" selected>
+                                            {{ $client->full_name }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -118,28 +130,18 @@
                                 <div>
                                     <select id="respondent_id" name="respondent_id" required>
                                         <option value="" selected disabled>Select option</option>
-                                        @php
-                                            $data = session('client.respondents');
-                                        @endphp
-                                        @foreach ($data as $item)
-                                            @php
-                                                $respondent = $item['respondent'];
-                                            @endphp
-                                            <option value="{{ $respondent['id'] }}">
-                                                {{ $respondent['firstname'] }}
-                                                {{ $respondent['middlename'] }}
-                                                {{ $respondent['lastname'] }}
-                                            </option>
+                                        @foreach ($respondents as $respondent)
+                                            <option value="{{ $respondent->id }}">{{ $respondent->full_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div>
-                                <label for="case_name" class="block text-sm font-medium leading-6 text-gray-900">
-                                    Case name<span class="text-red-500">*</span>
+                                <label for="case_code" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Case Code<span class="text-red-500">*</span>
                                 </label>
                                 <div>
-                                    <input type="text" name="case_name" id="case_name"
+                                    <input type="text" name="case_code" id="case_code"
                                         class="block w-full rounded-md border-0 px-3 py-1.5
                                     text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
                                     placeholder:text-gray-400 focus:ring-2 focus:ring-inset
@@ -177,13 +179,12 @@
                                     </select>
                                 </div>
                             </div>
-                            <div>
-                                <label for="abuse_category_id"
-                                    class="hidden casesubcat text-sm font-medium leading-6 text-gray-900">
+                            <div class="abusecat hidden">
+                                <label for="abuse_category_id" class="text-sm font-medium leading-6 text-gray-900">
                                     Abuse Category
                                 </label>
                                 <div>
-                                    <select id="abuse_category_id" class="hidden casesubcat" name="abuse_category_id">
+                                    <select id="abuse_category_id" name="abuse_category_id[]">
                                         <option value="" selected disabled>Select option</option>
                                         @foreach ($abuseCategories as $abuseCategory)
                                             <option value="{{ $abuseCategory->id }}">
@@ -193,8 +194,23 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="abusecat hidden">
+                                <label for="abuse_subcategory_id" class="text-sm font-medium leading-6 text-gray-900">
+                                    Abuse Subcategory
+                                </label>
+                                <div>
+                                    <select id="abuse_subcategory_id" name="abuse_subcategory_id[]">
+                                        <option value="" selected disabled>Select option</option>
+                                        @foreach ($abuseSubcategories as $abuseSubcategory)
+                                            <option value="{{ $abuseSubcategory->id }}">
+                                                {{ $abuseSubcategory->type }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mt-14 flex justify-center">
+                        <div class="mt-2 flex justify-center">
                             <button type="submit"
                                 class="rounded-md bg-violet-600 px-6 py-2 text-sm font-semibold
                                 text-white shadow-sm hover:bg-violet-500 focus-visible:outline

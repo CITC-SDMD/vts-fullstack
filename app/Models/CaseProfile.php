@@ -49,6 +49,11 @@ class CaseProfile extends Model
         return $this->belongsTo(AbuseCategory::class);
     }
 
+    public function abuseSubcategory(): BelongsTo
+    {
+        return $this->belongsTo(AbuseSubcategory::class);
+    }
+
     public function complainant(): BelongsTo
     {
         return $this->belongsTo(Client::class);

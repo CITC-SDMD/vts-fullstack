@@ -23,13 +23,19 @@ $(document).ready(function () {
 
     $("#abuse_category_id").selectize({
         plugins: ["clear_button"],
+        maxItems: null,
+        persist: false,
+    });
+
+    $("#abuse_subcategory_id").selectize({
+        plugins: ["clear_button"],
+        maxItems: null,
         persist: false,
     });
 
     $('#new-case-close-button').click(function () {
         $('#new-case-modal').toggle('hidden');
         $('#new-case-form').trigger('reset');
-        $("#complainant_id")[0].selectize.clear();
         $("#respondent_id")[0].selectize.clear();
         $("#case_category_id")[0].selectize.clear();
         $("#case_subcategory_id")[0].selectize.clear();
@@ -44,9 +50,9 @@ $(document).ready(function () {
 
     $('#case_category_id').change(function () {
         if ($(this).val() == 1) {
-            $(".casesubcat").removeClass('hidden');
+            $(".abusecat").removeClass('hidden');
         } else {
-            $(".casesubcat").addClass('hidden');
+            $(".abusecat").addClass('hidden');
         }
     });
 });

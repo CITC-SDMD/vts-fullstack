@@ -12,6 +12,8 @@ interface ClientRepositoryInterface
 
     public function showRespondents($respondentIds);
 
+    public function showRespondentList($respondentIds);
+
     public function showByUuid(string $uuid);
 
     public function showByFullname(object $payload);

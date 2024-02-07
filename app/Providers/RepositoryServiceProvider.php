@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Interface\Repositories\AbuseCategoryRepositoryInterface;
+use App\Interface\Repositories\AbuseSubcategoryRepositoryInterface;
 use App\Interface\Repositories\BarangayRepositoryInterface;
 use App\Interface\Repositories\CaseCategoryRepositoryInterface;
 use App\Interface\Repositories\CaseProfileRepositoryInterface;
@@ -12,6 +13,7 @@ use App\Interface\Repositories\RelationshipRepositoryInterface;
 use App\Interface\Repositories\RespondentRepositoryInterface;
 use App\Interface\Repositories\UserRepositoryInterface;
 use App\Repositories\AbuseCategoryRepository;
+use App\Repositories\AbuseSubcategoryRepository;
 use App\Repositories\BarangayRepository;
 use App\Repositories\CaseCategoryRepository;
 use App\Repositories\CaseProfileRepository;
@@ -39,6 +41,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(RelationshipRepositoryInterface::class, RelationshipRepository::class);
         $this->app->bind(CaseCategoryRepositoryInterface::class, CaseCategoryRepository::class);
         $this->app->bind(AbuseCategoryRepositoryInterface::class, AbuseCategoryRepository::class);
+        $this->app->bind(AbuseSubcategoryRepositoryInterface::class, AbuseSubcategoryRepository::class);
     }
 
     /**

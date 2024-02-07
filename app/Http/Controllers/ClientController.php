@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClientCaseStoreRequest;
 use App\Http\Requests\ClientFullnameRequest;
 use App\Http\Requests\ClientStoreRequest;
 use App\Http\Requests\RespondentStoreRequest;
 use App\Http\Requests\SearchRequest;
 use App\Interface\Repositories\AbuseCategoryRepositoryInterface;
+use App\Interface\Repositories\AbuseSubcategoryRepositoryInterface;
 use App\Interface\Repositories\BarangayRepositoryInterface;
 use App\Interface\Repositories\CaseCategoryRepositoryInterface;
 use App\Interface\Repositories\CaseProfileRepositoryInterface;
@@ -37,6 +39,8 @@ class ClientController extends Controller
 
     private $abuseCategoryRepository;
 
+    private $abuseSubcategoryRepository;
+
     public function __construct(
         ClientRepositoryInterface $clientRepository,
         BarangayRepositoryInterface $barangayRepository,
@@ -45,7 +49,8 @@ class ClientController extends Controller
         ChildRepositoryInterface $childRepository,
         RelationshipRepositoryInterface $relationshipRepository,
         CaseCategoryRepositoryInterface $caseCategoryRepository,
-        AbuseCategoryRepositoryInterface $abuseCategoryRepository
+        AbuseCategoryRepositoryInterface $abuseCategoryRepository,
+        AbuseSubcategoryRepositoryInterface $abuseSubcategoryRepository
     ) {
         $this->middleware('auth');
         $this->clientRepository = $clientRepository;
@@ -56,6 +61,7 @@ class ClientController extends Controller
         $this->relationshipRepository = $relationshipRepository;
         $this->caseCategoryRepository = $caseCategoryRepository;
         $this->abuseCategoryRepository = $abuseCategoryRepository;
+        $this->abuseSubcategoryRepository = $abuseSubcategoryRepository;
     }
 
     public function index()
@@ -122,22 +128,54 @@ class ClientController extends Controller
     {
         $client = $this->clientRepository->showByUuid($uuid);
         $cases = $this->caseProfileRepository->showByClientId($client->id);
+        $respondentIds = $this->respondentRepository->showRespondentIdArray($client->id);
+        $respondents = $this->clientRepository->showRespondentList($respondentIds);
         $relationships = $this->relationshipRepository->index();
         $caseCategories = $this->caseCategoryRepository->index();
         $abuseCategories = $this->abuseCategoryRepository->index();
-
-
-        $data = (object) [
-            'cases' => $cases,
-            'casesPagination' => $cases->links('components.pagination'),
-        ];
+        $abuseSubcategories = $this->abuseSubcategoryRepository->index();
 
         return view('clients.client-cases', [
-            'data' => $data,
+            'client' => $client,
+            'respondents' => $respondents,
+            'cases' => $cases,
+            'casesPagination' => $cases->links('components.pagination'),
             'relationships' => $relationships,
             'caseCategories' => $caseCategories,
             'abuseCategories' => $abuseCategories,
+            'abuseSubcategories' => $abuseSubcategories,
         ]);
+    }
+
+    public function storeCase(ClientCaseStoreRequest $request)
+    {
+        if ($request->abuse_category_id) {
+            foreach ($request->abuse_category_id as $abuseCategoryId) {
+                if ($request->abuse_subcategory_id) {
+                    foreach ($request->abuse_subcategory_id as $abuseSubcategoryId) {
+                        $abuseSub = $this->abuseSubcategoryRepository->showById($abuseSubcategoryId);
+                        if ($abuseSub->abuse_category_id == $abuseCategoryId) {
+                            $case = $this->caseProfileRepository->showByClientIdRespondentIdAbuseCategoryIdAbuseSubcategoryId($request->complainant_id, $request->respondent_id, $abuseCategoryId, $abuseSubcategoryId);
+                            if (!$case) {
+                                $this->caseProfileRepository->store($request, $abuseCategoryId, $abuseSubcategoryId);
+                            }
+                        }
+                    }
+                } else {
+                    $case = $this->caseProfileRepository->showByComplainantIdRespondentIdAbuseCategoryId($request->complainant_id, $request->respondent_id, $abuseCategoryId);
+                    if (!$case) {
+                        $this->caseProfileRepository->store($request, $abuseCategoryId);
+                    }
+                }
+            }
+        } else {
+            $case = $this->caseProfileRepository->showByComplainantIdRespondentIdCaseCategoryId($request->complainant_id, $request->respondent_id, $request->case_category_id);
+            if (!$case) {
+                $this->caseProfileRepository->store($request);
+            }
+        }
+
+        return back();
     }
 
     public function showRespondents(string $uuid)
@@ -146,7 +184,6 @@ class ClientController extends Controller
         $respondentIds = $this->respondentRepository->showRespondentIdArray($client->id);
         $respondents = $this->clientRepository->showRespondents($respondentIds);
         $barangays = $this->barangayRepository->index();
-
 
         $data = (object) [
             'respondents' => $respondents,
