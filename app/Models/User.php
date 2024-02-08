@@ -27,6 +27,11 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function getFullNameAttribute()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
     public function agency(): BelongsTo
     {
         return $this->belongsTo(ReferralAgency::class);

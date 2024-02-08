@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Client extends Model
+class Client extends Model implements HasMedia
 {
-    use HasFactory, UsesUuid;
+    use HasFactory, UsesUuid, InteractsWithMedia;
 
     protected $fillable = [
         'brgy_id',
@@ -34,6 +36,11 @@ class Client extends Model
     protected $casts = [
         'is_4ps_beneficiary' => 'boolean',
     ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('clientMedia')->useDisk('client');
+    }
 
     public function getFullNameAttribute()
     {

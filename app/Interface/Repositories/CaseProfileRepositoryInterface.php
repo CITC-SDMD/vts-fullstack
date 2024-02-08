@@ -6,6 +6,8 @@ interface CaseProfileRepositoryInterface
 {
     public function index();
 
+    public function showByUuid(string $uuid);
+
     public function showByClientId(int $clientId);
 
     public function store(object $payload, $abuseCategoryId = null, $abuseSubcategoryId = null);

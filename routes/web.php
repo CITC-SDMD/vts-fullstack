@@ -38,11 +38,13 @@ Route::prefix('clients')->group(function () {
     Route::get('/{uuid}/profile/cases', [ClientController::class, 'showCases'])->name('client.show.cases');
     Route::get('/{uuid}/profile/respondents', [ClientController::class, 'showRespondents'])->name('client.show.respondents');
     Route::get('/{uuid}/profile/dependents', [ClientController::class, 'showDependents'])->name('client.show.dependents');
+    Route::get('/{uuid}/download', [ClientController::class, 'download'])->name('client.show.download');
     Route::post('/check', [ClientController::class, 'showByFullname'])->name('client.check');
     Route::post('/', [ClientController::class, 'store'])->name('client.store');
     Route::post('/respondent', [ClientController::class, 'storeRespondent'])->name('client.store.respondent');
     Route::post('/case', [ClientController::class, 'storeCase'])->name('client.store.case');
     Route::post('/search', [ClientController::class, 'search'])->name('client.search');
+    Route::post('/{uuid}/upload-signature', [ClientController::class, 'upload'])->name('client.upload');
 });
 
 Route::prefix('child')->group(function () {
@@ -51,4 +53,5 @@ Route::prefix('child')->group(function () {
 
 Route::prefix('case-profiles')->group(function () {
     Route::get('/', [CaseProfileController::class, 'index'])->name('caseprofile.index');
+    Route::get('/{uuid}/profile', [CaseProfileController::class, 'show'])->name('caseprofile.show');
 });

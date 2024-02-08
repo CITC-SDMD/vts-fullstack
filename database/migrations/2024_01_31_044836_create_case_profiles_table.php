@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('case_profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid();
             $table->unsignedBigInteger('case_category_id');
             $table->unsignedBigInteger('abuse_category_id')->nullable();
             $table->unsignedBigInteger('abuse_subcategory_id')->nullable();

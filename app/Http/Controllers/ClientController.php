@@ -19,6 +19,8 @@ use App\Interface\Repositories\RespondentRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ClientController extends Controller
@@ -218,18 +220,30 @@ class ClientController extends Controller
         return $user;
     }
 
-    public function edit(string $id)
+    public function upload(Request $request, string $uuid)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'file' => ['required', 'image', 'mimes:jpeg,png,gif,webp', 'max:5120']
+        ]);
+
+        if ($validator->fails()) {
+            Alert::error('Error', $validator->messages()->first('file'));
+
+            return back();
+        }
+
+        $this->clientRepository->uploadMedia($request, $uuid);
+
+        Alert::success('Success', 'Signature uploaded successfully.');
+
+        return back();
     }
 
-    public function update(Request $request, string $id)
+    public function download(string $uuid)
     {
-        //
-    }
+        $client = $this->clientRepository->showByUuid($uuid);
+        $filePath = 'vts/client/' . $client->file;
 
-    public function destroy(string $id)
-    {
-        //
+        return Storage::download($filePath);
     }
 }

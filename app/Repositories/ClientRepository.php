@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Interface\Repositories\ClientRepositoryInterface;
+use illuminate\Support\Str;
 use App\Models\Client;
 
 class ClientRepository implements ClientRepositoryInterface
@@ -98,6 +99,20 @@ class ClientRepository implements ClientRepositoryInterface
         $client->occupation = $payload->occupation;
         $client->ethnicity = $payload->ethnicity;
         $client->is_4ps_beneficiary = $payload->is_4ps_beneficiary;
+        $client->save();
+
+        return $client->fresh();
+    }
+
+    public function uploadMedia(object $payload, string $uuid)
+    {
+        $client = Client::where('uuid', $uuid)->first();
+        if ($payload->file) {
+            $client->addMediaFromRequest('file')->toMediaCollection('clientMedia');
+        }
+        $filePath = $client->getMedia('clientMedia')->last()->getPath();
+        $appPath = Str::after($filePath, 'client/');
+        $client->file = $appPath;
         $client->save();
 
         return $client->fresh();

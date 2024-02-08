@@ -2,17 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Interface\Repositories\AbuseSubcategoryRepositoryInterface;
 use App\Interface\Repositories\CaseProfileRepositoryInterface;
+use App\Interface\Repositories\ReferralAgencyRepositoryInterface;
+use App\Interface\Repositories\ServiceRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CaseProfileController extends Controller
 {
     private $caseProfileRepository;
 
-    public function __construct(CaseProfileRepositoryInterface $caseProfileRepository)
-    {
+    private $referralAgencyRepository;
+
+    private $serviceRepository;
+
+    public function __construct(
+        CaseProfileRepositoryInterface $caseProfileRepository,
+        ReferralAgencyRepositoryInterface $referralAgencyRepository,
+        ServiceRepositoryInterface $serviceRepository,
+    ) {
         $this->middleware('auth');
         $this->caseProfileRepository = $caseProfileRepository;
+        $this->referralAgencyRepository = $referralAgencyRepository;
+        $this->serviceRepository = $serviceRepository;
     }
 
     public function index()
@@ -25,49 +38,30 @@ class CaseProfileController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($uuid)
     {
-        //
+        $caseProfile = $this->caseProfileRepository->showByUuid($uuid);
+        $agencies = $this->referralAgencyRepository->index();
+        $services = $this->serviceRepository->index();
+
+        Session::put('caseProfile', $caseProfile);
+
+        return view('cases.case-profile', [
+            'agencies' => $agencies,
+            'services' => $services,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //

@@ -16,7 +16,13 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
             'abuseCategory',
             'abuseSubcategory',
         ])
+            ->orderBy('id', 'desc')
             ->paginate(config('pagination.paginate'));
+    }
+
+    public function showByUuid(string $uuid)
+    {
+        return CaseProfile::where('uuid', $uuid)->first();
     }
 
     public function showByClientId(int $clientId)
