@@ -25,6 +25,12 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
         return CaseProfile::where('uuid', $uuid)->first();
     }
 
+    public function showByCaseProfileId(int $caseProfileId)
+    {
+        return CaseProfile::with(['caseLogs'])
+            ->findOrFail($caseProfileId);
+    }
+
     public function showByClientId(int $clientId)
     {
         return CaseProfile::with([
@@ -89,5 +95,16 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
             ->where('abuse_category_id', $abuseCategoryId)
             ->where('abuse_subcategory_id', $abuseSubcategoryId)
             ->first();
+    }
+
+    public function updateAssessedBy(int $caseProfileId)
+    {
+        $user = auth()->user();
+
+        $caseProfile = CaseProfile::findOrFail($caseProfileId);
+        $caseProfile->assessed_by_id = $user->id;
+        $caseProfile->save();
+
+        return $caseProfile->fresh();
     }
 }

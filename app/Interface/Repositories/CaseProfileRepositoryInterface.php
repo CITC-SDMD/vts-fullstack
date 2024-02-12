@@ -8,6 +8,8 @@ interface CaseProfileRepositoryInterface
 
     public function showByUuid(string $uuid);
 
+    public function showByCaseProfileId(int $caseProfileId);
+
     public function showByClientId(int $clientId);
 
     public function store(object $payload, $abuseCategoryId = null, $abuseSubcategoryId = null);
@@ -17,4 +19,6 @@ interface CaseProfileRepositoryInterface
     public function showByComplainantIdRespondentIdAbuseCategoryId(int $complainantId, int $respondentId, int $abuseCategoryId);
 
     public function showByClientIdRespondentIdAbuseCategoryIdAbuseSubcategoryId(int $complainantId, int $respondentId, int $abuseCategoryId, int $abuseSubcategoryId);
+
+    public function updateAssessedBy(int $caseProfileId);
 }

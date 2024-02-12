@@ -11,6 +11,7 @@ class ClientRepository implements ClientRepositoryInterface
     public function index()
     {
         return Client::with(['barangay'])
+            ->where('sex', 'female')
             ->orderBy('id', 'desc')
             ->paginate(config('pagination.paginate'));
     }

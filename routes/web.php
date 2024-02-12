@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CaseLogController;
 use App\Http\Controllers\CaseProfileController;
 use App\Http\Controllers\ChildController;
 use App\Http\Controllers\ClientController;
@@ -54,4 +55,9 @@ Route::prefix('child')->group(function () {
 Route::prefix('case-profiles')->group(function () {
     Route::get('/', [CaseProfileController::class, 'index'])->name('caseprofile.index');
     Route::get('/{uuid}/profile', [CaseProfileController::class, 'show'])->name('caseprofile.show');
+});
+
+Route::prefix('case-logs')->group(function () {
+    Route::get('/{uuid}/details', [CaseLogController::class, 'show'])->name('caselog.show');
+    Route::post('/', [CaseLogController::class, 'store'])->name('caselog.store');
 });

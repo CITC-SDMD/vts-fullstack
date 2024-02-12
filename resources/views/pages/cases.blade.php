@@ -57,16 +57,10 @@
                                         Complainant
                                     </th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Respondent
-                                    </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Case category
                                     </th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Abuse category
-                                    </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Abuse Subcategory
                                     </th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Case created</th>
@@ -85,20 +79,16 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {{ $case->case_code }}
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <td
+                                            class="truncate text-ellipsis overflow-hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {{ $case->complainant->full_name }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $case->respondent->full_name }}
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {{ $case->caseCategory->category_name }}
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $case->abuseCategory->abuse_type ?? 'N/A' }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $case->abuseSubcategory->type ?? 'N/A' }}
+                                            {{ $case->abuseCategory->abuse_type ?? 'N/A' }} -
+                                            {{ $case->abuseSubcategory->type }}
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {{ \Carbon\Carbon::parse($case['created_at'])->format('M d, Y') }}

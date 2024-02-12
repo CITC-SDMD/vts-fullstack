@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('case_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid();
             $table->unsignedBigInteger('case_profile_id');
             $table->unsignedBigInteger('referred_by_id');
             $table->unsignedBigInteger('referral_agency_id');

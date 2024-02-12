@@ -27,4 +27,40 @@ class CaseLogRepository implements CaseLogRepositoryInterface
 
         return $log->fresh();
     }
+
+    public function showByCaseProfileId(int $caseProfileId)
+    {
+        return CaseLog::with([
+            'referredBy',
+            'referredBy.agency',
+            'referralAgency',
+            'service',
+        ])
+            ->where('case_profile_id', $caseProfileId)
+            ->orderBy('id', 'desc')
+            ->paginate(config('pagination.shortPage'));
+    }
+
+    public function showByCaseProfileIdReferralAgencyIdServiceId(int $caseProfileId, int $agencyId, int $serviceId)
+    {
+        return CaseLog::where('case_profile_id', $caseProfileId)
+            ->where('referral_agency_id', $agencyId)
+            ->where('service_id', $serviceId)
+            ->first();
+    }
+
+    public function showByUuid(string $uuid)
+    {
+        return CaseLog::with([
+            'caseProfile',
+            'caseProfile.caseCategory',
+            'referredBy',
+            'referredBy.agency',
+            'referralAgency',
+            'service',
+            'assistanceLogs'
+        ])
+            ->where('uuid', $uuid)
+            ->first();
+    }
 }

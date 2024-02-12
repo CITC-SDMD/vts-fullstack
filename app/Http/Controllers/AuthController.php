@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use App\Interface\Repositories\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -35,6 +36,10 @@ class AuthController extends Controller
         }
 
         Auth::login($user);
+
+        Session::put('user', $user);
+
+        Log::debug(session('user.agency_id'));
 
         return redirect()->route('dashboard.index');
     }
