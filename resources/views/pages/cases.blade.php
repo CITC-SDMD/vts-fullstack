@@ -87,8 +87,8 @@
                                             {{ $case->caseCategory->category_name }}
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $case->abuseCategory->abuse_type ?? 'N/A' }} -
-                                            {{ $case->abuseSubcategory->type }}
+                                            {{ $case->abuseCategory->abuse_type . ' - ' ?? 'N/A' }}
+                                            {{ $case->abuseSubcategory->type ?? '' }}
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {{ \Carbon\Carbon::parse($case['created_at'])->format('M d, Y') }}
