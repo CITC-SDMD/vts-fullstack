@@ -157,9 +157,9 @@
                                             {{ $caselog->service->service_type }}
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{-- @foreach ($caseLog['assistance_logs'] as $logs)
-                                                {{ $logs['status'] }}
-                                            @endforeach --}}
+                                            @foreach ($caselog->assistanceLogs as $logs)
+                                                {{ $logs->status }}
+                                            @endforeach
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {{ \Carbon\Carbon::parse($caselog->created_at)->format('M d, Y') }}

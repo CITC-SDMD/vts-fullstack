@@ -30,6 +30,10 @@ export default {
                 '208': '536px',
                 '212': '540px',
             },
+            fontSize: {
+                'xxs': '10px',
+                'xxxs': '8px'
+            }
         },
     },
     plugins: [],

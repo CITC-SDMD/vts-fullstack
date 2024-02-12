@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="px-4 py-6 sm:px-6 overflow-hidden overflow-y-auto h-72">
                                     @if (count($caselog->assistanceLogs) != 0)
-                                        <ul role="list" class="space-y-8">
+                                        <ul role="list" class="space-y-4">
                                             @foreach ($caselog->assistanceLogs as $assistance)
                                                 <li>
                                                     <div class="flex space-x-3">
@@ -90,24 +90,25 @@
                                                             <div class="grid grid-cols-2">
                                                                 <div>
                                                                     <a href="#"
-                                                                        class="font-medium text-gray-900 pointer-events-none">
+                                                                        class="font-medium gap-x-2 text-sm text-gray-900 pointer-events-none">
                                                                         {{ $assistance->user->full_name }}
-                                                                        <br>
                                                                         <span class="text-xxs text-gray-500 font-normal">
                                                                             {{ $assistance->user->agency->agency_name }}
+                                                                        </span>
+                                                                        <br>
+                                                                        <span class="text-xxs text-gray-500">
+                                                                            Status: {{ $assistance->status }}
                                                                         </span>
                                                                     </a>
                                                                 </div>
                                                                 <div class="mt-1 text-xxs flex justify-end">
                                                                     <span class="font-medium text-gray-500">
-                                                                        {{ \Carbon\Carbon::parse($assistance->created_at)->format('g:i A') }}
+                                                                        {{ \Carbon\Carbon::parse($assistance->created_at)->format('M d, Y - g:i A') }}
                                                                     </span>
                                                                 </div>
                                                             </div>
-                                                            <div class="mt-2 mb-2 font-semibold text-sm text-gray-700">
-                                                                <p>
-                                                                    {{ $assistance->description }}
-                                                                </p>
+                                                            <div class="mt-3 mb-2 font-medium text-gray-700">
+                                                                {{ $assistance->description }}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -140,7 +141,8 @@
                                         </div>
                                     </div>
                                     <div class="min-w-0 flex-1">
-                                        <form action="#" method="post" autocomplete="off">
+                                        <form action="{{ route('assistancelogs.store') }}" method="post"
+                                            autocomplete="off">
                                             @csrf
                                             <div>
                                                 <input type="hidden" name="case_log_id" value="{{ $caselog->id }}">
@@ -159,13 +161,21 @@
                                                                 Complaint Prepared
                                                             </option>
                                                             <option
-                                                                value="Complaint Filed at City Prosecutor’s Office (Dismissed, Info Filed)">
-                                                                Complaint Filed at City Prosecutor’s Office (Dismissed, Info
-                                                                Filed)
+                                                                value="Complaint Filed at City Prosecutor’s Office - Dismissed">
+                                                                Complaint Filed at City Prosecutor’s Office - Dismissed
                                                             </option>
                                                             <option
-                                                                value="Case Filed at Court (Ongoing, Archived, Dismissed)">
-                                                                Case Filed at Court (Ongoing, Archived, Dismissed)
+                                                                value="Complaint Filed at City Prosecutor’s Office - Info Filed">
+                                                                Complaint Filed at City Prosecutor’s Office - Info Filed
+                                                            </option>
+                                                            <option value="Case Filed at Court - Ongoing">
+                                                                Case Filed at Court - Ongoing
+                                                            </option>
+                                                            <option value="Case Filed at Court - Archived">
+                                                                Case Filed at Court - Archived
+                                                            </option>
+                                                            <option value="Case Filed at Court - Dismissed">
+                                                                Case Filed at Court - Dismissed
                                                             </option>
                                                             <option value="Terminated">
                                                                 Terminated

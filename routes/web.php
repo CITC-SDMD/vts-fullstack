@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssistanceLogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CaseLogController;
 use App\Http\Controllers\CaseProfileController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\ChildController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 use App\Models\Relationship;
 use App\Models\Respondent;
 use Illuminate\Support\Facades\Route;
@@ -55,9 +57,22 @@ Route::prefix('child')->group(function () {
 Route::prefix('case-profiles')->group(function () {
     Route::get('/', [CaseProfileController::class, 'index'])->name('caseprofile.index');
     Route::get('/{uuid}/profile', [CaseProfileController::class, 'show'])->name('caseprofile.show');
+    Route::post('/search', [CaseProfileController::class, 'search'])->name('caseprofile.search');
 });
 
 Route::prefix('case-logs')->group(function () {
     Route::get('/{uuid}/details', [CaseLogController::class, 'show'])->name('caselog.show');
     Route::post('/', [CaseLogController::class, 'store'])->name('caselog.store');
+});
+
+Route::prefix('assistance-logs')->group(function () {
+    Route::post('/', [AssistanceLogController::class, 'store'])->name('assistancelogs.store');
+});
+
+Route::prefix('users')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('users.index');
+    Route::get('/{uuid}/profile', [UserController::class, 'show'])->name('users.show');
+    Route::post('/', [UserController::class, 'store'])->name('users.store');
+    Route::post('/search', [UserController::class, 'search'])->name('users.search');
+    Route::put('/{uuid}/update-profile', [UserController::class, 'update'])->name('users.update');
 });

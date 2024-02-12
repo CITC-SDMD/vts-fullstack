@@ -21,4 +21,6 @@ interface CaseProfileRepositoryInterface
     public function showByClientIdRespondentIdAbuseCategoryIdAbuseSubcategoryId(int $complainantId, int $respondentId, int $abuseCategoryId, int $abuseSubcategoryId);
 
     public function updateAssessedBy(int $caseProfileId);
+
+    public function search(object $payload);
 }

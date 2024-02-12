@@ -107,4 +107,36 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
 
         return $caseProfile->fresh();
     }
+
+    public function search(object $payload)
+    {
+        return CaseProfile::with([
+            'complainant',
+            'respondent',
+            'caseCategory',
+            'abuseCategory',
+        ])
+            ->where(function ($query) use ($payload) {
+                $query->where('case_code', 'LIKE', "%$payload->search%")
+                    ->orWhere('case_profile_id', 'LIKE', "%$payload->search%");
+            })
+            ->orWhereHas('complainant', function ($query) use ($payload) {
+                $query->where('firstname', 'LIKE', "%$payload->search%")
+                    ->orWhere('middlename', 'LIKE', "%$payload->search%")
+                    ->orWhere('lastname', 'LIKE', "%$payload->search%");
+            })
+            ->orWhereHas('respondent', function ($query) use ($payload) {
+                $query->where('firstname', 'LIKE', "%$payload->search%")
+                    ->orWhere('middlename', 'LIKE', "%$payload->search%")
+                    ->orWhere('lastname', 'LIKE', "%$payload->search%");
+            })
+            ->orWhereHas('caseCategory', function ($query) use ($payload) {
+                $query->where('category_name', 'LIKE', "%$payload->search%");
+            })
+            ->orWhereHas('abuseCategory', function ($query) use ($payload) {
+                $query->where('abuse_type', 'LIKE', "%$payload->search%");
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+    }
 }

@@ -12,5 +12,7 @@ interface UserRepositoryInterface
 
     public function showByEmail(string $email);
 
-    public function update(object $payload, int $userId);
+    public function update(object $payload, string $uuid);
+
+    public function search(object $payload);
 }

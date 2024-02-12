@@ -35,6 +35,9 @@ class CaseLogRepository implements CaseLogRepositoryInterface
             'referredBy.agency',
             'referralAgency',
             'service',
+            'assistanceLogs' => function ($query) {
+                $query->latest('created_at')->take(1);
+            }
         ])
             ->where('case_profile_id', $caseProfileId)
             ->orderBy('id', 'desc')
@@ -58,7 +61,9 @@ class CaseLogRepository implements CaseLogRepositoryInterface
             'referredBy.agency',
             'referralAgency',
             'service',
-            'assistanceLogs'
+            'assistanceLogs' => function ($query) {
+                $query->orderBy('id', 'desc');
+            }
         ])
             ->where('uuid', $uuid)
             ->first();

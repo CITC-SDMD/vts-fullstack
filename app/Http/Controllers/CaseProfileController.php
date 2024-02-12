@@ -60,18 +60,12 @@ class CaseProfileController extends Controller
         ]);
     }
 
-    public function edit(string $id)
+    public function search(Request $request)
     {
-        //
-    }
+        $cases = $this->caseProfileRepository->search($request);
 
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
+        return view('pages.cases', [
+            'cases' => $cases
+        ]);
     }
 }

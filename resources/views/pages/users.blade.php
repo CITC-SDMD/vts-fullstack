@@ -1,24 +1,18 @@
 @extends('layouts.main')
 
-@section('title', 'Case Profile | VAW Tracking System')
-
-@section('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
-        integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-@endsection
+@section('title', 'Users | VAW Tracking System')
 
 @section('content')
     <div class="px-4 sm:px-6 lg:px-8 lg:mx-20">
         <div class="sm:flex sm:items-center sm:justify-center">
             <div class="sm:flex-auto">
-                <label for="search" class="block text-sm font-medium leading-6 text-gray-900">Search cases</label>
-                <form action="{{ route('caseprofile.search') }}" method="post" autocomplete="off">
+                <label for="search" class="block text-sm font-medium leading-6 text-gray-900">Search users</label>
+                <form action="{{ route('users.search') }}" method="post" autocomplete="off">
                     @csrf
                     <div class="relative mt-2 flex items-center gap-x-4">
                         <input type="text" name="search" id="search" required
                             class="block lg:w-96 w-40 rounded-md border-0 px-3 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            placeholder="Search by case name, client first name, or client last name">
+                            placeholder="Search by first name, last name, or agency">
                         <button type="sumbmit"
                             class="inline-flex items-center gap-x-1.5 rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
                             Search
@@ -32,9 +26,9 @@
                 </form>
             </div>
             <div class="flex items-center justify-center mt-4 md:mt-8 lg:mt-8">
-                <button type="button" id="new-case-button"
+                <button type="button" id="new-user-button"
                     class="block rounded-md w-full bg-violet-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
-                    Create new case
+                    Create new user
                 </button>
             </div>
         </div>
@@ -48,54 +42,48 @@
                                 <tr>
                                     <th scope="col"
                                         class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                        Case Profile ID
+                                        Agency
                                     </th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Case Code
+                                        Full name
                                     </th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Complainant
+                                        Email address
                                     </th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Case category
+                                        Contact number
                                     </th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Abuse category
-                                    </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Case created</th>
+                                        Created at</th>
                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                         <span class="sr-only">Edit</span>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
-                                @foreach ($cases as $case)
+                                @foreach ($users as $user)
                                     <tr>
                                         <td
                                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                            {{ $case->case_profile_id }}
+                                            {{ $user->agency->agency_name }}
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $case->case_code }}
+                                            {{ $user->full_name }}
                                         </td>
                                         <td
                                             class="truncate text-ellipsis overflow-hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $case->complainant->full_name }}
+                                            {{ $user->email }}
+                                        </td>
+                                        <td
+                                            class="truncate text-ellipsis overflow-hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {{ $user->contact_number }}
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $case->caseCategory->category_name }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $case->abuseCategory->abuse_type . ' - ' ?? 'N/A' }}
-                                            {{ $case->abuseSubcategory->type ?? '' }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ \Carbon\Carbon::parse($case['created_at'])->format('M d, Y') }}
+                                            {{ \Carbon\Carbon::parse($user->created_at)->format('M d, Y') }}
                                         </td>
                                         <td
                                             class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                            <a href="{{ route('caseprofile.show', $case->uuid) }}"
+                                            <a href="{{ route('users.show', $user->uuid) }}"
                                                 class="inline-flex gap-x-1 items-center rounded bg-indigo-50 px-4 py-1 text-xs font-semibold text-violet-600 shadow-sm hover:bg-violet-100">
                                                 <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -117,24 +105,24 @@
         </div>
     </div>
 
-    @if (isset($casesPagination))
-        <div class="flex items-center justify-center">
-            {{ $casesPagination }}
+    @if (isset($paginate))
+        <div class="mt-4 flex items-center justify-center">
+            {!! $paginate !!}
         </div>
     @endif
 
-    <div class="relative z-10 hidden" id="new-case-modal" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="relative z-10 hidden" id="new-user-modal" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
         <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
             <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                 <div
-                    class="relative transform overflow-hidden h-128 rounded-lg bg-white px-6 pb-4 pt-5 text-left shadow-xl transition-all lg:w-1/2 w-full">
+                    class="relative transform overflow-hidden h-188 rounded-lg bg-white px-6 pb-4 pt-5 text-left shadow-xl transition-all lg:w-1/2 w-full">
                     <div class="border-b border-gray-200 pb-2 lg:grid lg:grid-cols-2">
                         <div class="lg:col-span-1">
-                            <h3 class="text-base font-semibold leading-6 text-gray-900">Create New Case</h3>
+                            <h3 class="text-base font-semibold leading-6 text-gray-900">Create New User</h3>
                         </div>
                         <div class="flex justify-end">
-                            <button type="button" id="new-case-close-button"
+                            <button type="button" id="new-user-close-button"
                                 class="rounded bg-violet-50 px-2 py-1 text-xs font-semibold text-violet-600 shadow-sm hover:bg-violet-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -143,94 +131,97 @@
                             </button>
                         </div>
                     </div>
-                    <form action="#" method="post" id="new-case-form" autocomplete="off">
+                    <form action="{{ route('users.store') }}" method="post" id="new-user-form" autocomplete="off">
                         @csrf
-                        <div class="mt-4 lg:grid lg:grid-cols-2 gap-x-4 gap-y-0 pb-4">
+                        <div class="mt-4 lg:grid lg:grid-cols-2 gap-x-4 gap-y-2 pb-4">
+                            <div class="lg:col-span-2">
+                                <label for="role" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Role<span class="text-red-500">*</span>
+                                </label>
+                                <select id="role" name="role" required
+                                    class="block lg:w-1/4 w-full rounded-md border-0 py-1.5 pl-1 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    @if (session('user.agency_id') == 13)
+                                        <option value="" selected disabled>Select role</option>
+                                        <option value="Administrator">Administrator</option>
+                                        <option value="User">User</option>
+                                    @else
+                                        <option value="User" selected>User</option>
+                                    @endif
+                                </select>
+                            </div>
                             <div>
                                 <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">
-                                    Complainant<span class="text-red-500">*</span>
+                                    First name<span class="text-red-500">*</span>
                                 </label>
                                 <div>
-                                    <select id="complainant_id" name="complainant_id" required>
-                                        <option value="" selected disabled>Select option</option>
-                                        {{-- @foreach (session('clients') as $client)
-                                            <option value="{{ $client['id'] }}">{{ $client['lastname'] }},
-                                                {{ $client['firstname'] }} {{ $client['middlename'] }}</option>
-                                        @endforeach --}}
-                                    </select>
+                                    <input type="text" name="firstname" id="firstname" required
+                                        class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        placeholder="Enter first name">
                                 </div>
                             </div>
                             <div>
-                                <label for="middlename" class="block text-sm font-medium leading-6 text-gray-900">
-                                    Respondent<span class="text-red-500">*</span>
+                                <label for="lastname" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Last name<span class="text-red-500">*</span>
                                 </label>
                                 <div>
-                                    <select id="respondent_id" name="respondent_id" required>
-                                        <option value="" selected disabled>Select option</option>
-                                    </select>
+                                    <input type="text" name="lastname" id="lastname" required
+                                        class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        placeholder="Enter last name">
                                 </div>
                             </div>
                             <div>
-                                <label for="case_code" class="block text-sm font-medium leading-6 text-gray-900">
-                                    Case name<span class="text-red-500">*</span>
+                                <label for="contact_number" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Contact number<span class="text-red-500">*</span>
                                 </label>
                                 <div>
-                                    <input type="text" name="case_code" id="case_code"
-                                        class="block w-full rounded-md border-0 px-3 py-1.5
-                                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
-                                        placeholder:text-gray-400 focus:ring-2 focus:ring-inset
-                                        focus:ring-violet-600 sm:text-sm sm:leading-6"
-                                        required>
+                                    <input type="text" name="contact_number" id="contact_number" required
+                                        class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        placeholder="Enter contact number">
                                 </div>
                             </div>
                             <div>
-                                <label for="relationship_id" class="block text-sm font-medium leading-6 text-gray-900">
-                                    Relationship to respondent<span class="text-red-500">*</span>
+                                <label for="agency_id" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Agency<span class="text-red-500">*</span>
                                 </label>
-                                <div>
-                                    <select id="relationship_id" name="relationship_id" required>
-                                        <option value="" selected disabled>Select option</option>
-                                        {{-- @foreach (session('relationships') as $relationship)
-                                            <option value="{{ $relationship['id'] }}">
-                                                {{ $relationship['relationship_type'] }}</option>
-                                        @endforeach --}}
-                                    </select>
-                                </div>
+                                <select id="agency_id" name="agency_id" required
+                                    class="block w-full rounded-md border-0 py-1.5 pl-1 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    <option selected disabled>Select agency</option>
+                                    @foreach ($agencies as $agency)
+                                        <option value="{{ $agency->id }}">{{ $agency->agency_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="col-start-1">
-                                <label for="case_category_id" class="block text-sm font-medium leading-6 text-gray-900">
-                                    Case category<span class="text-red-500">*</span>
+                            <div class="lg:col-span-2">
+                                <label for="agency_address" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Agency address<span class="text-red-500">*</span>
                                 </label>
                                 <div>
-                                    <select id="case_category_id" name="case_category_id" required>
-                                        <option value="" selected disabled>Select option</option>
-                                        {{-- @foreach (session('caseCategories') as $caseCategory)
-                                            <option value="{{ $caseCategory['id'] }}">
-                                                {{ $caseCategory['category_name'] }}
-                                            </option>
-                                        @endforeach --}}
-                                    </select>
+                                    <textarea rows="2" name="agency_address" id="agency_address" required
+                                        class="block resize-none w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                                 </div>
                             </div>
                             <div>
-                                <label for="case_subcategory_id"
-                                    class="hidden casesubcat text-sm font-medium leading-6 text-gray-900">
-                                    Case subcategory
+                                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Email address<span class="text-red-500">*</span>
                                 </label>
                                 <div>
-                                    <select id="case_subcategory_id" class="hidden casesubcat"
-                                        name="case_subcategory_id">
-                                        <option value="" selected disabled>Select option</option>
-                                        {{-- @foreach (session('caseSubcategories') as $caseSubcategory)
-                                            <option value="{{ $caseSubcategory['id'] }}">
-                                                {{ $caseSubcategory['value'] }}
-                                            </option>
-                                        @endforeach --}}
-                                    </select>
+                                    <input type="email" name="email" id="email" required
+                                        class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        placeholder="Enter email address">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="password" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Password<span class="text-red-500">*</span>
+                                </label>
+                                <div>
+                                    <input type="password" name="password" id="password" required
+                                        class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        placeholder="Enter password">
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-14 flex justify-center">
+                        <div class="flex justify-center">
                             <button type="submit"
                                 class="rounded-md bg-violet-600 px-6 py-2 text-sm font-semibold
                                     text-white shadow-sm hover:bg-violet-500 focus-visible:outline
@@ -247,8 +238,5 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
-        integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{{ asset('scripts/cases.js') }}"></script>
+    <script src="{{ asset('scripts/users.js') }}"></script>
 @endsection
