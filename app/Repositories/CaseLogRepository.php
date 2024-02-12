@@ -4,9 +4,27 @@ namespace App\Repositories;
 
 use App\Interface\Repositories\CaseLogRepositoryInterface;
 use App\Models\CaseLog;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class CaseLogRepository implements CaseLogRepositoryInterface
 {
+    public function caseLogCount()
+    {
+        $currentYear = Carbon::now()->year;
+
+        return CaseLog::whereYear('created_at', $currentYear)->count();
+    }
+
+    public function caseLogPerMonth()
+    {
+        return CaseLog::selectRaw('COUNT(*) as total_caselogs')
+            ->whereYear('created_at', now()->year)
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->pluck('total_caselogs')
+            ->toArray();
+    }
+
     public function store(object $payload, $agencyId, $serviceId)
     {
         $user = auth()->user();

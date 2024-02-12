@@ -12,6 +12,10 @@ class Controller extends BaseController
 
     public function index()
     {
+        if (auth()->user()) {
+            return redirect()->route('dashboard.index');
+        }
+
         return view('welcome');
     }
 }

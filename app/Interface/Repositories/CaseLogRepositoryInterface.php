@@ -4,6 +4,10 @@ namespace App\Interface\Repositories;
 
 interface CaseLogRepositoryInterface
 {
+    public function caseLogCount();
+
+    public function caseLogPerMonth();
+
     public function store(object $payload, $agencyId, $serviceId);
 
     public function showByCaseProfileId(int $caseProfileId);

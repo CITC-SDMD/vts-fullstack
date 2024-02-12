@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Interface\Repositories\CaseProfileRepositoryInterface;
 use App\Models\CaseProfile;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class CaseProfileRepository implements CaseProfileRepositoryInterface
 {
@@ -18,6 +20,22 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
         ])
             ->orderBy('id', 'desc')
             ->paginate(config('pagination.paginate'));
+    }
+
+    public function caseCount()
+    {
+        $currentYear = Carbon::now()->year;
+
+        return CaseProfile::whereYear('created_at', $currentYear)->count();
+    }
+
+    public function casePerMonth()
+    {
+        return CaseProfile::selectRaw('COUNT(*) as total_cases')
+            ->whereYear('created_at', now()->year)
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->pluck('total_cases')
+            ->toArray();
     }
 
     public function showByUuid(string $uuid)

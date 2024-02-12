@@ -6,6 +6,10 @@ interface CaseProfileRepositoryInterface
 {
     public function index();
 
+    public function caseCount();
+
+    public function casePerMonth();
+
     public function showByUuid(string $uuid);
 
     public function showByCaseProfileId(int $caseProfileId);

@@ -8,6 +8,10 @@ interface ClientRepositoryInterface
 
     public function showAllClient();
 
+    public function clientCount();
+
+    public function clientPerMonth();
+
     public function search(object $payload);
 
     public function create(object $payload);

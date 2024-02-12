@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\Interface\Repositories\ClientRepositoryInterface;
 use illuminate\Support\Str;
 use App\Models\Client;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ClientRepository implements ClientRepositoryInterface
 {
@@ -19,6 +21,22 @@ class ClientRepository implements ClientRepositoryInterface
     public function showAllClient()
     {
         return Client::all();
+    }
+
+    public function clientPerMonth()
+    {
+        return Client::selectRaw('COUNT(*) as total_clients')
+            ->whereYear('created_at', now()->year)
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->pluck('total_clients')
+            ->toArray();
+    }
+
+    public function clientCount()
+    {
+        $currentYear = Carbon::now()->year;
+
+        return Client::whereYear('created_at', $currentYear)->count();
     }
 
     public function search(object $payload)

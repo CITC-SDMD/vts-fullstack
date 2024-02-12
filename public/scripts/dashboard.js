@@ -1,3 +1,81 @@
 $(document).ready(function () {
     $('.dashboard-button').addClass('active-link');
+
+    var clients = {
+        series: [{
+            data: clientsPerMonth
+        }],
+        chart: {
+            type: 'area',
+            height: 80,
+            sparkline: {
+                enabled: true
+            },
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        fill: {
+            opacity: 0.3,
+        },
+        yaxis: {
+            min: 0
+        },
+        colors: ['#D397F8'],
+    };
+
+    var clientChart = new ApexCharts(document.querySelector("#client-chart"), clients);
+    clientChart.render();
+
+    var cases = {
+        series: [{
+            data: casesPerMonth
+        }],
+        chart: {
+            type: 'area',
+            height: 80,
+            sparkline: {
+                enabled: true
+            },
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        fill: {
+            opacity: 0.3,
+        },
+        yaxis: {
+            min: 0
+        },
+        colors: ['#D397F8'],
+    };
+
+    var caseChart = new ApexCharts(document.querySelector("#case-chart"), cases);
+    caseChart.render();
+
+    var caseLogs = {
+        series: [{
+            data: caseLogsPerMonth
+        }],
+        chart: {
+            type: 'area',
+            height: 80,
+            sparkline: {
+                enabled: true
+            },
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        fill: {
+            opacity: 0.3,
+        },
+        yaxis: {
+            min: 0
+        },
+        colors: ['#D397F8'],
+    };
+
+    var caseLogChart = new ApexCharts(document.querySelector("#caselogs-chart"), caseLogs);
+    caseLogChart.render();
 });
