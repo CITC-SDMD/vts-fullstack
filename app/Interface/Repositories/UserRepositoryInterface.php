@@ -6,6 +6,8 @@ interface UserRepositoryInterface
 {
     public function index();
 
+    public function showAll();
+
     public function create(object $payload);
 
     public function showByUuid(string $uuid);

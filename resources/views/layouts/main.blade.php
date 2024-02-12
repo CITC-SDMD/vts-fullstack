@@ -73,7 +73,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#"
+                                            <a href="{{ route('resources.index') }}"
                                                 class="resources-button text-white hover:bg-violet-900 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -151,7 +151,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#"
+                                    <a href="{{ route('resources.index') }}"
                                         class="resources-button text-white hover:bg-violet-900 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="h-6 w-6 shrink-0">

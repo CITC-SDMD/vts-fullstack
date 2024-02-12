@@ -8,6 +8,7 @@ use App\Http\Controllers\ChildController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\UserController;
 use App\Models\Relationship;
 use App\Models\Respondent;
@@ -75,4 +76,8 @@ Route::prefix('users')->group(function () {
     Route::post('/', [UserController::class, 'store'])->name('users.store');
     Route::post('/search', [UserController::class, 'search'])->name('users.search');
     Route::put('/{uuid}/update-profile', [UserController::class, 'update'])->name('users.update');
+});
+
+Route::prefix('resources')->group(function () {
+    Route::get('/', [ResourceController::class, 'index'])->name('resources.index');
 });

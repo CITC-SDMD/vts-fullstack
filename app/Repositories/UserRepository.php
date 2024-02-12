@@ -22,6 +22,11 @@ class UserRepository implements UserRepositoryInterface
             ->paginate(config('pagination.paginate'));
     }
 
+    public function showAll()
+    {
+        return User::with(['agency'])->get();
+    }
+
     public function create(object $payload)
     {
         $user = new User();

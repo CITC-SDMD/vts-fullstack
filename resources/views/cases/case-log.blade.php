@@ -90,15 +90,14 @@
                                                             <div class="grid grid-cols-2">
                                                                 <div>
                                                                     <a href="#"
-                                                                        class="font-medium gap-x-2 text-sm text-gray-900 pointer-events-none">
+                                                                        class="font-medium gap-x-2 text-sm text-gray-900 pointer-events-none leading-none">
                                                                         {{ $assistance->user->full_name }}
                                                                         <span class="text-xxs text-gray-500 font-normal">
                                                                             {{ $assistance->user->agency->agency_name }}
                                                                         </span>
-                                                                        <br>
-                                                                        <span class="text-xxs text-gray-500">
+                                                                        <p class="text-xxs text-gray-500">
                                                                             Status: {{ $assistance->status }}
-                                                                        </span>
+                                                                        </p>
                                                                     </a>
                                                                 </div>
                                                                 <div class="mt-1 text-xxs flex justify-end">
@@ -161,12 +160,12 @@
                                                                 Complaint Prepared
                                                             </option>
                                                             <option
-                                                                value="Complaint Filed at City Prosecutor’s Office - Dismissed">
-                                                                Complaint Filed at City Prosecutor’s Office - Dismissed
-                                                            </option>
-                                                            <option
                                                                 value="Complaint Filed at City Prosecutor’s Office - Info Filed">
                                                                 Complaint Filed at City Prosecutor’s Office - Info Filed
+                                                            </option>
+                                                            <option
+                                                                value="Complaint Filed at City Prosecutor’s Office - Dismissed">
+                                                                Complaint Filed at City Prosecutor’s Office - Dismissed
                                                             </option>
                                                             <option value="Case Filed at Court - Ongoing">
                                                                 Case Filed at Court - Ongoing

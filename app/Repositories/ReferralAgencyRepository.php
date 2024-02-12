@@ -11,4 +11,9 @@ class ReferralAgencyRepository implements ReferralAgencyRepositoryInterface
     {
         return ReferralAgency::all();
     }
+
+    public function resource()
+    {
+        return ReferralAgency::paginate(2);
+    }
 }
