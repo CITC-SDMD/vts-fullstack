@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Interface\Repositories\ReferralAgencyRepositoryInterface;
 use App\Interface\Repositories\UserRepositoryInterface;
-use Illuminate\Http\Request;
 
 class ResourceController extends Controller
 {
@@ -29,7 +28,7 @@ class ResourceController extends Controller
         return view('pages.resources', [
             'agencies' => $agencies,
             'paginate' => $agencies->links('components.pagination'),
-            'users' => $users
+            'users' => $users,
         ]);
     }
 }

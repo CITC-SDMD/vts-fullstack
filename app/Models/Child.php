@@ -24,7 +24,7 @@ class Child extends Model
 
     public function getFullNameAttribute()
     {
-        return $this->firstname . ' ' . $this->middlename . ' ' . $this->lastname;
+        return $this->firstname.' '.$this->middlename.' '.$this->lastname;
     }
 
     public function client(): BelongsTo

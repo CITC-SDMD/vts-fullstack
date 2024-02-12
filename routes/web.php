@@ -11,8 +11,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\RespondentController;
 use App\Http\Controllers\UserController;
-use App\Models\Relationship;
-use App\Models\Respondent;
 use Illuminate\Support\Facades\Route;
 
 /*

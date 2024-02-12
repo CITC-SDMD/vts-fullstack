@@ -18,19 +18,19 @@ class CustomMediaPathGenerator implements PathGenerator
     {
         $path = $this->filePath();
 
-        return $path . 'conversions/';
+        return $path.'conversions/';
     }
 
     public function getPathForResponsiveImages(Media $media): string
     {
         $path = $this->filePath();
 
-        return $path . 'responsive-images/';
+        return $path.'responsive-images/';
     }
 
     private function filePath()
     {
 
-        return "vts/client/";
+        return 'vts/client/';
     }
 }

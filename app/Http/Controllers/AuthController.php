@@ -23,13 +23,13 @@ class AuthController extends Controller
     {
         $user = $this->userRepository->showByEmail($request->email);
 
-        if (!$user) {
+        if (! $user) {
             Alert::toast('No account associated with email address provided.', 'Toast Type');
 
             return back();
         }
 
-        if (!Hash::check($request->password, $user->password)) {
+        if (! Hash::check($request->password, $user->password)) {
             Alert::toast('Invalid password', 'Toast Type');
 
             return back();

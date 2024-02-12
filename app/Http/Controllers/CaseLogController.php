@@ -31,7 +31,7 @@ class CaseLogController extends Controller
         foreach ($request->referral_agency_id as $agencyId) {
             foreach ($request->service_id as $serviceId) {
                 $log = $this->caseLogRepository->showByCaseProfileIdReferralAgencyIdServiceId($request->case_profile_id, $agencyId, $serviceId);
-                if (!$log) {
+                if (! $log) {
                     $this->caseLogRepository->store($request, $agencyId, $serviceId);
                 }
             }
@@ -45,7 +45,7 @@ class CaseLogController extends Controller
         $caseLog = $this->caseLogRepository->showByUuid($uuid);
 
         return view('cases.case-log', [
-            'caselog' => $caseLog
+            'caselog' => $caseLog,
         ]);
     }
 }

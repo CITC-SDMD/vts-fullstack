@@ -2,5 +2,5 @@
 
 return [
     'paginate' => 10,
-    'shortPage' => 5
+    'shortPage' => 5,
 ];

@@ -30,7 +30,7 @@ class UserController extends Controller
         return view('pages.users', [
             'users' => $users,
             'agencies' => $agencies,
-            'paginate' => $users->links('components.pagination')
+            'paginate' => $users->links('components.pagination'),
         ]);
     }
 
@@ -48,7 +48,7 @@ class UserController extends Controller
         $user = $this->userRepository->showByUuid($uuid);
 
         return view('users.user-profile', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 

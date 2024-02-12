@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\AbuseSubcategory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class AbuseSubcategorySeeder extends Seeder
@@ -16,59 +15,59 @@ class AbuseSubcategorySeeder extends Seeder
         $subCategories = [
             [
                 'abuse_category_id' => 1,
-                'type' => 'Medical Certificate'
+                'type' => 'Medical Certificate',
             ],
             [
                 'abuse_category_id' => 1,
-                'type' => 'BPO'
+                'type' => 'BPO',
             ],
             [
                 'abuse_category_id' => 1,
-                'type' => 'Medical Certificate'
+                'type' => 'Medical Certificate',
             ],
             [
                 'abuse_category_id' => 1,
-                'type' => 'Police Blotter'
+                'type' => 'Police Blotter',
             ],
             [
                 'abuse_category_id' => 2,
-                'type' => 'No Support'
+                'type' => 'No Support',
             ],
             [
                 'abuse_category_id' => 2,
-                'type' => 'Irregular & Insufficient Support'
+                'type' => 'Irregular & Insufficient Support',
             ],
             [
                 'abuse_category_id' => 2,
-                'type' => 'Deprivation of Properties'
+                'type' => 'Deprivation of Properties',
             ],
             [
                 'abuse_category_id' => 2,
-                'type' => 'Not allowed to work/profession'
+                'type' => 'Not allowed to work/profession',
             ],
             [
                 'abuse_category_id' => 3,
-                'type' => 'Marital Infidelity'
+                'type' => 'Marital Infidelity',
             ],
             [
                 'abuse_category_id' => 3,
-                'type' => 'Verbal Abuse'
+                'type' => 'Verbal Abuse',
             ],
             [
                 'abuse_category_id' => 3,
-                'type' => 'Threat'
+                'type' => 'Threat',
             ],
             [
                 'abuse_category_id' => 3,
-                'type' => 'Public Humiliation'
+                'type' => 'Public Humiliation',
             ],
             [
                 'abuse_category_id' => 3,
-                'type' => 'Damage of Property'
+                'type' => 'Damage of Property',
             ],
             [
                 'abuse_category_id' => 3,
-                'type' => 'Stalking'
+                'type' => 'Stalking',
             ],
         ];
 

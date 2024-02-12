@@ -69,7 +69,7 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
         $month = $currentTimestamp->month;
         $day = $currentTimestamp->day;
         $millisecond = $currentTimestamp->millisecond;
-        $caseNumber = $year . $month . $day . $millisecond;
+        $caseNumber = $year.$month.$day.$millisecond;
 
         $caseProfile = new CaseProfile();
         $caseProfile->case_category_id = $payload->case_category_id;
@@ -79,7 +79,7 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
         $caseProfile->respondent_id = $payload->respondent_id;
         $caseProfile->received_by_id = $user->id;
         $caseProfile->relationship_id = $payload->relationship_id;
-        $caseProfile->case_profile_id = 'CASE #' . $caseNumber;
+        $caseProfile->case_profile_id = 'CASE #'.$caseNumber;
         $caseProfile->case_code = $payload->case_code;
         $caseProfile->save();
 

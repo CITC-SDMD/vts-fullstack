@@ -31,8 +31,8 @@ class DashboardController extends Controller
         $cases = $this->caseProfileRepository->caseCount();
         $caseLogs = $this->caseLogRepository->caseLogCount();
         $clientsPerMonth = $this->clientRepository->clientPerMonth();
-        $casesPerMonth  = $this->caseProfileRepository->casePerMonth();
-        $caseLogsPerMonth  = $this->caseLogRepository->caseLogPerMonth();
+        $casesPerMonth = $this->caseProfileRepository->casePerMonth();
+        $caseLogsPerMonth = $this->caseLogRepository->caseLogPerMonth();
 
         $stats = [
             'clients' => $clients,
@@ -44,7 +44,7 @@ class DashboardController extends Controller
         ];
 
         return view('pages.dashboard', [
-            'stats' => $stats
+            'stats' => $stats,
         ]);
     }
 }

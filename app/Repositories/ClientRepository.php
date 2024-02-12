@@ -3,10 +3,10 @@
 namespace App\Repositories;
 
 use App\Interface\Repositories\ClientRepositoryInterface;
-use illuminate\Support\Str;
 use App\Models\Client;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use illuminate\Support\Str;
 
 class ClientRepository implements ClientRepositoryInterface
 {

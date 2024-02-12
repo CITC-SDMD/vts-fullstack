@@ -12,7 +12,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Client extends Model implements HasMedia
 {
-    use HasFactory, UsesUuid, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, UsesUuid;
 
     protected $fillable = [
         'uuid',
@@ -44,7 +44,7 @@ class Client extends Model implements HasMedia
 
     public function getFullNameAttribute()
     {
-        return $this->firstname . ' ' . $this->middlename . ' ' . $this->lastname;
+        return $this->firstname.' '.$this->middlename.' '.$this->lastname;
     }
 
     public function barangay(): BelongsTo

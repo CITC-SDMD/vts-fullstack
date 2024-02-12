@@ -38,7 +38,7 @@ class CaseProfileController extends Controller
         CaseProfileRepositoryInterface $caseProfileRepository,
         ReferralAgencyRepositoryInterface $referralAgencyRepository,
         ServiceRepositoryInterface $serviceRepository,
-        CaseLogRepositoryInterface  $caseLogRepository,
+        CaseLogRepositoryInterface $caseLogRepository,
         ClientRepositoryInterface $clientRepository,
         RelationshipRepositoryInterface $relationshipRepository,
         CaseCategoryRepositoryInterface $caseCategoryRepository,
@@ -90,7 +90,7 @@ class CaseProfileController extends Controller
             'agencies' => $agencies,
             'services' => $services,
             'caselogs' => $caseLogs,
-            'paginate' => $caseLogs->links('components.pagination')
+            'paginate' => $caseLogs->links('components.pagination'),
         ]);
     }
 
@@ -99,7 +99,7 @@ class CaseProfileController extends Controller
         $cases = $this->caseProfileRepository->search($request);
 
         return view('pages.cases', [
-            'cases' => $cases
+            'cases' => $cases,
         ]);
     }
 }

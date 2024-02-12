@@ -17,7 +17,6 @@ use App\Interface\Repositories\ClientRepositoryInterface;
 use App\Interface\Repositories\RelationshipRepositoryInterface;
 use App\Interface\Repositories\RespondentRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -94,7 +93,7 @@ class ClientController extends Controller
         ];
 
         return view('pages.clients', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -158,21 +157,21 @@ class ClientController extends Controller
                         $abuseSub = $this->abuseSubcategoryRepository->showById($abuseSubcategoryId);
                         if ($abuseSub->abuse_category_id == $abuseCategoryId) {
                             $case = $this->caseProfileRepository->showByClientIdRespondentIdAbuseCategoryIdAbuseSubcategoryId($request->complainant_id, $request->respondent_id, $abuseCategoryId, $abuseSubcategoryId);
-                            if (!$case) {
+                            if (! $case) {
                                 $this->caseProfileRepository->store($request, $abuseCategoryId, $abuseSubcategoryId);
                             }
                         }
                     }
                 } else {
                     $case = $this->caseProfileRepository->showByComplainantIdRespondentIdAbuseCategoryId($request->complainant_id, $request->respondent_id, $abuseCategoryId);
-                    if (!$case) {
+                    if (! $case) {
                         $this->caseProfileRepository->store($request, $abuseCategoryId);
                     }
                 }
             }
         } else {
             $case = $this->caseProfileRepository->showByComplainantIdRespondentIdCaseCategoryId($request->complainant_id, $request->respondent_id, $request->case_category_id);
-            if (!$case) {
+            if (! $case) {
                 $this->caseProfileRepository->store($request);
             }
         }
@@ -190,11 +189,11 @@ class ClientController extends Controller
         $data = (object) [
             'respondents' => $respondents,
             'barangays' => $barangays,
-            'respondentsPagination' => $respondents->links('components.pagination')
+            'respondentsPagination' => $respondents->links('components.pagination'),
         ];
 
         return view('clients.client-respondents', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -209,7 +208,7 @@ class ClientController extends Controller
         ];
 
         return view('clients.client-children', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -223,7 +222,7 @@ class ClientController extends Controller
     public function upload(Request $request, string $uuid)
     {
         $validator = Validator::make($request->all(), [
-            'file' => ['required', 'image', 'mimes:jpeg,png,gif,webp', 'max:5120']
+            'file' => ['required', 'image', 'mimes:jpeg,png,gif,webp', 'max:5120'],
         ]);
 
         if ($validator->fails()) {
@@ -242,7 +241,7 @@ class ClientController extends Controller
     public function download(string $uuid)
     {
         $client = $this->clientRepository->showByUuid($uuid);
-        $filePath = 'vts/client/' . $client->file;
+        $filePath = 'vts/client/'.$client->file;
 
         return Storage::download($filePath);
     }
