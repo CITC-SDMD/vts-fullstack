@@ -16,6 +16,11 @@ class ClientRepository implements ClientRepositoryInterface
             ->paginate(config('pagination.paginate'));
     }
 
+    public function showAllClient()
+    {
+        return Client::all();
+    }
+
     public function search(object $payload)
     {
         return Client::with(['barangay'])

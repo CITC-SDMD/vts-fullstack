@@ -143,25 +143,25 @@
                             </button>
                         </div>
                     </div>
-                    <form action="#" method="post" id="new-case-form" autocomplete="off">
+                    <form action="{{ route('client.store.case') }}" method="post" id="new-case-form"
+                        autocomplete="off">
                         @csrf
                         <div class="mt-4 lg:grid lg:grid-cols-2 gap-x-4 gap-y-0 pb-4">
                             <div>
-                                <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">
+                                <label for="complainant_id" class="block text-sm font-medium leading-6 text-gray-900">
                                     Complainant<span class="text-red-500">*</span>
                                 </label>
                                 <div>
                                     <select id="complainant_id" name="complainant_id" required>
                                         <option value="" selected disabled>Select option</option>
-                                        {{-- @foreach (session('clients') as $client)
-                                            <option value="{{ $client['id'] }}">{{ $client['lastname'] }},
-                                                {{ $client['firstname'] }} {{ $client['middlename'] }}</option>
-                                        @endforeach --}}
+                                        @foreach ($clients as $client)
+                                            <option value="{{ $client->id }}">{{ $client->full_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div>
-                                <label for="middlename" class="block text-sm font-medium leading-6 text-gray-900">
+                                <label for="respondent_id" class="block text-sm font-medium leading-6 text-gray-900">
                                     Respondent<span class="text-red-500">*</span>
                                 </label>
                                 <div>
@@ -172,7 +172,7 @@
                             </div>
                             <div>
                                 <label for="case_code" class="block text-sm font-medium leading-6 text-gray-900">
-                                    Case name<span class="text-red-500">*</span>
+                                    Case code<span class="text-red-500">*</span>
                                 </label>
                                 <div>
                                     <input type="text" name="case_code" id="case_code"
@@ -190,10 +190,11 @@
                                 <div>
                                     <select id="relationship_id" name="relationship_id" required>
                                         <option value="" selected disabled>Select option</option>
-                                        {{-- @foreach (session('relationships') as $relationship)
-                                            <option value="{{ $relationship['id'] }}">
-                                                {{ $relationship['relationship_type'] }}</option>
-                                        @endforeach --}}
+                                        @foreach ($relationships as $relationship)
+                                            <option value="{{ $relationship->id }}">
+                                                {{ $relationship->relationship_type }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -204,28 +205,41 @@
                                 <div>
                                     <select id="case_category_id" name="case_category_id" required>
                                         <option value="" selected disabled>Select option</option>
-                                        {{-- @foreach (session('caseCategories') as $caseCategory)
-                                            <option value="{{ $caseCategory['id'] }}">
-                                                {{ $caseCategory['category_name'] }}
+                                        @foreach ($caseCategories as $caseCategory)
+                                            <option value="{{ $caseCategory->id }}">
+                                                {{ $caseCategory->category_name }}
                                             </option>
-                                        @endforeach --}}
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div>
-                                <label for="case_subcategory_id"
-                                    class="hidden casesubcat text-sm font-medium leading-6 text-gray-900">
-                                    Case subcategory
+                            <div class="abusecat hidden">
+                                <label for="abuse_category_id" class="text-sm font-medium leading-6 text-gray-900">
+                                    Abuse subcategory
                                 </label>
                                 <div>
-                                    <select id="case_subcategory_id" class="hidden casesubcat"
-                                        name="case_subcategory_id">
+                                    <select id="abuse_category_id" name="abuse_category_id[]">
                                         <option value="" selected disabled>Select option</option>
-                                        {{-- @foreach (session('caseSubcategories') as $caseSubcategory)
-                                            <option value="{{ $caseSubcategory['id'] }}">
-                                                {{ $caseSubcategory['value'] }}
+                                        @foreach ($abuseCategories as $abuseCategory)
+                                            <option value="{{ $abuseCategory->id }}">
+                                                {{ $abuseCategory->abuse_type }}
                                             </option>
-                                        @endforeach --}}
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="abusecat hidden">
+                                <label for="abuse_subcategory_id" class="text-sm font-medium leading-6 text-gray-900">
+                                    Abuse Subcategory
+                                </label>
+                                <div>
+                                    <select id="abuse_subcategory_id" name="abuse_subcategory_id[]">
+                                        <option value="" selected disabled>Select option</option>
+                                        @foreach ($abuseSubcategories as $abuseSubcategory)
+                                            <option value="{{ $abuseSubcategory->id }}">
+                                                {{ $abuseSubcategory->type }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -251,4 +265,27 @@
         integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('scripts/cases.js') }}"></script>
+    <script>
+        $("#complainant_id").selectize({
+            plugins: ["clear_button"],
+            persist: false,
+            onChange: function() {
+                var complainantId = $('#complainant_id').val();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ url('/respondent') }}/" + complainantId,
+                    success: function(response) {
+                        $('#respondent_id')[0].selectize.clearOptions();
+                        $.each(response, function(index, item) {
+                            $('#respondent_id')[0].selectize.addOption({
+                                value: item.id,
+                                text: item.firstname + ' ' + item.middlename + ' ' +
+                                    item.lastname
+                            })
+                        });
+                    }
+                })
+            }
+        });
+    </script>
 @endsection

@@ -9,6 +9,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\RespondentController;
 use App\Http\Controllers\UserController;
 use App\Models\Relationship;
 use App\Models\Respondent;
@@ -80,4 +81,8 @@ Route::prefix('users')->group(function () {
 
 Route::prefix('resources')->group(function () {
     Route::get('/', [ResourceController::class, 'index'])->name('resources.index');
+});
+
+Route::prefix('respondent')->group(function () {
+    Route::get('/{complainantId}', [RespondentController::class, 'show']);
 });

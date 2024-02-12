@@ -6,6 +6,8 @@ interface ClientRepositoryInterface
 {
     public function index();
 
+    public function showAllClient();
+
     public function search(object $payload);
 
     public function create(object $payload);
