@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('relationships', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid();
             $table->string('relationship_type');
             $table->timestamps();
         });

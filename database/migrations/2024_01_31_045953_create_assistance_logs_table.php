@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('assistance_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid();
             $table->unsignedBigInteger('case_log_id');
             $table->unsignedBigInteger('user_id');
             $table->text('description');
             $table->enum('status', [
                 'Complaint Prepared',
-                'Complaint Filed at City Prosecutor’s Office (Dismissed, Info Filed)',
-                'Case Filed at Court (Ongoing, Archived, Dismissed)',
+                'Complaint Filed at City Prosecutor’s Office - Dismissed',
+                'Complaint Filed at City Prosecutor’s Office - Info Filed',
+                'Case Filed at Court - Ongoing',
+                'Case Filed at Court - Archived',
+                'Case Filed at Court - Dismissed',
                 'Terminated',
             ]);
             $table->timestamps();

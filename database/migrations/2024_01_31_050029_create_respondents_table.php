@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('respondents', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid();
             $table->unsignedBigInteger('complainant_id');
             $table->unsignedBigInteger('respondent_id');
             $table->timestamps();

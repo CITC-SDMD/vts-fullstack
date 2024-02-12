@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('abuse_subcategories', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid();
             $table->unsignedBigInteger('abuse_category_id');
             $table->string('type');
             $table->timestamps();

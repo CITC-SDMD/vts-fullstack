@@ -15,8 +15,8 @@ class Client extends Model implements HasMedia
     use HasFactory, UsesUuid, InteractsWithMedia;
 
     protected $fillable = [
-        'brgy_id',
         'uuid',
+        'brgy_id',
         'firstname',
         'middlename',
         'lastname',

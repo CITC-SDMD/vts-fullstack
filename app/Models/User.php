@@ -17,8 +17,8 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, HasRoles, Notifiable, UsesUuid;
 
     protected $fillable = [
-        'agency_id',
         'uuid',
+        'agency_id',
         'firstname',
         'lastname',
         'contact_number',

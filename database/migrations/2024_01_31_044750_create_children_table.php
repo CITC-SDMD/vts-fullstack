@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('children', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid();
             $table->unsignedBigInteger('client_id');
             $table->string('firstname');
             $table->string('middlename');

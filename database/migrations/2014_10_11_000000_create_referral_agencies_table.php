@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('referral_agencies', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid();
             $table->string('agency_name');
             $table->timestamps();
         });
