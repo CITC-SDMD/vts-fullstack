@@ -97,9 +97,19 @@ class CaseProfileController extends Controller
     public function search(Request $request)
     {
         $cases = $this->caseProfileRepository->search($request);
+        $clients = $this->clientRepository->showAllClient();
+        $relationships = $this->relationshipRepository->index();
+        $caseCategories = $this->caseCategoryRepository->index();
+        $abuseCategories = $this->abuseCategoryRepository->index();
+        $abuseSubcategories = $this->abuseSubcategoryRepository->index();
 
         return view('pages.cases', [
             'cases' => $cases,
+            'relationships' => $relationships,
+            'caseCategories' => $caseCategories,
+            'abuseCategories' => $abuseCategories,
+            'abuseSubcategories' => $abuseSubcategories,
+            'clients' => $clients,
         ]);
     }
 }
