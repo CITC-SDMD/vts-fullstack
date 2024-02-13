@@ -33,6 +33,11 @@ $(document).ready(function () {
         $('#complete-respondent-form').trigger('reset');
     });
 
+    $('#error-confirm-button').click(function () {
+        $('.error-modal').toggle('hidden');
+        $('#new-respondent-form').trigger('reset');
+    });
+
     $('#new-respondent-form').submit(function (event) {
         event.preventDefault();
         var route = $(this).data('route');
@@ -48,7 +53,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 if (response) {
-                    console.log(response);
+                    $('.error-modal').toggle('hidden');
                 } else {
                     $('#new-respondent-modal').toggle('hidden');
                     $('#respondent-firstname').val($('#firstname').val());
