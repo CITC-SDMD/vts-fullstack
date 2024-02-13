@@ -74,7 +74,7 @@
                 <div
                     class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                     <div class="flex justify-between">
-                        <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Client Intake</h3>
+                        <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Respondent Intake</h3>
                         <button id="new-respondent-close-button"
                             class="rounded bg-violet-50 px-2 py-1 text-xs font-semibold text-violet-600 shadow-sm hover:bg-violet-100">
                             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -140,7 +140,7 @@
                     class="relative transform overflow-hidden rounded-lg bg-white px-6 pb-4 pt-5 text-left shadow-xl transition-all lg:w-1/2 w-full">
                     <div class="border-b border-gray-200 pb-2 lg:grid lg:grid-cols-2">
                         <div class="lg:col-span-1">
-                            <h3 class="text-base font-semibold leading-6 text-gray-900">Create New Client</h3>
+                            <h3 class="text-base font-semibold leading-6 text-gray-900">Create New Respondent</h3>
                         </div>
                         <div class="flex justify-end">
                             <button type="button" id="close-complete-respondent-modal-button"
