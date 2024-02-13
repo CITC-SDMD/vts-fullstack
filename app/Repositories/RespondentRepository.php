@@ -22,4 +22,11 @@ class RespondentRepository implements RespondentRepositoryInterface
         return Respondent::where('complainant_id', $complainantId)
             ->pluck('respondent_id');
     }
+
+    public function showByComplainantIdRespondentId(int $complainantId, int $respondentId)
+    {
+        return Respondent::where('complainant_id', $complainantId)
+            ->where('respondent_id', $respondentId)
+            ->first();
+    }
 }

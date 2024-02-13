@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interface\Repositories\ClientRepositoryInterface;
 use App\Models\Client;
 use Carbon\Carbon;
+use Faker\Core\Uuid;
 use Illuminate\Support\Facades\DB;
 use illuminate\Support\Str;
 
@@ -104,9 +105,9 @@ class ClientRepository implements ClientRepositoryInterface
             ->first();
     }
 
-    public function update(object $payload, int $clientId)
+    public function update(object $payload, string $uuid)
     {
-        $client = Client::findOrFail($clientId);
+        $client = Client::where('uuid', $uuid)->first();
         $client->barangay_id = $payload->barangay_id;
         $client->firstname = $payload->firstname;
         $client->middlename = $payload->middlename;

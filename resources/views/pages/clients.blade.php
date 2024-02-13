@@ -292,7 +292,7 @@
                             </div>
                             <div>
                                 <label for="age" class="block text-sm font-medium leading-6 text-gray-900">
-                                    Age<span class="text-red-500">*</span>
+                                    Age
                                 </label>
                                 <div>
                                     <input type="number" name="age" min="1" id="age"

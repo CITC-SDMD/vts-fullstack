@@ -5,6 +5,17 @@ $(document).ready(function () {
         allowInput: true,
     });
 
+    $('#respondent_id').selectize({
+        plugins: ["clear_button"],
+        persist: false,
+    });
+
+    $('#create-new-respondent').click(function () {
+        $('#new-client-modal').toggle('hidden');
+        $('#respondent_id')[0].selectize.clear();
+        $('#complete-respondent-modal').toggle('hidden');
+    });
+
     $('#birthdate').change(function () {
         var dob = $(this).val();
         var birthDate = new Date(dob);
@@ -36,36 +47,5 @@ $(document).ready(function () {
     $('#error-confirm-button').click(function () {
         $('.error-modal').toggle('hidden');
         $('#new-respondent-form').trigger('reset');
-    });
-
-    $('#new-respondent-form').submit(function (event) {
-        event.preventDefault();
-        var route = $(this).data('route');
-
-        $.ajax({
-            type: "POST",
-            url: route,
-            data: {
-                '_token': $(this).data('csrf'),
-                'firstname': $('#firstname').val(),
-                'middlename': $('#middlename').val(),
-                'lastname': $('#lastname').val()
-            },
-            success: function (response) {
-                if (response) {
-                    $('.error-modal').toggle('hidden');
-                } else {
-                    $('#new-respondent-modal').toggle('hidden');
-                    $('#respondent-firstname').val($('#firstname').val());
-                    $('#respondent-middlename').val($('#middlename').val());
-                    $('#respondent-lastname').val($('#lastname').val());
-                    $('#complete-respondent-modal').toggle('hidden');
-                    $('#new-respondent-form').trigger('reset');
-                }
-            },
-            error: function (response) {
-                console.log(response);
-            }
-        });
     });
 });

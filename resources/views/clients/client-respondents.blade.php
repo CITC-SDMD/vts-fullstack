@@ -1,6 +1,9 @@
 @extends('clients.client-profile')
 
 @section('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
+        integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 @endsection
 
@@ -34,6 +37,9 @@
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                     Civil Status
                                 </th>
+                                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                                    <span class="sr-only">View</span>
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
@@ -53,6 +59,20 @@
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                         {{ $respondent->civil_status }}
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <a href="{{ route('client.show', $respondent->uuid) }}"
+                                            class="inline-flex gap-x-1 items-center rounded bg-indigo-50 px-4 py-1 text-xs font-semibold text-violet-600 shadow-sm hover:bg-violet-100">
+                                            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                            </svg>
+                                            View
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -85,37 +105,26 @@
                         </button>
                     </div>
                     <div class="mt-3 border-b"></div>
-                    <form id="new-respondent-form" data-csrf="{{ csrf_token() }}" data-route="{{ route('client.check') }}"
-                        method="post" autocomplete="off">
+                    <form id="new-respondent-form" action="{{ route('respondent.store') }}" method="POST"
+                        autocomplete="off">
+                        @csrf
+                        <input type="hidden" name="complainant_id" value="{{ session('client.id') }}">
                         <div class="mt-4 space-y-2">
                             <div>
-                                <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">
-                                    First name
+                                <label for="respondent_id" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Respondent<span class="text-red-500">*</span>
                                 </label>
-                                <div class="mt-1">
-                                    <input type="firstname" name="firstname" id="firstname" required
-                                        class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                        placeholder="Enter first name">
-                                </div>
-                            </div>
-                            <div>
-                                <label for="middlename" class="block text-sm font-medium leading-6 text-gray-900">
-                                    Middle name
-                                </label>
-                                <div class="mt-1">
-                                    <input type="middlename" name="middlename" id="middlename" required
-                                        class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
-                                        placeholder="Enter middle name">
-                                </div>
-                            </div>
-                            <div>
-                                <label for="lastname" class="block text-sm font-medium leading-6 text-gray-900">
-                                    Last name
-                                </label>
-                                <div class="mt-1">
-                                    <input type="lastname" name="lastname" id="lastname" required
-                                        class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
-                                        placeholder="Enter last name">
+                                <div>
+                                    <select id="respondent_id" name="respondent_id" required>
+                                        <option value="" selected disabled>Select respondent</option>
+                                        @foreach ($data->respondentLists as $respondentList)
+                                            @if ($respondentList->id != session('client.id'))
+                                                <option value="{{ $respondentList->id }}">
+                                                    {{ $respondentList->full_name }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -126,6 +135,12 @@
                             </button>
                         </div>
                     </form>
+                    <div class="mt-2">
+                        <button type="button" id="create-new-respondent"
+                            class="inline-flex w-full justify-center rounded-md bg-violet-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
+                            Create new respondent
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -240,7 +255,7 @@
                             </div>
                             <div>
                                 <label for="age" class="block text-sm font-medium leading-6 text-gray-900">
-                                    Age<span class="text-red-500">*</span>
+                                    Age
                                 </label>
                                 <div>
                                     <input type="number" name="age" min="1" id="age"
@@ -423,6 +438,9 @@
 @endsection
 
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+        integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ asset('scripts/client-respondents.js') }}"></script>
 @endsection

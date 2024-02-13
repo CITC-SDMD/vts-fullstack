@@ -24,7 +24,7 @@ interface ClientRepositoryInterface
 
     public function showByFullname(object $payload);
 
-    public function update(object $payload, int $clientId);
+    public function update(object $payload, string $uuid);
 
     public function uploadMedia(object $payload, string $uuid);
 }

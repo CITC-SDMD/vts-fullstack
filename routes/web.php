@@ -39,6 +39,7 @@ Route::prefix('dashboard')->group(function () {
 Route::prefix('clients')->group(function () {
     Route::get('/', [ClientController::class, 'index'])->name('client.index');
     Route::get('/{uuid}/profile', [ClientController::class, 'show'])->name('client.show');
+    Route::get('/{uuid}/edit-profile', [ClientController::class, 'edit'])->name('client.edit');
     Route::get('/{uuid}/profile/cases', [ClientController::class, 'showCases'])->name('client.show.cases');
     Route::get('/{uuid}/profile/respondents', [ClientController::class, 'showRespondents'])->name('client.show.respondents');
     Route::get('/{uuid}/profile/dependents', [ClientController::class, 'showDependents'])->name('client.show.dependents');
@@ -49,6 +50,7 @@ Route::prefix('clients')->group(function () {
     Route::post('/case', [ClientController::class, 'storeCase'])->name('client.store.case');
     Route::post('/search', [ClientController::class, 'search'])->name('client.search');
     Route::post('/{uuid}/upload-signature', [ClientController::class, 'upload'])->name('client.upload');
+    Route::put('/{uuid}/update-profile', [ClientController::class, 'update'])->name('client.update');
 });
 
 Route::prefix('child')->group(function () {
@@ -84,6 +86,7 @@ Route::prefix('resources')->group(function () {
 
 Route::prefix('respondent')->group(function () {
     Route::get('/{complainantId}', [RespondentController::class, 'show']);
+    Route::post('/', [RespondentController::class, 'store'])->name('respondent.store');
 });
 
 Route::prefix('notification')->group(function () {

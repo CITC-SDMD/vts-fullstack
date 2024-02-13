@@ -157,21 +157,21 @@ class ClientController extends Controller
                         $abuseSub = $this->abuseSubcategoryRepository->showById($abuseSubcategoryId);
                         if ($abuseSub->abuse_category_id == $abuseCategoryId) {
                             $case = $this->caseProfileRepository->showByClientIdRespondentIdAbuseCategoryIdAbuseSubcategoryId($request->complainant_id, $request->respondent_id, $abuseCategoryId, $abuseSubcategoryId);
-                            if (! $case) {
+                            if (!$case) {
                                 $this->caseProfileRepository->store($request, $abuseCategoryId, $abuseSubcategoryId);
                             }
                         }
                     }
                 } else {
                     $case = $this->caseProfileRepository->showByComplainantIdRespondentIdAbuseCategoryId($request->complainant_id, $request->respondent_id, $abuseCategoryId);
-                    if (! $case) {
+                    if (!$case) {
                         $this->caseProfileRepository->store($request, $abuseCategoryId);
                     }
                 }
             }
         } else {
             $case = $this->caseProfileRepository->showByComplainantIdRespondentIdCaseCategoryId($request->complainant_id, $request->respondent_id, $request->case_category_id);
-            if (! $case) {
+            if (!$case) {
                 $this->caseProfileRepository->store($request);
             }
         }
@@ -185,9 +185,11 @@ class ClientController extends Controller
         $respondentIds = $this->respondentRepository->showRespondentIdArray($client->id);
         $respondents = $this->clientRepository->showRespondents($respondentIds);
         $barangays = $this->barangayRepository->index();
+        $respondentList = $this->clientRepository->showAllClient();
 
         $data = (object) [
             'respondents' => $respondents,
+            'respondentLists' => $respondentList,
             'barangays' => $barangays,
             'respondentsPagination' => $respondents->links('components.pagination'),
         ];
@@ -241,8 +243,28 @@ class ClientController extends Controller
     public function download(string $uuid)
     {
         $client = $this->clientRepository->showByUuid($uuid);
-        $filePath = 'vts/client/'.$client->file;
+        $filePath = 'vts/client/' . $client->file;
 
         return Storage::download($filePath);
+    }
+
+    public function edit(string $uuid)
+    {
+        $client = $this->clientRepository->showByUuid($uuid);
+        $barangays = $this->barangayRepository->index();
+
+        return view('clients.client-update', [
+            'client' => $client,
+            'barangays' => $barangays,
+        ]);
+    }
+
+    public function update(Request $request, string $uuid)
+    {
+        $client = $this->clientRepository->update($request, $uuid);
+
+        Alert::success('Success', 'Profile updated successfully.');
+
+        return redirect()->route('client.show', $client->uuid);
     }
 }
