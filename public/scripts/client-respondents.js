@@ -2,7 +2,7 @@ $(document).ready(function () {
     $('.clients-button').addClass('active-link');
 
     $("#birthdate").flatpickr({
-        allowInput: false,
+        allowInput: true,
     });
 
     $('#birthdate').change(function () {
