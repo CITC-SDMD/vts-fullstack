@@ -6,6 +6,8 @@ interface UserRepositoryInterface
 {
     public function index();
 
+    public function showByAgencyId($agencyId);
+
     public function showAll();
 
     public function create(object $payload);

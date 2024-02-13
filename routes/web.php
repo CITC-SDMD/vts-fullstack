@@ -8,6 +8,7 @@ use App\Http\Controllers\ChildController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\RespondentController;
 use App\Http\Controllers\UserController;
@@ -83,4 +84,8 @@ Route::prefix('resources')->group(function () {
 
 Route::prefix('respondent')->group(function () {
     Route::get('/{complainantId}', [RespondentController::class, 'show']);
+});
+
+Route::prefix('notification')->group(function () {
+    Route::post('/mark-notification-as-read/{id}', [NotificationController::class, 'markNotificationAsRead'])->name('notification.read');
 });

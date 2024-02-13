@@ -22,6 +22,11 @@ class UserRepository implements UserRepositoryInterface
             ->paginate(config('pagination.paginate'));
     }
 
+    public function showByAgencyId($agencyId)
+    {
+        return User::where('agency_id', $agencyId)->get();
+    }
+
     public function showAll()
     {
         return User::with(['agency'])->get();

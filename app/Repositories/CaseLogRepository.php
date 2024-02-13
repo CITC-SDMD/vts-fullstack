@@ -86,4 +86,13 @@ class CaseLogRepository implements CaseLogRepositoryInterface
             ->where('uuid', $uuid)
             ->first();
     }
+
+    public function showById(int $caseLogId)
+    {
+        return CaseLog::with([
+            'referredBy',
+            'referredBy.agency',
+            'referralAgency',
+        ])->findOrFail($caseLogId);
+    }
 }

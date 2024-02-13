@@ -15,4 +15,6 @@ interface CaseLogRepositoryInterface
     public function showByCaseProfileIdReferralAgencyIdServiceId(int $caseProfileId, int $agencyId, int $serviceId);
 
     public function showByUuid(string $uuid);
+
+    public function showById(int $caseLogId);
 }

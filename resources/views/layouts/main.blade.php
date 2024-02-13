@@ -197,14 +197,39 @@
 
                 <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 justify-end">
                     <div class="flex items-center gap-x-4 lg:gap-x-6">
-                        <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
-                            <span class="sr-only">View notifications</span>
-                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                            </svg>
-                        </button>
+                        <div class="relative">
+                            <button type="button" id="notification-button"
+                                class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500 flex">
+                                <span class="sr-only">View notifications</span>
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                                </svg>
+                                <span
+                                    class="inline-flex items-center rounded-md bg-indigo-100 px-2 py-1 text-xs font-medium text-indigo-700">
+                                    {{ auth()->user()->unreadNotifications()->count() }}
+                                </span>
+                            </button>
+
+                            <div class="absolute space-y-2 hidden right-0 mt-2.5 w-80 lg:w-96 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
+                                role="menu" aria-orientation="vertical" id="notification-menu"
+                                aria-labelledby="user-menu-button" tabindex="-1">
+                                @forelse (auth()->user()->unreadNotifications as $notification)
+                                    <button data-notification-id="{{ $notification->id }}"
+                                        class="px-4 hover:bg-violet-50 w-full text-left text-violet-500 leading-none py-3 mark-as-read-btn">
+                                        {{ $notification->data['title'] }}<br>
+                                        <span class="text-xs text-gray-500">
+                                            {{ $notification->data['body'] }}
+                                        </span>
+                                    </button>
+                                @empty
+                                    <span class="text-center block px-3 py-1 text-sm leading-6 text-gray-500">
+                                        No new notifications
+                                    </span>
+                                @endforelse
+                            </div>
+                        </div>
 
                         <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10" aria-hidden="true"></div>
 
@@ -253,6 +278,24 @@
 
     <script src="{{ asset('scripts/jquery.min.js') }}"></script>
     <script src="{{ asset('scripts/main.js') }}"></script>
+    <script>
+        document.querySelectorAll('.mark-as-read-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const notificationId = this.getAttribute('data-notification-id');
+                fetch("{{ url('/notification/mark-notification-as-read/') }}" + '/' + notificationId, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        window.location = data.data.link;
+                    })
+                    .catch(error => console.error(error));
+            });
+        });
+    </script>
     @yield('scripts')
 </body>
 
