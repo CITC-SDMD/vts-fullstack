@@ -14,6 +14,9 @@ class RelationshipSeeder extends Seeder
     {
         $types = [
             [
+                'relationship_type' => 'No Relation',
+            ],
+            [
                 'relationship_type' => 'Brother',
             ],
             [
