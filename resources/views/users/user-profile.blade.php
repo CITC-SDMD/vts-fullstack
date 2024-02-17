@@ -26,7 +26,7 @@
                         First name
                     </label>
                     <div>
-                        <input type="text" name="firstname" id="firstname"
+                        <input type="text" name="firstname" id="firstname" required
                             class="block w-full lg:w-1/2 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                             value="{{ $user->firstname }}">
                     </div>
@@ -36,7 +36,7 @@
                         Last name
                     </label>
                     <div>
-                        <input type="text" name="lastname" id="lastname"
+                        <input type="text" name="lastname" id="lastname" required
                             class="block w-full lg:w-1/2 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                             value="{{ $user->lastname }}">
                     </div>
@@ -46,7 +46,7 @@
                         Contact number
                     </label>
                     <div>
-                        <input type="text" name="contact_number" id="contact_number"
+                        <input type="text" name="contact_number" id="contact_number" required
                             class="block w-full lg:w-1/2 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                             value="{{ $user->contact_number }}">
                     </div>
@@ -56,7 +56,7 @@
                         Agency address
                     </label>
                     <div>
-                        <input type="text" name="agency_address" id="agency_address"
+                        <input type="text" name="agency_address" id="agency_address" required
                             class="block w-full lg:w-1/2 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                             value="{{ $user->agency_address }}">
                     </div>
@@ -66,7 +66,7 @@
                         Email address
                     </label>
                     <div>
-                        <input type="email" name="email" id="email"
+                        <input type="email" name="email" id="email" required
                             class="block w-full lg:w-1/2 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                             value="{{ $user->email }}">
                     </div>

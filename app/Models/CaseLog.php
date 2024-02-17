@@ -21,6 +21,11 @@ class CaseLog extends Model
         'case_log_number',
     ];
 
+    public function latestAssistanceLog()
+    {
+        return $this->hasOne(AssistanceLog::class)->latest('created_at');
+    }
+
     public function caseProfile(): BelongsTo
     {
         return $this->belongsTo(CaseProfile::class);

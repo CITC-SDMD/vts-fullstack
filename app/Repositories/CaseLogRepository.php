@@ -33,14 +33,14 @@ class CaseLogRepository implements CaseLogRepositoryInterface
         $month = $currentTimestamp->month;
         $day = $currentTimestamp->day;
         $millisecond = $currentTimestamp->millisecond;
-        $caseLogNumber = $year.$month.$day.$millisecond;
+        $caseLogNumber = $year . $month . $day . $millisecond;
 
         $log = new CaseLog();
         $log->case_profile_id = $payload->case_profile_id;
         $log->referred_by_id = $user->agency_id;
         $log->referral_agency_id = $agencyId;
         $log->service_id = $serviceId;
-        $log->case_log_number = 'CASELOG #'.$caseLogNumber;
+        $log->case_log_number = 'CASELOG #' . $caseLogNumber;
         $log->save();
 
         return $log->fresh();
@@ -53,12 +53,8 @@ class CaseLogRepository implements CaseLogRepositoryInterface
             'referredBy.agency',
             'referralAgency',
             'service',
-            'assistanceLogs' => function ($query) {
-                $query->latest('created_at')->take(1);
-            },
         ])
             ->where('case_profile_id', $caseProfileId)
-            ->orderBy('id', 'desc')
             ->paginate(config('pagination.shortPage'));
     }
 

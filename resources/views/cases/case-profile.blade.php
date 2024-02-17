@@ -157,9 +157,9 @@
                                             {{ $caselog->service->service_type }}
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            @foreach ($caselog->assistanceLogs as $logs)
-                                                {{ $logs->status }}
-                                            @endforeach
+                                            @if ($caselog->latestAssistanceLog)
+                                                {{ $caselog->latestAssistanceLog->status }}
+                                            @endif
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {{ \Carbon\Carbon::parse($caselog->created_at)->format('M d, Y') }}
@@ -187,6 +187,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="flex items-center justify-center mt-6">
+            {!! $paginate !!}
         </div>
 
         <div class="relative z-10 hidden" id="new-caselog-modal" aria-labelledby="modal-title" role="dialog"
@@ -225,7 +229,8 @@
                                         <select id="referral_agency_id" name="referral_agency_id[]" required>
                                             <option value="" selected disabled>Select option</option>
                                             @foreach ($agencies as $agency)
-                                                <option value="{{ $agency->id }}">{{ $agency->agency_name }}</option>
+                                                <option value="{{ $agency->id }}">{{ $agency->agency_name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -238,7 +243,8 @@
                                         <select id="service_id" name="service_id[]" required>
                                             <option value="" selected disabled>Select option</option>
                                             @foreach ($services as $service)
-                                                <option value="{{ $service->id }}">{{ $service->service_type }}</option>
+                                                <option value="{{ $service->id }}">{{ $service->service_type }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>

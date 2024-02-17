@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <div class="px-4 sm:px-6 lg:px-8">
+    <div class="px-4 sm:px-6 lg:px-8 lg:mx-20">
         <div class="sm:flex sm:items-center sm:justify-center">
             <div class="sm:flex-auto">
                 <label for="search" class="block text-sm font-medium leading-6 text-gray-900">Search client</label>
@@ -295,7 +295,7 @@
                                     Age
                                 </label>
                                 <div>
-                                    <input type="number" name="age" min="1" id="age"
+                                    <input type="number" name="age" min="1" id="age" readonly
                                         class="block w-full rounded-md border-0 px-3 py-1.5
                                         text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
                                         placeholder:text-gray-400 focus:ring-2 focus:ring-inset
@@ -390,11 +390,11 @@
                                 </div>
                             </div>
                             <div>
-                                <label for="civil_status" class="block text-sm font-medium leading-6 text-gray-900">
+                                <label for="ethnicity" class="block text-sm font-medium leading-6 text-gray-900">
                                     Ethnicity
                                 </label>
                                 <div>
-                                    <select id="civil_status" name="civil_status"
+                                    <select id="ethnicity" name="ethnicity"
                                         class="mt-1 block w-full rounded-md border-0 px-2 py-1.5 pr-10
                                         text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
                                         focus:ring-violet-600 sm:text-sm sm:leading-6">

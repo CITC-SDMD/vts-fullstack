@@ -134,6 +134,7 @@
                                 </label>
                                 <div>
                                     <input type="number" name="age" id="child_age" required
+                                        onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'"
                                         class="block w-full rounded-md border-0 px-3 py-1.5
                                         text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
                                         placeholder:text-gray-400 focus:ring-2 focus:ring-inset
