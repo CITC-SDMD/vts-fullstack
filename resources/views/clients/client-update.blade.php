@@ -35,7 +35,7 @@
                             First name
                         </label>
                         <div>
-                            <input type="text" name="firstname" id="firstname"
+                            <input type="text" name="firstname" id="firstname" required
                                 class="block w-full lg:w-1/2 px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                                 value={{ $client->firstname }}>
                         </div>
@@ -45,7 +45,7 @@
                             Middle name
                         </label>
                         <div>
-                            <input type="text" name="middlename" id="middlename"
+                            <input type="text" name="middlename" id="middlename" required
                                 class="block w-full lg:w-1/2 px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                                 value={{ $client->middlename }}>
                         </div>
@@ -55,7 +55,7 @@
                             Last name
                         </label>
                         <div>
-                            <input type="text" name="lastname" id="lastname"
+                            <input type="text" name="lastname" id="lastname" required
                                 class="block w-full lg:w-1/2 px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                                 value={{ $client->lastname }}>
                         </div>
@@ -75,7 +75,7 @@
                             Date of birthselected
                         </label>
                         <div>
-                            <input type="text" name="birthdate" id="birthdate" value="{{ $client->birthdate }}"
+                            <input type="text" name="birthdate" required id="birthdate" value="{{ $client->birthdate }}"
                                 class="block w-full lg:w-1/2 rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                         <label for="sex" class="block text-sm font-medium leading-6 text-gray-900">
                             Sex
                         </label>
-                        <select id="sex" name="sex"
+                        <select id="sex" name="sex" required
                             class="block w-full lg:w-1/2 rounded-md border-0 py-1.5 pl-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6">
                             @if ($client->sex == 'male')
                                 <option value="male" selected>Male</option>
@@ -99,7 +99,7 @@
                             Age
                         </label>
                         <div>
-                            <input type="text" name="age" id="age" value="{{ $client->age }}"
+                            <input type="text" name="age" id="age" value="{{ $client->age }}" readonly
                                 class="block w-full lg:w-1/2 rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                         <label for="civil_status" class="block text-sm font-medium leading-6 text-gray-900">
                             Civil status
                         </label>
-                        <select id="civil_status" name="civil_status"
+                        <select id="civil_status" name="civil_status" required
                             class="block w-full lg:w-1/2 rounded-md border-0 py-1.5 pl-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6">
                             @if ($client->civil_status == 'single')
                                 <option value="single" selected>single</option>
@@ -138,7 +138,7 @@
                         </label>
                         <select id="educ_attain" name="educ_attain"
                             class="block w-full lg:w-1/2 rounded-md border-0 py-1.5 pl-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6">
-                            @if ($client->civil_status == 'No formal education')
+                            @if ($client->educ_attain == 'No formal education')
                                 <option value="No formal education" selected>No formal education</option>
                                 <option value="Primary education">Primary education</option>
                                 <option value="Secondary education">Secondary education or high school</option>
@@ -147,7 +147,7 @@
                                 <option value="Bachelor's degree">Bachelor's degree</option>
                                 <option value="Master's degree">Master's degree</option>
                                 <option value="Doctorate or higher">Doctorate or higher</option>
-                            @elseif($client->civil_status == 'Primary education')
+                            @elseif($client->educ_attain == 'Primary education')
                                 <option value="No formal education">No formal education</option>
                                 <option value="Primary education" selected>Primary education</option>
                                 <option value="Secondary education">Secondary education or high school</option>
@@ -156,7 +156,7 @@
                                 <option value="Bachelor's degree">Bachelor's degree</option>
                                 <option value="Master's degree">Master's degree</option>
                                 <option value="Doctorate or higher">Doctorate or higher</option>
-                            @elseif($client->civil_status == 'Secondary education')
+                            @elseif($client->educ_attain == 'Secondary education')
                                 <option value="No formal education">No formal education</option>
                                 <option value="Primary education">Primary education</option>
                                 <option value="Secondary education" selected>Secondary education or high school</option>
@@ -165,7 +165,7 @@
                                 <option value="Bachelor's degree">Bachelor's degree</option>
                                 <option value="Master's degree">Master's degree</option>
                                 <option value="Doctorate or higher">Doctorate or higher</option>
-                            @elseif($client->civil_status == 'GED')
+                            @elseif($client->educ_attain == 'GED')
                                 <option value="No formal education">No formal education</option>
                                 <option value="Primary education">Primary education</option>
                                 <option value="Secondary education">Secondary education or high school</option>
@@ -174,7 +174,7 @@
                                 <option value="Bachelor's degree">Bachelor's degree</option>
                                 <option value="Master's degree">Master's degree</option>
                                 <option value="Doctorate or higher">Doctorate or higher</option>
-                            @elseif($client->civil_status == 'Vocational qualification')
+                            @elseif($client->educ_attain == 'Vocational qualification')
                                 <option value="No formal education">No formal education</option>
                                 <option value="Primary education">Primary education</option>
                                 <option value="Secondary education">Secondary education or high school</option>
@@ -183,7 +183,7 @@
                                 <option value="Bachelor's degree">Bachelor's degree</option>
                                 <option value="Master's degree">Master's degree</option>
                                 <option value="Doctorate or higher">Doctorate or higher</option>
-                            @elseif($client->civil_status == "Bachelor's degree")
+                            @elseif($client->educ_attain == "Bachelor's degree")
                                 <option value="No formal education">No formal education</option>
                                 <option value="Primary education">Primary education</option>
                                 <option value="Secondary education">Secondary education or high school</option>
@@ -192,7 +192,7 @@
                                 <option value="Bachelor's degree" selected>Bachelor's degree</option>
                                 <option value="Master's degree">Master's degree</option>
                                 <option value="Doctorate or higher">Doctorate or higher</option>
-                            @elseif($client->civil_status == "Master's degree")
+                            @elseif($client->educ_attain == "Master's degree")
                                 <option value="No formal education">No formal education</option>
                                 <option value="Primary education">Primary education</option>
                                 <option value="Secondary education">Secondary education or high school</option>
@@ -201,7 +201,7 @@
                                 <option value="Bachelor's degree">Bachelor's degree</option>
                                 <option value="Master's degree" selected>Master's degree</option>
                                 <option value="Doctorate or higher">Doctorate or higher</option>
-                            @elseif($client->civil_status == 'Doctorate or higher')
+                            @elseif($client->educ_attain == 'Doctorate or higher')
                                 <option value="No formal education">No formal education</option>
                                 <option value="Primary education">Primary education</option>
                                 <option value="Secondary education">Secondary education or high school</option>
@@ -237,7 +237,7 @@
                         <label for="barangay_id" class="block text-sm font-medium leading-6 text-gray-900">
                             Barangay
                         </label>
-                        <select id="barangay_id" name="barangay_id"
+                        <select id="barangay_id" name="barangay_id" required
                             class="block w-full lg:w-1/2 rounded-md border-0 py-1.5 pl-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6">
                             @foreach ($barangays as $barangay)
                                 @if ($client->barangay_id == $barangay->id)
@@ -253,7 +253,7 @@
                             Home address
                         </label>
                         <div>
-                            <textarea rows="2" name="home_address" id="home_address"
+                            <textarea rows="2" name="home_address" id="home_address" required
                                 class="resize-none block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6">{{ $client->home_address }}</textarea>
                         </div>
                     </div>
@@ -294,7 +294,7 @@
                     </div>
                     <div>
                         <label for="is_4ps_beneficiary" class="block text-sm font-medium leading-6 text-gray-900">
-                            Ethnicity
+                            4Ps Member
                         </label>
                         <select id="is_4ps_beneficiary" name="is_4ps_beneficiary"
                             class="block w-full lg:w-1/2 rounded-md border-0 py-1.5 pl-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6">

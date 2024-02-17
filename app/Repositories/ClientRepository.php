@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Interface\Repositories\ClientRepositoryInterface;
 use App\Models\Client;
 use Carbon\Carbon;
-use Faker\Core\Uuid;
 use Illuminate\Support\Facades\DB;
 use illuminate\Support\Str;
 
