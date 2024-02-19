@@ -80,7 +80,6 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
         $caseProfile->received_by_id = $user->id;
         $caseProfile->relationship_id = $payload->relationship_id;
         $caseProfile->case_profile_id = 'CASE #'.$caseNumber;
-        $caseProfile->case_code = $payload->case_code;
         $caseProfile->save();
 
         return $caseProfile->fresh();
@@ -135,8 +134,7 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
             'abuseCategory',
         ])
             ->where(function ($query) use ($payload) {
-                $query->where('case_code', 'LIKE', "%$payload->search%")
-                    ->orWhere('case_profile_id', 'LIKE', "%$payload->search%");
+                $query->Where('case_profile_id', 'LIKE', "%$payload->search%");
             })
             ->orWhereHas('complainant', function ($query) use ($payload) {
                 $query->where('firstname', 'LIKE', "%$payload->search%")

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Interface\Repositories\AbuseCategoryRepositoryInterface;
 use App\Interface\Repositories\AbuseSubcategoryRepositoryInterface;
+use App\Interface\Repositories\AssistanceLogAttachmentRepositoryInterface;
 use App\Interface\Repositories\AssistanceLogRepositoryInterface;
 use App\Interface\Repositories\BarangayRepositoryInterface;
 use App\Interface\Repositories\CaseCategoryRepositoryInterface;
@@ -18,6 +19,7 @@ use App\Interface\Repositories\ServiceRepositoryInterface;
 use App\Interface\Repositories\UserRepositoryInterface;
 use App\Repositories\AbuseCategoryRepository;
 use App\Repositories\AbuseSubcategoryRepository;
+use App\Repositories\AssistanceLogAttachmentRepository;
 use App\Repositories\AssistanceLogRepository;
 use App\Repositories\BarangayRepository;
 use App\Repositories\CaseCategoryRepository;
@@ -54,6 +56,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
         $this->app->bind(CaseLogRepositoryInterface::class, CaseLogRepository::class);
         $this->app->bind(AssistanceLogRepositoryInterface::class, AssistanceLogRepository::class);
+        $this->app->bind(AssistanceLogAttachmentRepositoryInterface::class, AssistanceLogAttachmentRepository::class);
     }
 
     /**

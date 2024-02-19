@@ -17,7 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('agency_id');
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('contact_number');
+            $table->string('telephone_number')->nullable();
+            $table->string('mobile_number')->nullable();
             $table->string('agency_address');
             $table->string('email')->unique();
             $table->string('password');

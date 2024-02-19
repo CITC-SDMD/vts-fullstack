@@ -23,7 +23,6 @@ return new class extends Migration
             $table->unsignedBigInteger('assessed_by_id')->nullable();
             $table->unsignedBigInteger('relationship_id');
             $table->string('case_profile_id');
-            $table->string('case_code');
             $table->timestamps();
         });
 

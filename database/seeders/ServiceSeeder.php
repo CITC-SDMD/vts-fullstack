@@ -26,7 +26,16 @@ class ServiceSeeder extends Seeder
                 'service_type' => 'Issuance of Certificate of Indigency',
             ],
             [
-                'service_type' => 'Assistance Food, Livelihood, Financial, Transportation',
+                'service_type' => 'Assistance Food',
+            ],
+            [
+                'service_type' => 'Livelihood',
+            ],
+            [
+                'service_type' => 'Financial',
+            ],
+            [
+                'service_type' => 'Transportation',
             ],
             [
                 'service_type' => 'Case study/home visit',

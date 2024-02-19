@@ -6,6 +6,7 @@ use App\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class AssistanceLog extends Model
 {
@@ -18,6 +19,11 @@ class AssistanceLog extends Model
         'description',
         'status',
     ];
+
+    public function assistanceLogAttachments(): HasMany
+    {
+        return $this->hasMany(AssistanceLogAttachment::class);
+    }
 
     public function caseLog(): BelongsTo
     {

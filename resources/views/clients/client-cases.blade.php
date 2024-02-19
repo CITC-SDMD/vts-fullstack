@@ -25,9 +25,6 @@
                                     Case Profile ID
                                 </th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                    Case Code
-                                </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                     Complainant
                                 </th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -48,9 +45,6 @@
                                 <tr>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                         {{ $case->case_profile_id }}
-                                    </td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        {{ $case->case_code }}
                                     </td>
                                     <td
                                         class="truncate text-ellipsis overflow-hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -149,19 +143,6 @@
                                 </div>
                             </div>
                             <div>
-                                <label for="case_code" class="block text-sm font-medium leading-6 text-gray-900">
-                                    Case Code<span class="text-red-500">*</span>
-                                </label>
-                                <div>
-                                    <input type="text" name="case_code" id="case_code"
-                                        class="block w-full rounded-md border-0 px-3 py-1.5
-                                    text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
-                                    placeholder:text-gray-400 focus:ring-2 focus:ring-inset
-                                    focus:ring-violet-600 sm:text-sm sm:leading-6"
-                                        required>
-                                </div>
-                            </div>
-                            <div>
                                 <label for="relationship_id" class="block text-sm font-medium leading-6 text-gray-900">
                                     Relationship to respondent<span class="text-red-500">*</span>
                                 </label>
@@ -176,7 +157,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-start-1">
+                            <div>
                                 <label for="case_category_id" class="block text-sm font-medium leading-6 text-gray-900">
                                     Case category<span class="text-red-500">*</span>
                                 </label>

@@ -2,6 +2,21 @@
 
 @section('title', 'Case Log | VAW Tracking System')
 
+@section('styles')
+    <style>
+        .tooltip {
+            color: red;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        a:hover+.tooltip {
+            display: block;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="min-h-full">
         <main class="py-2">
@@ -32,12 +47,6 @@
                                         <dt class="text-sm font-medium text-gray-500">Case number</dt>
                                         <dd class="mt-1 text-sm text-gray-900">
                                             {{ $caselog->caseProfile->case_profile_id }}
-                                        </dd>
-                                    </div>
-                                    <div class="sm:col-span-1">
-                                        <dt class="text-sm font-medium text-gray-500">Case code</dt>
-                                        <dd class="mt-1 text-sm text-gray-900">
-                                            {{ $caselog->caseProfile->case_code }}
                                         </dd>
                                     </div>
                                     <div class="sm:col-span-1">
@@ -109,6 +118,40 @@
                                                             <div class="mt-3 mb-2 font-medium text-gray-700">
                                                                 {{ $assistance->description }}
                                                             </div>
+                                                            @if ($assistance->assistanceLogAttachments->isNotEmpty())
+                                                                <div class="mt-4">
+                                                                    <div>
+                                                                        <p class="text-xxs font-bold">File attachments:</p>
+                                                                    </div>
+                                                                    <div class="flex space-x-4">
+                                                                        @foreach ($assistance->assistanceLogAttachments as $attachment)
+                                                                            <div class="flex items-center space-x-2">
+                                                                                <a href="{{ route('attachment.download', $attachment->uuid) }}"
+                                                                                    class="hover:underline truncate text-blue-500 text-xxs">{{ Illuminate\Support\Str::limit($attachment->file, $limit = 10, $end = '...') }}</a>
+                                                                                <div class="relative inline-block text-xxs">
+                                                                                    <a href="{{ route('attachment.delete', $attachment->uuid) }}"
+                                                                                        class="text-red-500 hover:text-red-700">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke-width="1.5"
+                                                                                            stroke="currentColor"
+                                                                                            class="w-3 h-3">
+                                                                                            <path stroke-linecap="round"
+                                                                                                stroke-linejoin="round"
+                                                                                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                                                        </svg>
+                                                                                    </a>
+                                                                                    <div
+                                                                                        class="hidden absolute z-10 p-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-md tooltip">
+                                                                                        Delete
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endforeach
+                                                                    </div>
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </li>
@@ -141,7 +184,7 @@
                                     </div>
                                     <div class="min-w-0 flex-1">
                                         <form action="{{ route('assistancelogs.store') }}" method="post"
-                                            autocomplete="off">
+                                            autocomplete="off" enctype="multipart/form-data">
                                             @csrf
                                             <div>
                                                 <input type="hidden" name="case_log_id" value="{{ $caselog->id }}">
@@ -151,10 +194,10 @@
                                                     placeholder="Add assistance description"></textarea>
                                             </div>
                                             <div class="grid grid-cols-2">
-                                                <div class="mt-3 flex items-center justify-start">
+                                                <div class="mt-3 flex items-center justify-start gap-x-4">
                                                     <div>
                                                         <select id="status" name="status" required
-                                                            class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                            class="mt-2 block w-full lg:w-60 rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                                             <option value="" selected disabled>Select status</option>
                                                             <option value="Complaint Prepared">
                                                                 Complaint Prepared
@@ -181,6 +224,26 @@
                                                             </option>
                                                         </select>
                                                     </div>
+                                                    @if ($caselog->referredBy->agency->agency_name == $caselog->referralAgency->agency_name)
+                                                        <div class="flex mt-1">
+                                                            <label for="fileInput"
+                                                                class="group -my-2 -ml-2 inline-flex items-center rounded-full px-3 py-2 text-left text-gray-400 cursor-pointer">
+                                                                <svg class="-ml-1 mr-2 h-5 w-5 group-hover:text-gray-500"
+                                                                    viewBox="0 0 20 20" fill="currentColor"
+                                                                    aria-hidden="true">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"
+                                                                        clip-rule="evenodd" />
+                                                                </svg>
+                                                                <input type="file" name="attachments[]" id="fileInput"
+                                                                    class="hidden" multiple
+                                                                    onchange="displayFileNames(this)">
+                                                                <span
+                                                                    class="text-sm italic text-gray-500 group-hover:text-gray-600"
+                                                                    id="fileNames">Attach a file</span>
+                                                            </label>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <div class="mt-3 flex items-center justify-end">
                                                     <button type="submit"
@@ -201,4 +264,17 @@
 
 @section('scripts')
     <script src="{{ asset('scripts/case-log.js') }}"></script>
+    <script>
+        function displayFileNames(input) {
+            const fileNamesSpan = document.getElementById('fileNames');
+            const files = input.files;
+
+            if (files.length > 0) {
+                const names = Array.from(files).map(file => file.name).join(', ');
+                fileNamesSpan.textContent = names;
+            } else {
+                fileNamesSpan.textContent = 'Attach a file';
+            }
+        }
+    </script>
 @endsection

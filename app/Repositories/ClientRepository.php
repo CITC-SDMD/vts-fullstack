@@ -134,7 +134,7 @@ class ClientRepository implements ClientRepositoryInterface
             $client->addMediaFromRequest('file')->toMediaCollection('clientMedia');
         }
         $filePath = $client->getMedia('clientMedia')->last()->getPath();
-        $appPath = Str::after($filePath, 'client/');
+        $appPath = Str::after($filePath, 'files/');
         $client->file = $appPath;
         $client->save();
 

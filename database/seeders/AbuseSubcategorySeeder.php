@@ -23,10 +23,6 @@ class AbuseSubcategorySeeder extends Seeder
             ],
             [
                 'abuse_category_id' => 1,
-                'type' => 'Medical Certificate',
-            ],
-            [
-                'abuse_category_id' => 1,
                 'type' => 'Police Blotter',
             ],
             [

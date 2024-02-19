@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Interface\Repositories\AssistanceLogAttachmentRepositoryInterface;
 use App\Interface\Repositories\AssistanceLogRepositoryInterface;
 use App\Interface\Repositories\CaseLogRepositoryInterface;
 use App\Interface\Repositories\UserRepositoryInterface;
+use App\Models\AssistanceLogAttachment;
 use App\Notifications\AssistanceLogNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
+use illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AssistanceLogController extends Controller
@@ -18,22 +21,38 @@ class AssistanceLogController extends Controller
 
     private $userRepository;
 
+    private $assistanceLogAttachmentRepository;
+
     public function __construct(
         AssistanceLogRepositoryInterface $assistanceLogRepository,
         CaseLogRepositoryInterface $caseLogRepository,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
+        AssistanceLogAttachmentRepositoryInterface $assistanceLogAttachmentRepository
     ) {
         $this->middleware('auth');
         $this->assistanceLogRepository = $assistanceLogRepository;
         $this->caseLogRepository = $caseLogRepository;
         $this->userRepository = $userRepository;
+        $this->assistanceLogAttachmentRepository = $assistanceLogAttachmentRepository;
     }
 
     public function store(Request $request)
     {
-        $this->assistanceLogRepository->store($request);
+        $assistanceLog = $this->assistanceLogRepository->store($request);
 
         $log = $this->caseLogRepository->showById($request->case_log_id);
+
+        if ($request->attachments) {
+            foreach ($request->attachments as $attachment) {
+                $image = new AssistanceLogAttachment();
+                $image->addMedia($attachment)->toMediaCollection('assistanceMedia');
+                $filePath = $image->getMedia('assistanceMedia')->last()->getPath();
+                $appPath = Str::after($filePath, 'files/');
+                $image->assistance_log_id = $assistanceLog->id;
+                $image->file = $appPath;
+                $image->save();
+            }
+        }
 
         $user = auth()->user();
 

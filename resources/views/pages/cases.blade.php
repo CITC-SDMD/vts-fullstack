@@ -51,9 +51,6 @@
                                         Case Profile ID
                                     </th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Case Code
-                                    </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Complainant
                                     </th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -76,9 +73,6 @@
                                             <td
                                                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                                 {{ $case->case_profile_id }}
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $case->case_code }}
                                             </td>
                                             <td
                                                 class="truncate text-ellipsis overflow-hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -152,8 +146,7 @@
                             </button>
                         </div>
                     </div>
-                    <form action="{{ route('client.store.case') }}" method="post" id="new-case-form"
-                        autocomplete="off">
+                    <form action="{{ route('client.store.case') }}" method="post" id="new-case-form" autocomplete="off">
                         @csrf
                         <div class="mt-4 lg:grid lg:grid-cols-2 gap-x-4 gap-y-0 pb-4">
                             <div>
@@ -177,19 +170,6 @@
                                     <select id="respondent_id" name="respondent_id" required>
                                         <option value="" selected disabled>Select option</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label for="case_code" class="block text-sm font-medium leading-6 text-gray-900">
-                                    Case code<span class="text-red-500">*</span>
-                                </label>
-                                <div>
-                                    <input type="text" name="case_code" id="case_code"
-                                        class="block w-full rounded-md border-0 px-3 py-1.5
-                                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
-                                        placeholder:text-gray-400 focus:ring-2 focus:ring-inset
-                                        focus:ring-violet-600 sm:text-sm sm:leading-6"
-                                        required>
                                 </div>
                             </div>
                             <div>

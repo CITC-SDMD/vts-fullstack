@@ -24,7 +24,6 @@ class ClientCaseStoreRequest extends FormRequest
         return [
             'complainant_id' => 'required',
             'respondent_id' => 'required',
-            'case_code' => 'required',
             'relationship_id' => 'required',
             'case_category_id' => 'required',
         ];

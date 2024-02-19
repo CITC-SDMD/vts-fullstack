@@ -31,6 +31,6 @@ class CustomMediaPathGenerator implements PathGenerator
     private function filePath()
     {
 
-        return 'vts/client/';
+        return 'vts/files/';
     }
 }

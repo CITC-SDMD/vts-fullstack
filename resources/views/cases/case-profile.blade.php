@@ -32,12 +32,6 @@
                         {{ session('caseProfile.case_profile_id') }}
                     </dd>
                 </div>
-                <div class="px-4 py-2 sm:col-span-1 sm:px-0">
-                    <dt class="text-sm font-medium leading-6 text-gray-900">Case code</dt>
-                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
-                        {{ session('caseProfile.case_code') }}
-                    </dd>
-                </div>
                 <div class="border-t border-gray-100 px-4 py-2 sm:col-span-1 sm:px-0">
                     <dt class="text-sm font-medium leading-6 text-gray-900">Case category</dt>
                     <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
@@ -76,14 +70,16 @@
                 <div class="border-t border-gray-100 px-4 py-2 sm:col-span-1 sm:px-0">
                     <dt class="text-sm font-medium leading-6 text-gray-900">Recieved by</dt>
                     <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
-                        {{ session('caseProfile.receivedBy.full_name') }}
+                        {{ session('caseProfile.receivedBy.full_name') }} -
+                        {{ session('caseProfile.receivedBy.agency.agency_name') }}
                     </dd>
                 </div>
                 <div class="border-t border-gray-100 px-4 py-2 sm:col-span-1 sm:px-0">
                     <dt class="text-sm font-medium leading-6 text-gray-900">Assessed by</dt>
                     <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
                         @if (session('caseProfile.assessedBy'))
-                            {{ session('caseProfile.assessedBy.full_name') }}
+                            {{ session('caseProfile.assessedBy.full_name') }} -
+                            {{ session('caseProfile.assessedBy.agency.agency_name') }}
                         @endif
                     </dd>
                 </div>

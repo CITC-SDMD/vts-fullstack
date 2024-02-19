@@ -38,7 +38,10 @@ class CaseCategorySeeder extends Seeder
                 'category_name' => 'RA 7877 – Anti-Sexual Harassment',
             ],
             [
-                'category_name' => 'RA 11596 - PROHIBITING THE PRACTICE OF CHILD MARRIAGE',
+                'category_name' => 'RA 11596 - Prohibiting the Practice of Child Marriage',
+            ],
+            [
+                'category_name' => 'Others',
             ],
         ];
 

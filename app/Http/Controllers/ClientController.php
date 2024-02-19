@@ -243,7 +243,7 @@ class ClientController extends Controller
     public function download(string $uuid)
     {
         $client = $this->clientRepository->showByUuid($uuid);
-        $filePath = 'vts/client/'.$client->file;
+        $filePath = 'vts/files/'.$client->file;
 
         return Storage::download($filePath);
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssistanceLogAttachmentController;
 use App\Http\Controllers\AssistanceLogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CaseLogController;
@@ -91,4 +92,9 @@ Route::prefix('respondent')->group(function () {
 
 Route::prefix('notification')->group(function () {
     Route::post('/mark-notification-as-read/{id}', [NotificationController::class, 'markNotificationAsRead'])->name('notification.read');
+});
+
+Route::prefix('assistance-log-attachments')->group(function () {
+    Route::get('/{uuid}/download-attachment', [AssistanceLogAttachmentController::class, 'download'])->name('attachment.download');
+    Route::get('/{uuid}/delete-attachment', [AssistanceLogAttachmentController::class, 'delete'])->name('attachment.delete');
 });
