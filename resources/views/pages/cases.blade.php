@@ -79,7 +79,11 @@
                                                 {{ $case->complainant->full_name }}
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $case->caseCategory->category_name }}
+                                                @if ($case->caseCategory->category_name == 'Others')
+                                                    {{ $case->caseCategory->category_name }} - {{ $case->others }}
+                                                @else
+                                                    {{ $case->caseCategory->category_name }}
+                                                @endif
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 @if ($case->abuseCategory)
@@ -187,7 +191,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-start-1">
+                            <div>
                                 <label for="case_category_id" class="block text-sm font-medium leading-6 text-gray-900">
                                     Case category<span class="text-red-500">*</span>
                                 </label>
@@ -224,12 +228,16 @@
                                 <div>
                                     <select id="abuse_subcategory_id" name="abuse_subcategory_id[]">
                                         <option value="" selected disabled>Select option</option>
-                                        @foreach ($abuseSubcategories as $abuseSubcategory)
-                                            <option value="{{ $abuseSubcategory->id }}">
-                                                {{ $abuseSubcategory->type }}
-                                            </option>
-                                        @endforeach
                                     </select>
+                                </div>
+                            </div>
+                            <div class="othercases hidden">
+                                <label for="others" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Please specify:
+                                </label>
+                                <div>
+                                    <input type="text" name="others" id="others"
+                                        class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                         </div>
@@ -255,26 +263,58 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('scripts/cases.js') }}"></script>
     <script>
-        $("#complainant_id").selectize({
-            plugins: ["clear_button"],
-            persist: false,
-            onChange: function() {
-                var complainantId = $('#complainant_id').val();
-                $.ajax({
-                    type: "GET",
-                    url: "{{ url('/respondent') }}/" + complainantId,
-                    success: function(response) {
-                        $('#respondent_id')[0].selectize.clearOptions();
-                        $.each(response, function(index, item) {
-                            $('#respondent_id')[0].selectize.addOption({
-                                value: item.id,
-                                text: item.firstname + ' ' + item.middlename + ' ' +
-                                    item.lastname
-                            })
-                        });
-                    }
-                })
-            }
+        $(document).ready(function() {
+            $('#abuse_category_id').change(function() {
+                var abuse_category_ids = $('#abuse_category_id').val();
+                if (abuse_category_ids) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/clients/get-subcategories",
+                        data: {
+                            '_token': "{{ csrf_token() }}",
+                            'abuse_category_ids': abuse_category_ids,
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            var selectize = $('#abuse_subcategory_id')[0].selectize;
+                            selectize.clearOptions();
+                            response.forEach(function(subcategory) {
+                                selectize.addOption({
+                                    value: subcategory.id,
+                                    text: subcategory.type
+                                });
+                            });
+                            selectize.refreshItems();
+                        },
+                        error: function(response) {
+                            console.log(response);
+                        }
+                    });
+                }
+            });
+
+            $("#complainant_id").selectize({
+                plugins: ["clear_button"],
+                persist: false,
+                onChange: function() {
+                    var complainantId = $('#complainant_id').val();
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('/respondent') }}/" + complainantId,
+                        success: function(response) {
+                            $('#respondent_id')[0].selectize.clearOptions();
+                            $.each(response, function(index, item) {
+                                $('#respondent_id')[0].selectize.addOption({
+                                    value: item.id,
+                                    text: item.firstname + ' ' + item
+                                        .middlename + ' ' +
+                                        item.lastname
+                                })
+                            });
+                        }
+                    })
+                }
+            });
         });
     </script>
 @endsection

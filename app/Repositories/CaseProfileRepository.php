@@ -80,6 +80,7 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
         $caseProfile->received_by_id = $user->id;
         $caseProfile->relationship_id = $payload->relationship_id;
         $caseProfile->case_profile_id = 'CASE #'.$caseNumber;
+        $caseProfile->others = $payload->others;
         $caseProfile->save();
 
         return $caseProfile->fresh();

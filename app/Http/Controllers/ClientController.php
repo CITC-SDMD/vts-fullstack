@@ -267,4 +267,11 @@ class ClientController extends Controller
 
         return redirect()->route('client.show', $client->uuid);
     }
+
+    public function getSubcategories(Request $request)
+    {
+        $subcategories = $this->abuseSubcategoryRepository->showManyByAbuseCategoryId($request->abuse_category_ids);
+
+        return $subcategories;
+    }
 }

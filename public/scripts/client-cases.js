@@ -54,5 +54,13 @@ $(document).ready(function () {
         } else {
             $(".abusecat").addClass('hidden');
         }
+
+        if ($(this).val() == 10) {
+            $('.othercases').removeClass('hidden');
+            $('#others').attr('required', true);
+        } else {
+            $('.othercases').addClass('hidden');
+            $('#others').removeAttr('required');
+        }
     });
 });

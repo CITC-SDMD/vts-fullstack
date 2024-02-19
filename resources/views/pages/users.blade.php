@@ -116,7 +116,7 @@
         <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
             <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                 <div
-                    class="relative transform overflow-hidden h-188 rounded-lg bg-white px-6 pb-4 pt-5 text-left shadow-xl transition-all lg:w-1/2 w-full">
+                    class="relative transform overflow-hidden h-fit rounded-lg bg-white px-6 pb-4 pt-5 text-left shadow-xl transition-all lg:w-1/2 w-full">
                     <div class="border-b border-gray-200 pb-2 lg:grid lg:grid-cols-2">
                         <div class="lg:col-span-1">
                             <h3 class="text-base font-semibold leading-6 text-gray-900">Create New User</h3>
@@ -170,13 +170,23 @@
                                 </div>
                             </div>
                             <div>
-                                <label for="contact_number" class="block text-sm font-medium leading-6 text-gray-900">
-                                    Contact number<span class="text-red-500">*</span>
+                                <label for="telephone_number" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Telephone number<span class="text-red-500">*</span>
                                 </label>
                                 <div>
-                                    <input type="text" name="contact_number" id="contact_number" required
+                                    <input type="text" name="telephone_number" id="telephone_number" required
                                         class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                        placeholder="Enter contact number">
+                                        placeholder="Enter telephone number">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="mobile_number" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Mobile number<span class="text-red-500">*</span>
+                                </label>
+                                <div>
+                                    <input type="text" name="mobile_number" id="mobile_number" required
+                                        class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        placeholder="Enter mobile number">
                                 </div>
                             </div>
                             <div>

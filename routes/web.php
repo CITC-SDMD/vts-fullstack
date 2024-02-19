@@ -51,6 +51,7 @@ Route::prefix('clients')->group(function () {
     Route::post('/case', [ClientController::class, 'storeCase'])->name('client.store.case');
     Route::post('/search', [ClientController::class, 'search'])->name('client.search');
     Route::post('/{uuid}/upload-signature', [ClientController::class, 'upload'])->name('client.upload');
+    Route::post('/get-subcategories', [ClientController::class, 'getSubcategories'])->name('client.getSubcategories');
     Route::put('/{uuid}/update-profile', [ClientController::class, 'update'])->name('client.update');
 });
 

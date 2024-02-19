@@ -15,6 +15,18 @@ $(document).ready(function () {
         persist: false,
     });
 
+    $("#abuse_category_id").selectize({
+        plugins: ["clear_button"],
+        maxItems: null,
+        persist: false,
+    });
+
+    $("#abuse_subcategory_id").selectize({
+        plugins: ["clear_button"],
+        maxItems: null,
+        persist: false,
+    });
+
     $('#case_category_id').change(function () {
         var case_id = $(this).val();
         if (case_id == 1) {
@@ -57,7 +69,7 @@ $(document).ready(function () {
         $("#respondent_id")[0].selectize.clear();
         $("#relationship_id")[0].selectize.clear();
         $("#case_category_id")[0].selectize.clear();
-        $("#abuse_subcategory_id")[0].selectize.clear();
-        $("#abuse_category_id")[0].selectize.clear();
+        // $("#abuse_subcategory_id")[0].selectize.clear();
+        // $("#abuse_category_id")[0].selectize.clear();
     });
 });

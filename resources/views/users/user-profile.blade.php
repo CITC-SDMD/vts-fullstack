@@ -42,13 +42,23 @@
                     </div>
                 </div>
                 <div>
-                    <label for="contact_number" class="block text-sm font-medium leading-6 text-gray-900">
-                        Contact number
+                    <label for="telephone_number" class="block text-sm font-medium leading-6 text-gray-900">
+                        Telephone number
                     </label>
                     <div>
-                        <input type="text" name="contact_number" id="contact_number" required
+                        <input type="text" name="telephone_number" id="telephone_number" required
                             class="block w-full lg:w-1/2 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
-                            value="{{ $user->contact_number }}">
+                            value="{{ $user->telephone_number }}">
+                    </div>
+                </div>
+                <div>
+                    <label for="mobile_number" class="block text-sm font-medium leading-6 text-gray-900">
+                        Mobile number
+                    </label>
+                    <div>
+                        <input type="text" name="mobile_number" id="mobile_number" required
+                            class="block w-full lg:w-1/2 rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
+                            value="{{ $user->mobile_number }}">
                     </div>
                 </div>
                 <div>

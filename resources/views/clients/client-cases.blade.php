@@ -51,7 +51,11 @@
                                         {{ $case->complainant->full_name }}
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        {{ $case->caseCategory->category_name }}
+                                        @if ($case->caseCategory->category_name == 'Others')
+                                            {{ $case->caseCategory->category_name }} - {{ $case->others }}
+                                        @else
+                                            {{ $case->caseCategory->category_name }}
+                                        @endif
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                         @if ($case->abuseCategory)
@@ -70,7 +74,7 @@
                                     <td
                                         class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                         <a href="{{ route('caseprofile.show', $case->uuid) }}"
-                                            class="inline-flex gap-x-1 items-center rounded bg-indigo-50 px-4 py-1 text-xs font-semibold text-violet-600 shadow-sm hover:bg-violet-100">
+                                            class="inline-flex gap-x-1 items-center rounded bg-violet-50 px-4 py-1 text-xs font-semibold text-violet-600 shadow-sm hover:bg-violet-100">
                                             <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -194,12 +198,16 @@
                                 <div>
                                     <select id="abuse_subcategory_id" name="abuse_subcategory_id[]">
                                         <option value="" selected disabled>Select option</option>
-                                        @foreach ($abuseSubcategories as $abuseSubcategory)
-                                            <option value="{{ $abuseSubcategory->id }}">
-                                                {{ $abuseSubcategory->type }}
-                                            </option>
-                                        @endforeach
                                     </select>
+                                </div>
+                            </div>
+                            <div class="othercases hidden">
+                                <label for="others" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Please specify:
+                                </label>
+                                <div>
+                                    <input type="text" name="others" id="others"
+                                        class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                         </div>
@@ -224,4 +232,36 @@
         integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('scripts/client-cases.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#abuse_category_id').change(function() {
+                var abuse_category_ids = $('#abuse_category_id').val();
+                if (abuse_category_ids) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/clients/get-subcategories",
+                        data: {
+                            '_token': "{{ csrf_token() }}",
+                            'abuse_category_ids': abuse_category_ids,
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            var selectize = $('#abuse_subcategory_id')[0].selectize;
+                            selectize.clearOptions();
+                            response.forEach(function(subcategory) {
+                                selectize.addOption({
+                                    value: subcategory.id,
+                                    text: subcategory.type
+                                });
+                            });
+                            selectize.refreshItems();
+                        },
+                        error: function(response) {
+                            console.log(response);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 @endsection

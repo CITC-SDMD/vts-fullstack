@@ -16,4 +16,9 @@ class AbuseSubcategoryRepository implements AbuseSubcategoryRepositoryInterface
     {
         return AbuseSubcategory::findOrFail($abuseSubcategoryId);
     }
+
+    public function showManyByAbuseCategoryId($abuseCategoryIds)
+    {
+        return AbuseSubcategory::whereIn('abuse_category_id', $abuseCategoryIds)->get();
+    }
 }
