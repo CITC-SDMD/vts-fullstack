@@ -6,7 +6,7 @@ interface AbuseSubcategoryRepositoryInterface
 {
     public function index();
 
-    public function showById(int $abuseSubcategoryId);
+    public function showById($abuseSubcategoryId);
 
     public function showManyByAbuseCategoryId($abuseCategoryId);
 }

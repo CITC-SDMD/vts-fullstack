@@ -228,6 +228,7 @@
                                 <div>
                                     <select id="abuse_subcategory_id" name="abuse_subcategory_id[]">
                                         <option value="" selected disabled>Select option</option>
+                                        <option value="Others">Others</option>
                                     </select>
                                 </div>
                             </div>
@@ -284,6 +285,10 @@
                                     text: subcategory.type
                                 });
                             });
+                            selectize.addOption({
+                                value: 'Others',
+                                text: 'Others'
+                            });
                             selectize.refreshItems();
                         },
                         error: function(response) {
@@ -325,6 +330,16 @@
                             });
                         }
                     })
+                }
+            });
+
+            $('#abuse_subcategory_id').change(function() {
+                if ($(this).val() == 'Others') {
+                    $('.othercases').removeClass('hidden');
+                    $('#others').attr('required', true);
+                } else {
+                    $('.othercases').addClass('hidden');
+                    $('#others').removeAttr('required');
                 }
             });
         });

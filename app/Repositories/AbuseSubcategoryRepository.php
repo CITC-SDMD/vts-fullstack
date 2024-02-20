@@ -12,9 +12,9 @@ class AbuseSubcategoryRepository implements AbuseSubcategoryRepositoryInterface
         return AbuseSubcategory::all();
     }
 
-    public function showById(int $abuseSubcategoryId)
+    public function showById($abuseSubcategoryId)
     {
-        return AbuseSubcategory::findOrFail($abuseSubcategoryId);
+        return AbuseSubcategory::where('id', $abuseSubcategoryId)->first();
     }
 
     public function showManyByAbuseCategoryId($abuseCategoryIds)

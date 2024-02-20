@@ -17,6 +17,7 @@ use App\Interface\Repositories\ClientRepositoryInterface;
 use App\Interface\Repositories\RelationshipRepositoryInterface;
 use App\Interface\Repositories\RespondentRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -155,23 +156,27 @@ class ClientController extends Controller
                 if ($request->abuse_subcategory_id) {
                     foreach ($request->abuse_subcategory_id as $abuseSubcategoryId) {
                         $abuseSub = $this->abuseSubcategoryRepository->showById($abuseSubcategoryId);
-                        if ($abuseSub->abuse_category_id == $abuseCategoryId) {
-                            $case = $this->caseProfileRepository->showByClientIdRespondentIdAbuseCategoryIdAbuseSubcategoryId($request->complainant_id, $request->respondent_id, $abuseCategoryId, $abuseSubcategoryId);
-                            if (! $case) {
-                                $this->caseProfileRepository->store($request, $abuseCategoryId, $abuseSubcategoryId);
+                        if ($abuseSub) {
+                            if ($abuseSub->abuse_category_id == $abuseCategoryId) {
+                                $case = $this->caseProfileRepository->showByClientIdRespondentIdAbuseCategoryIdAbuseSubcategoryId($request->complainant_id, $request->respondent_id, $abuseCategoryId, $abuseSubcategoryId);
+                                if (!$case) {
+                                    $this->caseProfileRepository->store($request, $abuseCategoryId, $abuseSubcategoryId);
+                                }
                             }
+                        } else {
+                            $this->caseProfileRepository->store($request, $abuseCategoryId, null);
                         }
                     }
                 } else {
                     $case = $this->caseProfileRepository->showByComplainantIdRespondentIdAbuseCategoryId($request->complainant_id, $request->respondent_id, $abuseCategoryId);
-                    if (! $case) {
+                    if (!$case) {
                         $this->caseProfileRepository->store($request, $abuseCategoryId);
                     }
                 }
             }
         } else {
             $case = $this->caseProfileRepository->showByComplainantIdRespondentIdCaseCategoryId($request->complainant_id, $request->respondent_id, $request->case_category_id);
-            if (! $case) {
+            if (!$case) {
                 $this->caseProfileRepository->store($request);
             }
         }
@@ -243,7 +248,7 @@ class ClientController extends Controller
     public function download(string $uuid)
     {
         $client = $this->clientRepository->showByUuid($uuid);
-        $filePath = 'vts/files/'.$client->file;
+        $filePath = 'vts/files/' . $client->file;
 
         return Storage::download($filePath);
     }
