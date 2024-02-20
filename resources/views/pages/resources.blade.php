@@ -24,7 +24,10 @@
                                             Email address: {{ $user->email }}
                                         </p>
                                         <p class="mt-1 truncate text-xs leading-1 text-gray-500">
-                                            Contact number: {{ $user->contact_number }}
+                                            Telephone number: {{ $user->telephone_number }}
+                                        </p>
+                                        <p class="mt-1 truncate text-xs leading-1 text-gray-500">
+                                            Mobile number: {{ $user->mobile_number }}
                                         </p>
                                         <p class="mt-1 truncate text-xs leading-1 text-gray-500">
                                             Address: {{ $user->agency_address }}
