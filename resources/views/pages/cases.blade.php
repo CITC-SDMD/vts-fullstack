@@ -87,7 +87,7 @@
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 @if ($case->abuseCategory)
-                                                    {{ $case->abuseCategory->abuse_type . ' - ' }}
+                                                    {{ $case->abuseCategory->abuse_type . ' - ' }} {{ $case->others ?? '' }}
                                                 @else
                                                     N/A
                                                 @endif
@@ -221,7 +221,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="abusecat hidden">
+                            <div class="abusesubcat hidden">
                                 <label for="abuse_subcategory_id" class="text-sm font-medium leading-6 text-gray-900">
                                     Abuse Subcategory
                                 </label>
@@ -290,6 +290,18 @@
                             console.log(response);
                         }
                     });
+                }
+
+                if ($('#abuse_category_id').val() == 5) {
+                    $('.othercases').removeClass('hidden');
+                    $('#others').attr('required', true);
+                    $(".abusesubcat").addClass('hidden');
+                    $("#abuse_subcategory_id").removeAttr('required');
+                } else {
+                    $('.othercases').addClass('hidden');
+                    $('#others').removeAttr('required');
+                    $(".abusesubcat").removeClass('hidden');
+                    $("#abuse_subcategory_id").attr('required', true);
                 }
             });
 

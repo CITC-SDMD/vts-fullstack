@@ -31,6 +31,7 @@ $(document).ready(function () {
         var case_id = $(this).val();
         if (case_id == 1) {
             $('.abusecat').removeClass('hidden');
+            $('.abusesubcat').removeClass('hidden');
             $("#abuse_category_id, #abuse_subcategory_id").attr('required', true);
             $("#abuse_category_id").selectize({
                 plugins: ["clear_button"],
@@ -53,6 +54,7 @@ $(document).ready(function () {
             $("#abuse_subcategory_id")[0].selectize.clear();
             $("#abuse_category_id")[0].selectize.clear();
             $('.abusecat').addClass('hidden');
+            $('.abusesubcat').addClass('hidden');
         }
     });
 

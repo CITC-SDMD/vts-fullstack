@@ -43,6 +43,7 @@
                     <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
                         @if (session('caseProfile.abuseCategory'))
                             {{ session('caseProfile.abuseCategory.abuse_type') }} -
+                            {{ session('caseProfile.others') ?? '' }}
                             {{ session('caseProfile.abuseSubcategory.type') }}
                         @else
                             N/A

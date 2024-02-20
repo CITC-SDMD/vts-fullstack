@@ -14,9 +14,6 @@ class RelationshipSeeder extends Seeder
     {
         $types = [
             [
-                'relationship_type' => 'No Relation',
-            ],
-            [
                 'relationship_type' => 'Brother',
             ],
             [
@@ -107,7 +104,49 @@ class RelationshipSeeder extends Seeder
                 'relationship_type' => 'Fiancé/Fiancée',
             ],
             [
-                'relationship_type' => 'Domestic Partner',
+                'relationship_type' => 'Live-in Partner',
+            ],
+            [
+                'relationship_type' => 'Stranger',
+            ],
+            [
+                'relationship_type' => 'Sexual Relation',
+            ],
+            [
+                'relationship_type' => 'Schoolmate',
+            ],
+            [
+                'relationship_type' => 'Neighbor',
+            ],
+            [
+                'relationship_type' => 'Landlord',
+            ],
+            [
+                'relationship_type' => 'Godparent',
+            ],
+            [
+                'relationship_type' => 'Friend',
+            ],
+            [
+                'relationship_type' => 'Former Spouse',
+            ],
+            [
+                'relationship_type' => 'Former Boyfriend',
+            ],
+            [
+                'relationship_type' => 'Former Live-in Partner',
+            ],
+            [
+                'relationship_type' => 'Employer',
+            ],
+            [
+                'relationship_type' => 'Co-Employee',
+            ],
+            [
+                'relationship_type' => 'Boyfriend',
+            ],
+            [
+                'relationship_type' => 'Acquaintance',
             ],
         ];
 

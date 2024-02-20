@@ -51,8 +51,10 @@ $(document).ready(function () {
     $('#case_category_id').change(function () {
         if ($(this).val() == 1) {
             $(".abusecat").removeClass('hidden');
+            $(".abusesubcat").removeClass('hidden');
         } else {
             $(".abusecat").addClass('hidden');
+            $(".abusesubcat").addClass('hidden');
         }
 
         if ($(this).val() == 10) {

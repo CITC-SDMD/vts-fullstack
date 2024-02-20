@@ -15,15 +15,7 @@ class AbuseSubcategorySeeder extends Seeder
         $subCategories = [
             [
                 'abuse_category_id' => 1,
-                'type' => 'Medical Certificate',
-            ],
-            [
-                'abuse_category_id' => 1,
-                'type' => 'BPO',
-            ],
-            [
-                'abuse_category_id' => 1,
-                'type' => 'Police Blotter',
+                'type' => 'Bodily or Physical harm',
             ],
             [
                 'abuse_category_id' => 2,
@@ -64,6 +56,34 @@ class AbuseSubcategorySeeder extends Seeder
             [
                 'abuse_category_id' => 3,
                 'type' => 'Stalking',
+            ],
+            [
+                'abuse_category_id' => 3,
+                'type' => 'Intimidation',
+            ],
+            [
+                'abuse_category_id' => 3,
+                'type' => 'Harassment',
+            ],
+            [
+                'abuse_category_id' => 4,
+                'type' => 'Rape',
+            ],
+            [
+                'abuse_category_id' => 4,
+                'type' => 'Sexual Harassment',
+            ],
+            [
+                'abuse_category_id' => 4,
+                'type' => 'Acts of Lasciviousness',
+            ],
+            [
+                'abuse_category_id' => 4,
+                'type' => 'Demeaning and Sexually Gestures',
+            ],
+            [
+                'abuse_category_id' => 4,
+                'type' => 'Prostituting Woman or Child',
             ],
         ];
 
