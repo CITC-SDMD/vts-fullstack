@@ -1,6 +1,10 @@
 $(document).ready(function () {
     $('.clients-button').addClass('active-link');
 
+    $("#created_at").flatpickr({
+        allowInput: true,
+    });
+
     $("#complainant_id").selectize({
         plugins: ["clear_button"],
         persist: false,

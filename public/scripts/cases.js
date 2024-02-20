@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $("#created_at").flatpickr({
+        allowInput: true,
+    });
 
     $("#respondent_id").selectize({
         plugins: ["clear_button"],

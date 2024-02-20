@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
         integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 @endsection
 
 @section('content')
@@ -150,9 +151,23 @@
                             </button>
                         </div>
                     </div>
-                    <form action="{{ route('client.store.case') }}" method="post" id="new-case-form" autocomplete="off">
+                    <form action="{{ route('client.store.case') }}" method="post" id="new-case-form"
+                        autocomplete="off">
                         @csrf
                         <div class="mt-4 lg:grid lg:grid-cols-2 gap-x-4 gap-y-0 pb-4">
+                            <div>
+                                <label for="created_at" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Case Date<span class="text-red-500">*</span>
+                                </label>
+                                <div>
+                                    <input type="text" name="created_at" id="created_at"
+                                        class="block w-full rounded-md border-0 px-3 py-1.5
+                                    text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                                    placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                                    focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                        required>
+                                </div>
+                            </div>
                             <div>
                                 <label for="complainant_id" class="block text-sm font-medium leading-6 text-gray-900">
                                     Complainant<span class="text-red-500">*</span>
@@ -262,6 +277,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
         integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ asset('scripts/cases.js') }}"></script>
     <script>
         $(document).ready(function() {
