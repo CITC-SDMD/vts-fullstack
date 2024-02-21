@@ -153,18 +153,17 @@
         <div class="block">
             <nav class="isolate flex divide-x rounded-lg divide-gray-200 shadow" aria-label="Tabs">
                 <a href="{{ route('client.show.cases', session('client.uuid')) }}" id="casesprofile-button"
-                    class="text-gray-500 rounded-l-lg group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-xs lg:text-sm font-medium hover:bg-gray-50 focus:z-10">
+                    class="text-gray-500 hover:text-gray-900 hover:underline rounded-l-lg group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-xs lg:text-sm font-medium hover:bg-gray-50 focus:z-10">
                     <span>Case Profiles</span>
                     <span aria-hidden="true" id="caseprofiles-aria" class="absolute inset-x-0 bottom-0 h-0.5"></span>
                 </a>
                 <a href="{{ route('client.show.respondents', session('client.uuid')) }}" id="respondents-button"
-                    class="text-gray-500 hover:text-gray-700 group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-xs lg:text-sm font-medium hover:bg-gray-50 focus:z-10">
+                    class="text-gray-500 hover:text-gray-900 hover:underline group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-xs lg:text-sm font-medium hover:bg-gray-50 focus:z-10">
                     <span>Respondents</span>
                     <span aria-hidden="true" id="respondents-aria" class="absolute inset-x-0 bottom-0 h-0.5"></span>
                 </a>
                 <a href="{{ route('client.show.dependents', session('client.uuid')) }}" id="children-button"
-                    class="text-gray-500 hover:text-gray-700 rounded-r-lg group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-xs lg:text-sm font-medium hover:bg-gray-50 focus:z-10"
-                    aria-current="page">
+                    class="text-gray-500 hover:text-gray-900 hover:underline rounded-r-lg group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-xs lg:text-sm font-medium hover:bg-gray-50 focus:z-10">
                     <span>Children</span>
                     <span aria-hidden="true" id="children-aria" class="absolute inset-x-0 bottom-0 h-0.5"></span>
                 </a>
