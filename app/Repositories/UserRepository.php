@@ -38,7 +38,8 @@ class UserRepository implements UserRepositoryInterface
         $user->agency_id = $payload->agency_id;
         $user->firstname = $payload->firstname;
         $user->lastname = $payload->lastname;
-        $user->contact_number = $payload->contact_number;
+        $user->telephone_number = $payload->telephone_number;
+        $user->mobile_number = $payload->mobile_number;
         $user->agency_address = $payload->agency_address;
         $user->email = $payload->email;
         $user->password = Hash::make($payload->password);
@@ -64,7 +65,8 @@ class UserRepository implements UserRepositoryInterface
         $user = User::where('uuid', $uuid)->first();
         $user->firstname = $payload->firstname;
         $user->lastname = $payload->lastname;
-        $user->contact_number = $payload->contact_number;
+        $user->telephone_number = $payload->telephone_number;
+        $user->mobile_number = $payload->mobile_number;
         $user->agency_address = $payload->agency_address;
         $user->email = $payload->email;
         if ($payload->password) {
