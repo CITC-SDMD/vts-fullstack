@@ -250,7 +250,7 @@
     <script>
         $(document).ready(function() {
             $('#abuse_category_id').change(function() {
-                var abuse_category_ids = $('#abuse_category_id').val();
+                var abuse_category_ids = $(this).val();
                 if (abuse_category_ids) {
                     $.ajax({
                         type: "POST",
@@ -260,7 +260,6 @@
                             'abuse_category_ids': abuse_category_ids,
                         },
                         success: function(response) {
-                            console.log(response);
                             var selectize = $('#abuse_subcategory_id')[0].selectize;
                             selectize.clearOptions();
                             response.forEach(function(subcategory) {
@@ -281,10 +280,11 @@
                     });
                 }
 
-                if ($('#abuse_category_id').val() == 5) {
+                if (['5'].includes(String($(this).val()))) {
                     $('.othercases').removeClass('hidden');
                     $('#others').attr('required', true);
                     $(".abusesubcat").addClass('hidden');
+                    console.log(String($(this).val()));
                 } else {
                     $('.othercases').addClass('hidden');
                     $('#others').removeAttr('required');
@@ -296,9 +296,6 @@
                 if ($(this).val() == 'Others') {
                     $('.othercases').removeClass('hidden');
                     $('#others').attr('required', true);
-                } else {
-                    $('.othercases').addClass('hidden');
-                    $('#others').removeAttr('required');
                 }
             });
         });
