@@ -15,47 +15,23 @@ class AbuseSubcategorySeeder extends Seeder
         $subCategories = [
             [
                 'abuse_category_id' => 1,
-                'type' => 'Bodily or Physical harm',
+                'type' => 'Physical Harm',
             ],
             [
                 'abuse_category_id' => 2,
-                'type' => 'No Support',
+                'type' => 'Withdraw Support',
             ],
             [
                 'abuse_category_id' => 2,
-                'type' => 'Irregular & Insufficient Support',
+                'type' => 'Prevent to Work',
             ],
             [
                 'abuse_category_id' => 2,
-                'type' => 'Deprivation of Properties',
+                'type' => 'Deprive Support',
             ],
             [
                 'abuse_category_id' => 2,
-                'type' => 'Not allowed to work/profession',
-            ],
-            [
-                'abuse_category_id' => 3,
-                'type' => 'Marital Infidelity',
-            ],
-            [
-                'abuse_category_id' => 3,
-                'type' => 'Verbal Abuse',
-            ],
-            [
-                'abuse_category_id' => 3,
-                'type' => 'Threat',
-            ],
-            [
-                'abuse_category_id' => 3,
-                'type' => 'Public Humiliation',
-            ],
-            [
-                'abuse_category_id' => 3,
-                'type' => 'Damage of Property',
-            ],
-            [
-                'abuse_category_id' => 3,
-                'type' => 'Stalking',
+                'type' => 'Control Money',
             ],
             [
                 'abuse_category_id' => 3,
@@ -64,6 +40,38 @@ class AbuseSubcategorySeeder extends Seeder
             [
                 'abuse_category_id' => 3,
                 'type' => 'Harassment',
+            ],
+            [
+                'abuse_category_id' => 3,
+                'type' => 'Stalking',
+            ],
+            [
+                'abuse_category_id' => 3,
+                'type' => 'Property Damage',
+            ],
+            [
+                'abuse_category_id' => 3,
+                'type' => 'Humiliation',
+            ],
+            [
+                'abuse_category_id' => 3,
+                'type' => 'Verbal Abuse',
+            ],
+            [
+                'abuse_category_id' => 3,
+                'type' => 'Infidelity',
+            ],
+            [
+                'abuse_category_id' => 3,
+                'type' => 'Witness Abuse',
+            ],
+            [
+                'abuse_category_id' => 3,
+                'type' => 'Pornography',
+            ],
+            [
+                'abuse_category_id' => 3,
+                'type' => 'Deprivation of Custody',
             ],
             [
                 'abuse_category_id' => 4,
@@ -79,11 +87,27 @@ class AbuseSubcategorySeeder extends Seeder
             ],
             [
                 'abuse_category_id' => 4,
-                'type' => 'Demeaning and Sexually Gestures',
+                'type' => 'Sexual Remarks',
             ],
             [
                 'abuse_category_id' => 4,
-                'type' => 'Prostituting Woman or Child',
+                'type' => 'Watch Obscene',
+            ],
+            [
+                'abuse_category_id' => 4,
+                'type' => 'Indescent Acts',
+            ],
+            [
+                'abuse_category_id' => 4,
+                'type' => 'Wife & Mistress Sleep Together',
+            ],
+            [
+                'abuse_category_id' => 4,
+                'type' => 'Sexual Activity',
+            ],
+            [
+                'abuse_category_id' => 4,
+                'type' => 'Prostituting',
             ],
         ];
 
