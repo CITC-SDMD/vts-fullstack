@@ -10,8 +10,10 @@ use App\Models\AssistanceLogAttachment;
 use App\Notifications\AssistanceLogNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Validator;
 use illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
+use Throwable;
 
 class AssistanceLogController extends Controller
 {
@@ -38,11 +40,21 @@ class AssistanceLogController extends Controller
 
     public function store(Request $request)
     {
-        $assistanceLog = $this->assistanceLogRepository->store($request);
-
-        $log = $this->caseLogRepository->showById($request->case_log_id);
-
         if ($request->attachments) {
+
+            $validate = Validator::make($request->all(), [
+                'attachments.*' => 'file|max:5120'
+            ]);
+
+            if ($validate->fails()) {
+                Alert::error('Error', 'File size exceeds 5mb.');
+                return back();
+            }
+
+            $assistanceLog = $this->assistanceLogRepository->store($request);
+
+            $log = $this->caseLogRepository->showById($request->case_log_id);
+
             foreach ($request->attachments as $attachment) {
                 $image = new AssistanceLogAttachment();
                 $image->addMedia($attachment)->toMediaCollection('assistanceMedia');
@@ -52,6 +64,10 @@ class AssistanceLogController extends Controller
                 $image->file = $appPath;
                 $image->save();
             }
+        } else {
+            $assistanceLog = $this->assistanceLogRepository->store($request);
+
+            $log = $this->caseLogRepository->showById($request->case_log_id);
         }
 
         $user = auth()->user();
