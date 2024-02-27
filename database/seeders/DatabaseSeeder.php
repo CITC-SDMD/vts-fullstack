@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             AgencySeeder::class,
             UserSeeder::class,
-            ClientSeeder::class,
             RelationshipSeeder::class,
             CaseCategorySeeder::class,
             AbuseCategorySeeder::class,
