@@ -13,55 +13,60 @@
 <body class="h-full">
     <div class="flex min-h-full">
         <div class="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-            <div class="mx-auto w-full max-w-sm lg:w-96">
-                <div>
-                    <div class="flex justify-center">
-                        <a href="#" class="text-gray-400 hover:text-gray-500">
-                            <img class="w-28" src="{{ asset('images/IGDD-logo.png') }}" alt="Your Company">
-                        </a>
-                    </div>
-                    <div class="flex justify-center">
-                        <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                            VAW Tracking System
-                        </h2>
-                    </div>
-                </div>
-
-                <div class="mt-10">
+            <div class="flex flex-col min-h-full">
+                <div class="mx-auto w-full max-w-sm lg:w-96 flex-grow">
                     <div>
-                        <form action="{{ route('auth.login') }}" method="POST" class="space-y-6" autocomplete="off">
-                            @csrf
-                            <div>
-                                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
-                                    address</label>
-                                <div class="mt-2">
-                                    <input id="email" name="email" type="email" required autocomplete="off"
-                                        class="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
-                                        placeholder="Enter email address">
-                                </div>
-                            </div>
+                        <div class="flex justify-center">
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <img class="w-28" src="{{ asset('images/IGDD-logo.png') }}" alt="Your Company">
+                            </a>
+                        </div>
+                        <div class="flex justify-center">
+                            <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                                VAW Tracking System
+                            </h2>
+                        </div>
+                    </div>
 
-                            <div>
-                                <label for="password"
-                                    class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                                <div class="mt-2">
-                                    <input id="password" name="password" type="password" autocomplete="off" required
-                                        class="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
-                                        placeholder="Enter password">
+                    <div class="mt-10">
+                        <div>
+                            <form action="{{ route('auth.login') }}" method="POST" class="space-y-6"
+                                autocomplete="off">
+                                @csrf
+                                <div>
+                                    <label for="email"
+                                        class="block text-sm font-medium leading-6 text-gray-900">Email
+                                        address</label>
+                                    <div class="mt-2">
+                                        <input id="email" name="email" type="email" required autocomplete="off"
+                                            class="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                            placeholder="Enter email address">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div>
-                                <button type="submit"
-                                    class="flex w-full justify-center rounded-md bg-violet-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
-                                    Sign in
-                                </button>
-                            </div>
-                        </form>
+                                <div>
+                                    <label for="password"
+                                        class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                                    <div class="mt-2">
+                                        <input id="password" name="password" type="password" autocomplete="off"
+                                            required
+                                            class="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                            placeholder="Enter password">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <button type="submit"
+                                        class="flex w-full justify-center rounded-md bg-violet-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
+                                        Sign in
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
-                <footer class="bg-white lg:mt-48 mt-28">
+                <footer class="bg-white">
                     <div class="grid grid-cols-1">
                         <div class="flex justify-center">
                             <a href="https://www.davaocity.gov.ph/" class="text-gray-400 hover:text-gray-500">
