@@ -32,7 +32,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-1 mb-3 px-4">
                     <div>
                         <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">
-                            First name
+                            First name<span class="text-red-500">*</span>
                         </label>
                         <div>
                             <input type="text" name="firstname" id="firstname" required
@@ -42,7 +42,7 @@
                     </div>
                     <div>
                         <label for="middlename" class="block text-sm font-medium leading-6 text-gray-900">
-                            Middle name
+                            Middle name<span class="text-red-500">*</span>
                         </label>
                         <div>
                             <input type="text" name="middlename" id="middlename" required
@@ -52,7 +52,7 @@
                     </div>
                     <div>
                         <label for="lastname" class="block text-sm font-medium leading-6 text-gray-900">
-                            Last name
+                            Last name<span class="text-red-500">*</span>
                         </label>
                         <div>
                             <input type="text" name="lastname" id="lastname" required
@@ -75,13 +75,13 @@
                             Date of birth
                         </label>
                         <div>
-                            <input type="text" name="birthdate" required id="birthdate" value="{{ $client->birthdate }}"
+                            <input type="text" name="birthdate" id="birthdate" value="{{ $client->birthdate }}"
                                 class="block w-full lg:w-1/2 rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
                     <div>
                         <label for="sex" class="block text-sm font-medium leading-6 text-gray-900">
-                            Sex
+                            Sex<span class="text-red-500">*</span>
                         </label>
                         <select id="sex" name="sex" required
                             class="block w-full lg:w-1/2 rounded-md border-0 py-1.5 pl-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6">
@@ -105,7 +105,7 @@
                     </div>
                     <div>
                         <label for="civil_status" class="block text-sm font-medium leading-6 text-gray-900">
-                            Civil status
+                            Civil status<span class="text-red-500">*</span>
                         </label>
                         <select id="civil_status" name="civil_status" required
                             class="block w-full lg:w-1/2 rounded-md border-0 py-1.5 pl-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6">
@@ -228,14 +228,47 @@
                             Occupation
                         </label>
                         <div>
-                            <input type="text" name="occupation" id="occupation"
-                                class="block w-full lg:w-1/2 px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
-                                value={{ $client->occupation }}>
+                            <select id="occupation" name="occupation"
+                                class="mt-1 block w-full lg:w-1/2 rounded-md border-0 px-2 py-1.5 pr-10
+                                        text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
+                                        focus:ring-violet-600 sm:text-sm sm:leading-6">
+                                @if ($client->occupation == 'Government')
+                                    <option value="Government" selected>Government</option>
+                                    <option value="Private">Private</option>
+                                    <option value="Self-employed">Self-employed</option>
+                                    <option value="Retired-employed">Retired-employed</option>
+                                    <option value="OFW">OFW</option>
+                                @elseif($client->occupation == 'Private')
+                                    <option value="Government">Government</option>
+                                    <option value="Private" selected>Private</option>
+                                    <option value="Self-employed">Self-employed</option>
+                                    <option value="Retired-employed">Retired-employed</option>
+                                    <option value="OFW">OFW</option>
+                                @elseif($client->occupation == 'Self-employed')
+                                    <option value="Government">Government</option>
+                                    <option value="Private">Private</option>
+                                    <option value="Self-employed" selected>Self-employed</option>
+                                    <option value="Retired-employee">Retired-employed</option>
+                                    <option value="OFW">OFW</option>
+                                @elseif($client->occupation == 'Retired-employee')
+                                    <option value="Government">Government</option>
+                                    <option value="Private">Private</option>
+                                    <option value="Self-employed">Self-employed</option>
+                                    <option value="Retired-employee" selected>Retired-employed</option>
+                                    <option value="OFW">OFW</option>
+                                @else
+                                    <option value="Government">Government</option>
+                                    <option value="Private">Private</option>
+                                    <option value="Self-employed">Self-employed</option>
+                                    <option value="Retired-employee">Retired-employed</option>
+                                    <option value="OFW" selected>OFW</option>
+                                @endif
+                            </select>
                         </div>
                     </div>
                     <div>
                         <label for="barangay_id" class="block text-sm font-medium leading-6 text-gray-900">
-                            Barangay
+                            Barangay<span class="text-red-500">*</span>
                         </label>
                         <select id="barangay_id" name="barangay_id" required
                             class="block w-full lg:w-1/2 rounded-md border-0 py-1.5 pl-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6">
@@ -248,9 +281,22 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="hidden sub_occupation">
+                        <label for="other_occupation" class="block text-sm font-medium leading-6 text-gray-900">
+                            Please specify occupation
+                        </label>
+                        <div>
+                            <input type="text" name="other_occupation" id="other_occupation"
+                                value="{{ $client->other_occupation }}"
+                                class="block w-full lg:w-1/2 rounded-md border-0 px-3 py-1.5
+                                text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                                placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                                focus:ring-violet-600 sm:text-sm sm:leading-6">
+                        </div>
+                    </div>
                     <div class="lg:col-span-2">
                         <label for="home_address" class="block text-sm font-medium leading-6 text-gray-900">
-                            Home address
+                            Home address<span class="text-red-500">*</span>
                         </label>
                         <div>
                             <textarea rows="2" name="home_address" id="home_address" required
