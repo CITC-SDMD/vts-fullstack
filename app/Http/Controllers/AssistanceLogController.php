@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
-use Throwable;
 
 class AssistanceLogController extends Controller
 {
@@ -43,11 +42,12 @@ class AssistanceLogController extends Controller
         if ($request->attachments) {
 
             $validate = Validator::make($request->all(), [
-                'attachments.*' => 'file|max:5120'
+                'attachments.*' => 'file|max:5120',
             ]);
 
             if ($validate->fails()) {
                 Alert::error('Error', 'File size exceeds 5mb.');
+
                 return back();
             }
 
@@ -72,8 +72,8 @@ class AssistanceLogController extends Controller
 
         $user = auth()->user();
 
-        if ($user->agency_id != $log->referredBy->agency_id) {
-            $referredByUsers = $this->userRepository->showByAgencyId($log->referredBy->agency_id);
+        if ($user->agency_id != $log->referredBy->id) {
+            $referredByUsers = $this->userRepository->showByAgencyId($log->referredBy->id);
             Notification::send($referredByUsers, new AssistanceLogNotification($log));
         }
 

@@ -33,7 +33,7 @@ class CaseLog extends Model
 
     public function referredBy(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(ReferralAgency::class);
     }
 
     public function referralAgency(): BelongsTo

@@ -924,6 +924,10 @@ class BarangaySeeder extends Seeder
                 'brgy_name' => 'Vicente Hizon Sr.',
                 'dist_name' => 'Buhangin District',
             ],
+            [
+                'brgy_code' => '0000000000',
+                'brgy_name' => 'Outside Davao City',
+            ],
         ];
 
         $faker = Faker::create();

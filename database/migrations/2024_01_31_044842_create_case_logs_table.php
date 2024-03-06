@@ -24,7 +24,7 @@ return new class extends Migration
 
         Schema::table('case_logs', function (Blueprint $table) {
             $table->foreign('case_profile_id')->references('id')->on('case_profiles')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('referred_by_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('referred_by_id')->references('id')->on('referral_agencies')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('referral_agency_id')->references('id')->on('referral_agencies')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('service_id')->references('id')->on('services')->onUpdate('cascade')->onDelete('cascade');
         });

@@ -20,8 +20,7 @@
 @section('content')
     <div class="min-h-full">
         <main class="py-2">
-            <div
-                class="mx-auto mt-2 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+            <div class="mx-auto mt-2 grid grid-cols-1 gap-6 lg:grid-flow-col-dense lg:grid-cols-3">
                 <div class="space-y-6 lg:col-span-3 lg:col-start-1">
                     <div>
                         <a href="{{ route('caseprofile.show', $caselog->caseProfile->uuid) }}"
@@ -58,7 +57,7 @@
                                     <div class="sm:col-span-1">
                                         <dt class="text-sm font-medium text-gray-500">Referred By</dt>
                                         <dd class="mt-1 text-sm text-gray-900">
-                                            {{ $caselog->referredBy->agency->agency_name }}</dd>
+                                            {{ $caselog->referredBy->agency_name }}</dd>
                                     </div>
                                     <div class="sm:col-span-1">
                                         <dt class="text-sm font-medium text-gray-500">Referred Agency</dt>

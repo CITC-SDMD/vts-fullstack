@@ -145,7 +145,7 @@
                                             {{ $caselog->case_log_number }}
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ $caselog->referredBy->agency->agency_name }}
+                                            {{ $caselog->referredBy->agency_name }}
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {{ $caselog->referralAgency->agency_name }}

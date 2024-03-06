@@ -26,7 +26,7 @@ class ClientCaseStoreRequest extends FormRequest
             'respondent_id' => 'required',
             'relationship_id' => 'required',
             'case_category_id' => 'required',
-            'created_at' => 'required'
+            'created_at' => 'required',
         ];
     }
 }

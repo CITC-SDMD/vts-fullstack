@@ -5,6 +5,17 @@ $(document).ready(function () {
         allowInput: true,
     });
 
+    $('#occupation').change(function () {
+        if ($(this).val() == 'Government' || $(this).val() == 'OFW') {
+            $('.sub_occupation').removeClass('hidden');
+            $('#other_occupation').attr('required', true);
+        } else {
+            $('.sub_occupation').addClass('hidden');
+            $('#other_occupation').removeAttr('required');
+            $('#other_occupation').val('');
+        }
+    });
+
     $('#new-client-button').click(function () {
         $('#new-client-modal').toggle('hidden');
     });

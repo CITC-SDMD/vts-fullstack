@@ -342,11 +342,17 @@
                                     Occupation
                                 </label>
                                 <div>
-                                    <input type="text" name="occupation" id="occupation"
-                                        class="block w-full rounded-md border-0 px-3 py-1.5
-                                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
-                                        placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                                    <select id="occupation" name="occupation"
+                                        class="mt-1 block w-full rounded-md border-0 px-2 py-1.5 pr-10
+                                        text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
                                         focus:ring-violet-600 sm:text-sm sm:leading-6">
+                                        <option value="" selected disabled>Select option</option>
+                                        <option value="Government">Government</option>
+                                        <option value="Private">Private</option>
+                                        <option value="Self-employed">Self-employed</option>
+                                        <option value="Retired-employed">Retired-employed</option>
+                                        <option value="OFW">OFW</option>
+                                    </select>
                                 </div>
                             </div>
                             <div>
@@ -364,6 +370,18 @@
                                             <option value="{{ $barangay->id }}">{{ $barangay->brgy_name }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                            <div class="hidden sub_occupation">
+                                <label for="other_occupation" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Please specify occupation
+                                </label>
+                                <div>
+                                    <input type="text" name="other_occupation" id="other_occupation"
+                                        class="block w-full rounded-md border-0 px-3 py-1.5
+                                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+                                        placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                                        focus:ring-violet-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="lg:col-span-2">
