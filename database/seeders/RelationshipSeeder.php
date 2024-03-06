@@ -47,10 +47,7 @@ class RelationshipSeeder extends Seeder
                 'relationship_type' => 'Niece',
             ],
             [
-                'relationship_type' => 'Husband',
-            ],
-            [
-                'relationship_type' => 'Wife',
+                'relationship_type' => 'Spouse',
             ],
             [
                 'relationship_type' => 'Son',

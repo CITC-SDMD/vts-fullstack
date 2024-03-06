@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="flex items-center justify-between">
-        <div class="sm:mx-20">
+        <div>
             <a href="{{ route('client.index') }}"
                 class="inline-flex items-center gap-x-1.5 rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
                 <svg class="-ml-0.5 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -14,7 +14,7 @@
                 Back
             </a>
         </div>
-        <div class="sm:mx-20">
+        <div>
             <a href="{{ route('client.edit', session('client.uuid')) }}"
                 class="inline-flex items-center gap-x-1.5 rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <div class="overflow-hidden bg-white shadow sm:rounded-lg sm:mx-20 mt-5">
+    <div class="overflow-hidden bg-white shadow sm:rounded-lg mt-5">
         <div class="px-4 py-2 sm:px-6">
             <h3 class="text-base font-semibold leading-7 text-gray-900">Client Information</h3>
             <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details of the client.</p>
@@ -60,7 +60,7 @@
                 <div class="border-t border-gray-100 px-4 py-2 sm:col-span-1 sm:px-0">
                     <dt class="text-sm font-medium leading-6 text-gray-900">Date of birth</dt>
                     <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
-                        {{ \Carbon\Carbon::parse(session('client.birthdate'))->format('M d, Y') }}
+                        {{ session('client.birthdate') ?? 'N/A' }}
                     </dd>
                 </div>
                 <div class="border-t border-gray-100 px-4 py-2 sm:col-span-1 sm:px-0">
@@ -72,7 +72,7 @@
                 <div class="border-t border-gray-100 px-4 py-2 sm:col-span-1 sm:px-0">
                     <dt class="text-sm font-medium leading-6 text-gray-900">Age</dt>
                     <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
-                        {{ session('client.age') }}
+                        {{ session('client.age') ?? 'N/A' }}
                     </dd>
                 </div>
                 <div class="border-t border-gray-100 px-4 py-2 sm:col-span-1 sm:px-0">
@@ -143,13 +143,14 @@
                                 Download Signature
                             </a>
                         @endif
+                        N/A
                     </dd>
                 </div>
             </dl>
         </div>
     </div>
 
-    <div class="mt-6 sm:px-20">
+    <div class="mt-6">
         <div class="block">
             <nav class="isolate flex divide-x rounded-lg divide-gray-200 shadow" aria-label="Tabs">
                 <a href="{{ route('client.show.cases', session('client.uuid')) }}" id="casesprofile-button"

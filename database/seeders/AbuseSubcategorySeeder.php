@@ -34,6 +34,10 @@ class AbuseSubcategorySeeder extends Seeder
                 'type' => 'Control Money',
             ],
             [
+                'abuse_category_id' => 2,
+                'type' => 'Insufficient Support',
+            ],
+            [
                 'abuse_category_id' => 3,
                 'type' => 'Intimidation',
             ],

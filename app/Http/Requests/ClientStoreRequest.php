@@ -26,7 +26,6 @@ class ClientStoreRequest extends FormRequest
             'firstname' => 'required',
             'middlename' => 'required',
             'lastname' => 'required',
-            'birthdate' => 'required',
             'sex' => 'required',
             'civil_status' => 'required',
             'home_address' => 'required',

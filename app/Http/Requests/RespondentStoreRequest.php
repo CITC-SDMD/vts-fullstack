@@ -27,7 +27,6 @@ class RespondentStoreRequest extends FormRequest
             'firstname' => 'required',
             'middlename' => 'required',
             'lastname' => 'required',
-            'birthdate' => 'required',
             'sex' => 'required',
             'age' => 'required',
             'civil_status' => 'required',

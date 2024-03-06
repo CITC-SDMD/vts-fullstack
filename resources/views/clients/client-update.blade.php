@@ -72,7 +72,7 @@
                     </div>
                     <div>
                         <label for="birthdate" class="block text-sm font-medium leading-6 text-gray-900">
-                            Date of birthselected
+                            Date of birth
                         </label>
                         <div>
                             <input type="text" name="birthdate" required id="birthdate" value="{{ $client->birthdate }}"
