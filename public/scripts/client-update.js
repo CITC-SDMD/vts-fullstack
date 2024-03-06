@@ -7,6 +7,14 @@ $(document).ready(function () {
         $('.sub_occupation').removeClass('hidden');
     }
 
+    $('#occupation').change(function () {
+        if ($(this).val() == 'Government' || $(this).val() == 'OFW') {
+            $('.sub_occupation').removeClass('hidden');
+        } else {
+            $('.sub_occupation').addClass('hidden');
+        }
+    });
+
     $('#birthdate').change(function () {
         var dob = $(this).val();
         var birthDate = new Date(dob);
