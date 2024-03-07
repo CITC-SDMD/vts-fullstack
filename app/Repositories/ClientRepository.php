@@ -121,6 +121,7 @@ class ClientRepository implements ClientRepositoryInterface
         $client->home_address = $payload->home_address;
         $client->work_address = $payload->work_address;
         $client->occupation = $payload->occupation;
+        $client->other_occupation = ($payload->occupation == 'Government' || $payload->occupation == 'OFW') ? $payload->other_occupation : null;
         $client->ethnicity = $payload->ethnicity;
         $client->is_4ps_beneficiary = $payload->is_4ps_beneficiary;
         $client->save();
