@@ -51,7 +51,7 @@
         </div>
     </dl>
 
-    <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+    {{-- <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div class="relative overflow-hidden rounded-lg bg-white shadow ">
             <div class="mb-0 px-4 py-2" id="women-chart">
                 hello world
@@ -62,7 +62,7 @@
                 hello world
             </div>
         </div>
-    </dl>
+    </dl> --}}
 @endsection
 
 @section('scripts')
