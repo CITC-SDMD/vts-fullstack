@@ -78,4 +78,6 @@ $(document).ready(function () {
 
     var caseLogChart = new ApexCharts(document.querySelector("#caselogs-chart"), caseLogs);
     caseLogChart.render();
+
+
 });

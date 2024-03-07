@@ -291,7 +291,7 @@
                                     Age
                                 </label>
                                 <div>
-                                    <input type="number" name="age" min="1" id="age" readonly
+                                    <input type="number" name="age" min="1" id="age"
                                         class="block w-full rounded-md border-0 px-3 py-1.5
                                         text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
                                         placeholder:text-gray-400 focus:ring-2 focus:ring-inset

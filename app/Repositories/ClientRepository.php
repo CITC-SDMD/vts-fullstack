@@ -17,6 +17,11 @@ class ClientRepository implements ClientRepositoryInterface
             ->paginate(config('pagination.paginate'));
     }
 
+    // public function womenClientCountFirstQuarter()
+    // {
+    //     return Client::where('')
+    // }
+
     public function showAllClient()
     {
         return Client::all();
