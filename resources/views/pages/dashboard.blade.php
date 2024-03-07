@@ -51,10 +51,9 @@
         </div>
     </dl>
 
-    {{-- <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+    <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div class="relative overflow-hidden rounded-lg bg-white shadow ">
             <div class="mb-0 px-4 py-2" id="women-chart">
-                hello world
             </div>
         </div>
         <div class="relative overflow-hidden rounded-lg bg-white shadow ">
@@ -62,7 +61,7 @@
                 hello world
             </div>
         </div>
-    </dl> --}}
+    </dl>
 @endsection
 
 @section('scripts')
@@ -71,6 +70,10 @@
         var clientsPerMonth = @json($stats['clientsPerMonth']);
         var casesPerMonth = @json($stats['casesPerMonth']);
         var caseLogsPerMonth = @json($stats['caseLogsPerMonth']);
+        var womentFirstQuarter = @json($stats['womentFirstQuarter']);
+        var womenSecondQuarter = @json($stats['womenSecondQuarter']);
+        var womenThirdQuarter = @json($stats['womenThirdQuarter']);
+        var womenFourthQuarter = @json($stats['womenFourthQuarter']);
     </script>
     <script src="{{ asset('scripts/dashboard.js') }}"></script>
 @endsection

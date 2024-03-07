@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Interface\Repositories\CaseLogRepositoryInterface;
 use App\Interface\Repositories\CaseProfileRepositoryInterface;
 use App\Interface\Repositories\ClientRepositoryInterface;
+use App\Interface\Repositories\RespondentRepositoryInterface;
+use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
@@ -17,7 +19,7 @@ class DashboardController extends Controller
     public function __construct(
         ClientRepositoryInterface $clientRepository,
         CaseProfileRepositoryInterface $caseProfileRepository,
-        CaseLogRepositoryInterface $caseLogRepository
+        CaseLogRepositoryInterface $caseLogRepository,
     ) {
         $this->middleware('auth');
         $this->clientRepository = $clientRepository;
@@ -33,6 +35,10 @@ class DashboardController extends Controller
         $clientsPerMonth = $this->clientRepository->clientPerMonth();
         $casesPerMonth = $this->caseProfileRepository->casePerMonth();
         $caseLogsPerMonth = $this->caseLogRepository->caseLogPerMonth();
+        $womentFirstQuarter = $this->caseProfileRepository->womenFirstQuarter();
+        $womenSecondQuarter = $this->caseProfileRepository->womenSecondQuarter();
+        $womenThirdQuarter = $this->caseProfileRepository->womenThirdQuarter();
+        $womenFourthQuarter = $this->caseProfileRepository->womenFourthQuarter();
 
         $stats = [
             'clients' => $clients,
@@ -41,6 +47,10 @@ class DashboardController extends Controller
             'clientsPerMonth' => $clientsPerMonth,
             'casesPerMonth' => $casesPerMonth,
             'caseLogsPerMonth' => $caseLogsPerMonth,
+            'womentFirstQuarter' => $womentFirstQuarter,
+            'womenSecondQuarter' => $womenSecondQuarter,
+            'womenThirdQuarter' => $womenThirdQuarter,
+            'womenFourthQuarter' => $womenFourthQuarter,
         ];
 
         return view('pages.dashboard', [

@@ -124,8 +124,8 @@
     </div>
 
     @if (isset($casesPagination))
-        <div class="flex items-center justify-center">
-            {{ $casesPagination }}
+        <div class="flex items-center justify-center mt-4">
+            {!! $casesPagination !!}
         </div>
     @endif
 

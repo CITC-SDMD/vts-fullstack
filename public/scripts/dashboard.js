@@ -79,5 +79,42 @@ $(document).ready(function () {
     var caseLogChart = new ApexCharts(document.querySelector("#caselogs-chart"), caseLogs);
     caseLogChart.render();
 
+    var women = {
+        series: [{
+            name: 'First Quarter',
+            data: womentFirstQuarter
+        }, {
+            name: 'Second Quarter',
+            data: womenSecondQuarter
+        }, {
+            name: 'Third Quarter',
+            data: womenThirdQuarter
+        }, {
+            name: 'Fourth Quarter',
+            data: womenFourthQuarter
+        }],
+        title: {
+            text: 'Summary of number of women clients assisted by CMO-IGDD',
+            align: 'left'
+        },
+        chart: {
+            height: 350,
+            type: 'area'
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        fill: {
+            opacity: 0.3,
+        },
+        yaxis: {
+            min: 0
+        },
+    }
 
+    var womenChart = new ApexCharts(document.querySelector("#women-chart"), women);
+    womenChart.render();
 });

@@ -27,4 +27,12 @@ interface CaseProfileRepositoryInterface
     public function updateAssessedBy(int $caseProfileId);
 
     public function search(object $payload);
+
+    public function womenFirstQuarter();
+
+    public function womenSecondQuarter();
+
+    public function womenThirdQuarter();
+
+    public function womenFourthQuarter();
 }
