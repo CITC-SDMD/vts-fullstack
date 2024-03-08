@@ -6,11 +6,9 @@ use App\Models\CaseCategory;
 use App\Models\CaseProfile;
 use App\Models\Client;
 use App\Models\Relationship;
-use Carbon\Carbon;
 use DateTime;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
 
 class CaseProfileSeeder extends Seeder
 {
@@ -39,7 +37,7 @@ class CaseProfileSeeder extends Seeder
             $month = $currentTimestamp->month;
             $day = $currentTimestamp->day;
             $millisecond = $currentTimestamp->millisecond;
-            $caseNumber = $year . $month . $day . $millisecond;
+            $caseNumber = $year.$month.$day.$millisecond;
 
             $respondent = Client::where('id', '!=', $client->id)->inRandomOrder()->first();
 
@@ -49,8 +47,8 @@ class CaseProfileSeeder extends Seeder
                 'respondent_id' => $respondent->id,
                 'received_by_id' => 1,
                 'relationship_id' => $faker->randomElement($relationships),
-                'case_profile_id' => 'CASE #' . $caseNumber,
-                'created_at' => $formattedRandomDate
+                'case_profile_id' => 'CASE #'.$caseNumber,
+                'created_at' => $formattedRandomDate,
             ]);
         }
     }

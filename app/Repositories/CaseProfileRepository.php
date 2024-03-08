@@ -60,7 +60,7 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
         $month = $currentTimestamp->month;
         $day = $currentTimestamp->day;
         $millisecond = $currentTimestamp->millisecond;
-        $caseNumber = $year . $month . $day . $millisecond;
+        $caseNumber = $year.$month.$day.$millisecond;
 
         $caseProfile = new CaseProfile();
         $caseProfile->case_category_id = $payload->case_category_id;
@@ -70,7 +70,7 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
         $caseProfile->respondent_id = $payload->respondent_id;
         $caseProfile->received_by_id = $user->id;
         $caseProfile->relationship_id = $payload->relationship_id;
-        $caseProfile->case_profile_id = 'CASE #' . $caseNumber;
+        $caseProfile->case_profile_id = 'CASE #'.$caseNumber;
         $caseProfile->others = $payload->others;
         $caseProfile->created_at = $payload->created_at;
         $caseProfile->save();
@@ -158,7 +158,7 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
             ->toArray();
     }
 
-    public function womenFirstQuarter()
+    public function womenCount()
     {
         return CaseProfile::with(['complainant'])
             ->selectRaw('COUNT(*) as total_cases')
@@ -167,58 +167,35 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
                     ->where('age', '>', 18);
             })
             ->whereYear('created_at', now()->year)
-            ->whereIn(DB::raw('MONTH(created_at)'), [1, 2, 3])
+            ->whereIn(DB::raw('MONTH(created_at)'), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
             ->groupBy(DB::raw('MONTH(created_at)'))
-            ->distinct()
             ->pluck('total_cases')
             ->toArray();
     }
 
-    public function womenSecondQuarter()
+    public function casesCount()
     {
-        return CaseProfile::with(['complainant'])
-            ->selectRaw('COUNT(*) as total_cases')
-            ->whereHas('complainant', function ($query) {
-                $query->where('sex', 'female')
-                    ->where('age', '>', 18);
-            })
-            ->whereYear('created_at', now()->year)
-            ->whereIn(DB::raw('MONTH(created_at)'), [4, 5, 6])
-            ->groupBy(DB::raw('MONTH(created_at)'))
-            ->distinct()
-            ->pluck('total_cases')
-            ->toArray();
-    }
+        $cases = CaseProfile::with(['caseCategory' => function ($query) {
+            $query->select('id', 'category_name');
+        }])
+            ->get()
+            ->pluck('caseCategory.category_name')
+            ->unique()
+            ->values();
 
-    public function womenThirdQuarter()
-    {
-        return CaseProfile::with(['complainant'])
-            ->selectRaw('COUNT(*) as total_cases')
-            ->whereHas('complainant', function ($query) {
-                $query->where('sex', 'female')
-                    ->where('age', '>', 18);
-            })
-            ->whereYear('created_at', now()->year)
-            ->whereIn(DB::raw('MONTH(created_at)'), [7, 8, 9])
-            ->groupBy(DB::raw('MONTH(created_at)'))
-            ->distinct()
-            ->pluck('total_cases')
-            ->toArray();
-    }
+        $count = CaseProfile::with(['caseCategory' => function ($query) {
+            $query->select('id', 'category_name');
+        }])
+            ->get()
+            ->pluck('caseCategory.category_name')
+            ->countBy()
+            ->values();
 
-    public function womenFourthQuarter()
-    {
-        return CaseProfile::with(['complainant'])
-            ->selectRaw('COUNT(*) as total_cases')
-            ->whereHas('complainant', function ($query) {
-                $query->where('sex', 'female')
-                    ->where('age', '>', 18);
-            })
-            ->whereYear('created_at', now()->year)
-            ->whereIn(DB::raw('MONTH(created_at)'), [10, 11, 12])
-            ->groupBy(DB::raw('MONTH(created_at)'))
-            ->distinct()
-            ->pluck('total_cases')
-            ->toArray();
+        $data = [
+            'cases' => $cases,
+            'count' => $count,
+        ];
+
+        return $data;
     }
 }

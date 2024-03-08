@@ -28,11 +28,7 @@ interface CaseProfileRepositoryInterface
 
     public function search(object $payload);
 
-    public function womenFirstQuarter();
+    public function womenCount();
 
-    public function womenSecondQuarter();
-
-    public function womenThirdQuarter();
-
-    public function womenFourthQuarter();
+    public function casesCount();
 }

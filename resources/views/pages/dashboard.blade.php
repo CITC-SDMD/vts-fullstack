@@ -57,8 +57,7 @@
             </div>
         </div>
         <div class="relative overflow-hidden rounded-lg bg-white shadow ">
-            <div class="mb-0 px-4 py-2" id="children-chart">
-                hello world
+            <div class="mb-0 px-4 py-2" id="cases-pie">
             </div>
         </div>
     </dl>
@@ -70,10 +69,11 @@
         var clientsPerMonth = @json($stats['clientsPerMonth']);
         var casesPerMonth = @json($stats['casesPerMonth']);
         var caseLogsPerMonth = @json($stats['caseLogsPerMonth']);
-        var womentFirstQuarter = @json($stats['womentFirstQuarter']);
-        var womenSecondQuarter = @json($stats['womenSecondQuarter']);
-        var womenThirdQuarter = @json($stats['womenThirdQuarter']);
-        var womenFourthQuarter = @json($stats['womenFourthQuarter']);
+        var womenCount = @json($stats['womenCount']);
+        var casesSummary = @json($stats['casesSummary']);
+        var casesCount = @json($stats['casesCount']);
+        console.log(cases);
+        console.log(casesCount);
     </script>
     <script src="{{ asset('scripts/dashboard.js') }}"></script>
 @endsection

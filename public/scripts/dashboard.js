@@ -79,30 +79,36 @@ $(document).ready(function () {
     var caseLogChart = new ApexCharts(document.querySelector("#caselogs-chart"), caseLogs);
     caseLogChart.render();
 
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+
     var women = {
         series: [{
-            name: 'First Quarter',
-            data: womentFirstQuarter
-        }, {
-            name: 'Second Quarter',
-            data: womenSecondQuarter
-        }, {
-            name: 'Third Quarter',
-            data: womenThirdQuarter
-        }, {
-            name: 'Fourth Quarter',
-            data: womenFourthQuarter
+            name: 'Total',
+            data: womenCount
         }],
+        dataLabels: {
+            enabled: false
+        },
         title: {
-            text: 'Summary of number of women clients assisted by CMO-IGDD',
+            text: 'Number of women client assisted by CMO-IGDD',
             align: 'left'
+        },
+        subtitle: {
+            text: 'January ' + currentYear + ' - ' + ' December ' + currentYear,
+            align: 'left'
+        },
+        xaxis: {
+            type: 'date',
+            categories: ["Jan", "Feb", "March", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]
         },
         chart: {
             height: 350,
             type: 'area'
         },
+        colors: ['#F9A8D4'],
         dataLabels: {
-            enabled: false
+            enabled: true
         },
         stroke: {
             curve: 'smooth'
@@ -117,4 +123,23 @@ $(document).ready(function () {
 
     var womenChart = new ApexCharts(document.querySelector("#women-chart"), women);
     womenChart.render();
+
+    var casesPie = {
+        series: casesCount,
+        chart: {
+            type: 'pie',
+        },
+        labels: casesSummary,
+        title: {
+            text: 'Summary of cases reported to CMO-IGDD',
+            align: 'left'
+        },
+        subtitle: {
+            text: 'January ' + currentYear + ' - ' + ' December ' + currentYear,
+            align: 'left'
+        },
+    }
+
+    var casePieChart = new ApexCharts(document.querySelector("#cases-pie"), casesPie);
+    casePieChart.render();
 });

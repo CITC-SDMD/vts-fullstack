@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             AbuseCategorySeeder::class,
             AbuseSubcategorySeeder::class,
             ClientSeeder::class,
-            CaseProfileSeeder::class
+            CaseProfileSeeder::class,
         ]);
     }
 }

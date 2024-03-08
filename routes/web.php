@@ -13,8 +13,6 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\RespondentController;
 use App\Http\Controllers\UserController;
-use App\Models\Client;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -100,14 +98,4 @@ Route::prefix('notification')->group(function () {
 Route::prefix('assistance-log-attachments')->group(function () {
     Route::get('/{uuid}/download-attachment', [AssistanceLogAttachmentController::class, 'download'])->name('attachment.download');
     Route::get('/{uuid}/delete-attachment', [AssistanceLogAttachmentController::class, 'delete'])->name('attachment.delete');
-});
-
-Route::get('/test', function () {
-    $counts = [
-        Client::whereRaw('MONTH(created_at) = 1')->count(),
-        Client::whereRaw('MONTH(created_at) = 2')->count(),
-        Client::whereRaw('MONTH(created_at) = 3')->count(),
-    ];
-
-    return $counts;
 });

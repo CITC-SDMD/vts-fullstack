@@ -29,7 +29,7 @@ class ClientSeeder extends Seeder
             $randomDate = new DateTime("$randomYear-$randomMonth-$randomDay");
             $formattedRandomDate = $randomDate->format('Y-m-d');
 
-            $randomBirthdate = $faker->dateTimeBetween('-' . $maxBirthYear . ' years', '-18 years');
+            $randomBirthdate = $faker->dateTimeBetween('-'.$maxBirthYear.' years', '-18 years');
             $formattedBirthdate = Carbon::parse($randomBirthdate)->format('Y-m-d');
             $currentAge = Carbon::parse($formattedBirthdate)->diffInYears();
             $barangay = Barangay::inRandomOrder()->first();
@@ -43,7 +43,8 @@ class ClientSeeder extends Seeder
                 'lastname' => $faker->lastName(),
                 'contact_no' => $faker->phoneNumber(),
                 'birthdate' => $formattedBirthdate,
-                'sex' => $faker->randomElement(['male', 'female']),
+                // 'sex' => $faker->randomElement(['male', 'female']),
+                'sex' => 'female',
                 'age' => $currentAge,
                 'civil_status' => $faker->randomElement(['single', 'married', 'widowed', 'divorced']),
                 'educ_attain' => $faker->word(),
