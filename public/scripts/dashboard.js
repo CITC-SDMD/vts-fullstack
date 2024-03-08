@@ -128,6 +128,7 @@ $(document).ready(function () {
         series: casesCount,
         chart: {
             type: 'pie',
+            width: 670
         },
         labels: casesSummary,
         title: {
