@@ -186,9 +186,9 @@
         aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
         <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <div class="flex min-h-screen items-end justify-center p-4 text-center sm:items-center sm:p-0">
                 <div
-                    class="relative transform overflow-hidden rounded-lg bg-white px-6 pb-4 pt-5 text-left shadow-xl transition-all lg:w-1/2 w-full">
+                    class="relative overflow-y-scroll h-96 transform overflow-hidden rounded-lg bg-white px-6 pb-4 pt-5 text-left shadow-xl transition-all lg:w-1/2 w-full">
                     <div class="border-b border-gray-200 pb-2 lg:grid lg:grid-cols-2">
                         <div class="lg:col-span-1">
                             <h3 class="text-base font-semibold leading-6 text-gray-900">Create New Client</h3>

@@ -10,21 +10,12 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\RespondentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', [Controller::class, 'index'])->name('login');
 
@@ -98,4 +89,8 @@ Route::prefix('notification')->group(function () {
 Route::prefix('assistance-log-attachments')->group(function () {
     Route::get('/{uuid}/download-attachment', [AssistanceLogAttachmentController::class, 'download'])->name('attachment.download');
     Route::get('/{uuid}/delete-attachment', [AssistanceLogAttachmentController::class, 'delete'])->name('attachment.delete');
+});
+
+Route::prefix('reports')->group(function () {
+    Route::get('/', [ReportController::class, 'index'])->name('reports.index');
 });
