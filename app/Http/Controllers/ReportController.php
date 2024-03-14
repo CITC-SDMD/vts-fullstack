@@ -31,7 +31,6 @@ class ReportController extends Controller
         //
     }
 
-
     public function edit(string $id)
     {
         //

@@ -11,7 +11,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\RespondentController;
 use App\Http\Controllers\UserController;
