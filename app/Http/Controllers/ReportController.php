@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Interface\Repositories\ReportRepositoryInterface;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReportController extends Controller
 {
-    public function __construct()
+    private $reportRepository;
+
+    public function __construct(ReportRepositoryInterface $reportRepository)
     {
         $this->middleware('auth');
+        $this->reportRepository = $reportRepository;
     }
 
     public function index()
@@ -16,33 +20,51 @@ class ReportController extends Controller
         return view('pages.reports');
     }
 
-    public function create()
+    public function firstQuarterClientSummary()
     {
-        //
+        $summaries = $this->reportRepository->clientSummaryFirstQuarter();
+
+        $pdf = Pdf::loadView('pdf.client-summary', [
+            'summaries' => $summaries,
+            'duration' => 'January to March 2023',
+        ]);
+
+        return $pdf->stream('first-quarter-client-summary-report.pdf');
     }
 
-    public function store(Request $request)
+    public function secondQuarterClientSummary()
     {
-        //
+        $summaries = $this->reportRepository->clientSummarySecondQuarter();
+
+        $pdf = Pdf::loadView('pdf.client-summary', [
+            'summaries' => $summaries,
+            'duration' => 'January to June 2023',
+        ]);
+
+        return $pdf->stream('second-quarter-client-summary-report.pdf');
     }
 
-    public function show(string $id)
+    public function thirdQuarterClientSummary()
     {
-        //
+        $summaries = $this->reportRepository->clientSummaryThirdQuarter();
+
+        $pdf = Pdf::loadView('pdf.client-summary', [
+            'summaries' => $summaries,
+            'duration' => 'January to September 2023',
+        ]);
+
+        return $pdf->stream('third-quarter-client-summary-report.pdf');
     }
 
-    public function edit(string $id)
+    public function fourthQuarterClientSummary()
     {
-        //
-    }
+        $summaries = $this->reportRepository->clientSummaryFourthQuarter();
 
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $pdf = Pdf::loadView('pdf.client-summary', [
+            'summaries' => $summaries,
+            'duration' => 'January to December 2023',
+        ]);
 
-    public function destroy(string $id)
-    {
-        //
+        return $pdf->stream('fourth-quarter-client-summary-report.pdf');
     }
 }

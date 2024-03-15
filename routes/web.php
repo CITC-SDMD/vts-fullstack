@@ -92,4 +92,8 @@ Route::prefix('assistance-log-attachments')->group(function () {
 
 Route::prefix('reports')->group(function () {
     Route::get('/', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/first-quarter', [ReportController::class, 'firstQuarterClientSummary'])->name('reports.first-quarter');
+    Route::get('/second-quarter', [ReportController::class, 'secondQuarterClientSummary'])->name('reports.second-quarter');
+    Route::get('/third-quarter', [ReportController::class, 'thirdQuarterClientSummary'])->name('reports.third-quarter');
+    Route::get('/fourth-quarter', [ReportController::class, 'fourthQuarterClientSummary'])->name('reports.fourth-quarter');
 });
