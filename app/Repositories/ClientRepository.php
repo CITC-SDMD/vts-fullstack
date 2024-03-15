@@ -69,9 +69,8 @@ class ClientRepository implements ClientRepositoryInterface
         $client->educ_attain = $payload->educ_attain;
         $client->home_address = $payload->home_address;
         $client->work_address = $payload->work_address;
-        $client->occupation = $payload->occupation;
-        $client->suboccupation = $payload->suboccupation;
-        $client->other_occupation = $payload->other_occupation;
+        $client->occupation_id = $payload->occupation_id;
+        $client->suboccupation_id = $payload->suboccupation_id;
         $client->ethnicity = $payload->ethnicity;
         $client->is_4ps_beneficiary = $payload->is_4ps_beneficiary;
         $client->save();
@@ -121,8 +120,8 @@ class ClientRepository implements ClientRepositoryInterface
         $client->educ_attain = $payload->educ_attain;
         $client->home_address = $payload->home_address;
         $client->work_address = $payload->work_address;
-        $client->occupation = $payload->occupation;
-        $client->other_occupation = ($payload->occupation == 'Government' || $payload->occupation == 'OFW') ? $payload->other_occupation : null;
+        $client->occupation_id = $payload->occupation_id;
+        $client->suboccupation_id = $payload->suboccupation_id;
         $client->ethnicity = $payload->ethnicity;
         $client->is_4ps_beneficiary = $payload->is_4ps_beneficiary;
         $client->save();
