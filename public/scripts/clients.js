@@ -6,13 +6,13 @@ $(document).ready(function () {
     });
 
     $('#occupation').change(function () {
-        if ($(this).val() == 'Government' || $(this).val() == 'OFW') {
+        if ($(this).val() == 5) {
             $('.sub_occupation').removeClass('hidden');
-            $('#other_occupation').attr('required', true);
+            $('#suboccupation').attr('required', true);
         } else {
             $('.sub_occupation').addClass('hidden');
-            $('#other_occupation').removeAttr('required');
-            $('#other_occupation').val('');
+            $('#suboccupation').removeAttr('required');
+            $('#suboccupation').val('');
         }
     });
 

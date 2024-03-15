@@ -14,8 +14,10 @@ use App\Interface\Repositories\CaseCategoryRepositoryInterface;
 use App\Interface\Repositories\CaseProfileRepositoryInterface;
 use App\Interface\Repositories\ChildRepositoryInterface;
 use App\Interface\Repositories\ClientRepositoryInterface;
+use App\Interface\Repositories\OccupationRepositoryInterface;
 use App\Interface\Repositories\RelationshipRepositoryInterface;
 use App\Interface\Repositories\RespondentRepositoryInterface;
+use App\Interface\Repositories\SuboccupationRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -42,6 +44,10 @@ class ClientController extends Controller
 
     private $abuseSubcategoryRepository;
 
+    private $occupationRepository;
+
+    private $suboccupationRepository;
+
     public function __construct(
         ClientRepositoryInterface $clientRepository,
         BarangayRepositoryInterface $barangayRepository,
@@ -51,7 +57,9 @@ class ClientController extends Controller
         RelationshipRepositoryInterface $relationshipRepository,
         CaseCategoryRepositoryInterface $caseCategoryRepository,
         AbuseCategoryRepositoryInterface $abuseCategoryRepository,
-        AbuseSubcategoryRepositoryInterface $abuseSubcategoryRepository
+        AbuseSubcategoryRepositoryInterface $abuseSubcategoryRepository,
+        OccupationRepositoryInterface $occupationRepository,
+        SuboccupationRepositoryInterface $suboccupationRepository
     ) {
         $this->middleware('auth');
         $this->clientRepository = $clientRepository;
@@ -63,16 +71,22 @@ class ClientController extends Controller
         $this->caseCategoryRepository = $caseCategoryRepository;
         $this->abuseCategoryRepository = $abuseCategoryRepository;
         $this->abuseSubcategoryRepository = $abuseSubcategoryRepository;
+        $this->occupationRepository = $occupationRepository;
+        $this->suboccupationRepository = $suboccupationRepository;
     }
 
     public function index()
     {
         $clients = $this->clientRepository->index();
         $barangays = $this->barangayRepository->index();
+        $occupations = $this->occupationRepository->index();
+        $suboccupations = $this->suboccupationRepository->index();
 
         $data = (object) [
             'clients' => $clients,
             'barangays' => $barangays,
+            'occupations' => $occupations,
+            'suboccupations' => $suboccupations,
             'pagination' => $clients->links('components.pagination'),
         ];
 

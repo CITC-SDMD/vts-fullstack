@@ -12,11 +12,13 @@ use App\Interface\Repositories\CaseLogRepositoryInterface;
 use App\Interface\Repositories\CaseProfileRepositoryInterface;
 use App\Interface\Repositories\ChildRepositoryInterface;
 use App\Interface\Repositories\ClientRepositoryInterface;
+use App\Interface\Repositories\OccupationRepositoryInterface;
 use App\Interface\Repositories\ReferralAgencyRepositoryInterface;
 use App\Interface\Repositories\RelationshipRepositoryInterface;
 use App\Interface\Repositories\ReportRepositoryInterface;
 use App\Interface\Repositories\RespondentRepositoryInterface;
 use App\Interface\Repositories\ServiceRepositoryInterface;
+use App\Interface\Repositories\SuboccupationRepositoryInterface;
 use App\Interface\Repositories\UserRepositoryInterface;
 use App\Repositories\AbuseCategoryRepository;
 use App\Repositories\AbuseSubcategoryRepository;
@@ -28,11 +30,13 @@ use App\Repositories\CaseLogRepository;
 use App\Repositories\CaseProfileRepository;
 use App\Repositories\ChildRepository;
 use App\Repositories\ClientRepository;
+use App\Repositories\OccupationRepository;
 use App\Repositories\ReferralAgencyRepository;
 use App\Repositories\RelationshipRepository;
 use App\Repositories\ReportRepository;
 use App\Repositories\RespondentRepository;
 use App\Repositories\ServiceRepository;
+use App\Repositories\SuboccupationRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -60,6 +64,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AssistanceLogRepositoryInterface::class, AssistanceLogRepository::class);
         $this->app->bind(AssistanceLogAttachmentRepositoryInterface::class, AssistanceLogAttachmentRepository::class);
         $this->app->bind(ReportRepositoryInterface::class, ReportRepository::class);
+        $this->app->bind(OccupationRepositoryInterface::class, OccupationRepository::class);
+        $this->app->bind(SuboccupationRepositoryInterface::class, SuboccupationRepository::class);
     }
 
     /**

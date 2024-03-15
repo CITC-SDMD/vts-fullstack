@@ -29,6 +29,7 @@ class Client extends Model implements HasMedia
         'home_address',
         'work_address',
         'occupation',
+        'suboccupation',
         'ethnicity',
         'is_4ps_beneficiary',
     ];

@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('home_address');
             $table->string('work_address')->nullable();
             $table->string('occupation')->nullable();
-            $table->string('other_occupation')->nullable();
+            $table->string('suboccupation')->nullable();
             $table->string('file')->nullable();
             $table->enum('ethnicity', ['non-ip', 'ip', 'muslim'])->nullable();
             $table->boolean('is_4ps_beneficiary')->nullable();
