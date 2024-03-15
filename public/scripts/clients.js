@@ -5,7 +5,7 @@ $(document).ready(function () {
         allowInput: true,
     });
 
-    $('#occupation').change(function () {
+    $('#occupation_id').change(function () {
         if ($(this).val() == 5) {
             $('.sub_occupation').removeClass('hidden');
             $('#suboccupation').attr('required', true);

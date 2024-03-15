@@ -5,14 +5,14 @@ $(document).ready(function () {
         allowInput: true,
     });
 
-    $('#occupation').change(function () {
+    $('#occupation_id').change(function () {
         if ($(this).val() == 5) {
             $('.sub_occupation').removeClass('hidden');
-            $('#suboccupations').attr('required', true);
+            $('#suboccupation_id').attr('required', true);
         } else {
             $('.sub_occupation').addClass('hidden');
-            $('#suboccupations').removeAttr('required');
-            $('#suboccupations').val('');
+            $('#suboccupation_id').removeAttr('required');
+            $('#suboccupation_id').val('');
         }
     });
 

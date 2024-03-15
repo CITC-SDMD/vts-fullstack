@@ -304,11 +304,11 @@
                                 </div>
                             </div>
                             <div>
-                                <label for="occupation" class="block text-sm font-medium leading-6 text-gray-900">
+                                <label for="occupation_id" class="block text-sm font-medium leading-6 text-gray-900">
                                     Occupation
                                 </label>
                                 <div>
-                                    <select id="occupation" name="occupation"
+                                    <select id="occupation_id" name="occupation_id"
                                         class="mt-1 block w-full rounded-md border-0 px-2 py-1.5 pr-10
                                         text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
                                         focus:ring-violet-600 sm:text-sm sm:leading-6">
@@ -337,11 +337,11 @@
                                 </div>
                             </div>
                             <div class="hidden sub_occupation">
-                                <label for="suboccupation" class="block text-sm font-medium leading-6 text-gray-900">
+                                <label for="suboccupation_id" class="block text-sm font-medium leading-6 text-gray-900">
                                     Select occupation
                                 </label>
                                 <div>
-                                    <select id="suboccupation" name="suboccupation"
+                                    <select id="suboccupation_id" name="suboccupation_id"
                                         class="mt-1 block w-full rounded-md border-0 px-2 py-1.5 pr-10
                                         text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
                                         focus:ring-violet-600 sm:text-sm sm:leading-6">
