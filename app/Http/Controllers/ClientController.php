@@ -203,12 +203,16 @@ class ClientController extends Controller
         $respondentIds = $this->respondentRepository->showRespondentIdArray($client->id);
         $respondents = $this->clientRepository->showRespondents($respondentIds);
         $barangays = $this->barangayRepository->index();
+        $occupations = $this->occupationRepository->index();
+        $suboccupations = $this->suboccupationRepository->index();
         $respondentList = $this->clientRepository->showAllClient();
 
         $data = (object) [
             'respondents' => $respondents,
             'respondentLists' => $respondentList,
             'barangays' => $barangays,
+            'occupations' => $occupations,
+            'suboccupations' => $suboccupations,
             'respondentsPagination' => $respondents->links('components.pagination'),
         ];
 

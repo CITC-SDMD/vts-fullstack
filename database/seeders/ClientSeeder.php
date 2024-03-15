@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Barangay;
 use App\Models\Client;
+use App\Models\Occupation;
+use App\Models\Suboccupation;
 use Carbon\Carbon;
 use DateTime;
 use Faker\Factory as Faker;
@@ -20,6 +22,9 @@ class ClientSeeder extends Seeder
 
         $faker = Faker::create();
 
+        $occupation = Occupation::all()->pluck('id');
+        $suboccupation = Suboccupation::all()->pluck('id');
+
         for ($i = 0; $i < 100; $i++) {
 
             $year = 2024;
@@ -34,7 +39,9 @@ class ClientSeeder extends Seeder
             $currentAge = Carbon::parse($formattedBirthdate)->diffInYears();
             $barangay = Barangay::inRandomOrder()->first();
 
-            $occupation = $faker->randomElement(['Government', 'Private', 'Self-employed', 'Retired-employed', 'OFW']);
+            $work = $faker->randomElement($occupation);
+
+            $age = $faker->numberBetween(14, 35);
 
             Client::create([
                 'barangay_id' => $barangay->id,
@@ -45,13 +52,13 @@ class ClientSeeder extends Seeder
                 // 'birthdate' => $formattedBirthdate,
                 // 'sex' => $faker->randomElement(['male', 'female']),
                 'sex' => 'female',
-                'age' => $faker->numberBetween(14, 35),
+                'age' => $age,
                 'civil_status' => $faker->randomElement(['single', 'married', 'widowed', 'divorced']),
                 'educ_attain' => $faker->word(),
                 'home_address' => $faker->streetAddress(),
                 'work_address' => $faker->address(),
-                'occupation' => $occupation,
-                'other_occupation' => ($occupation == 'Government' || $occupation == 'OFW') ? $faker->jobTitle() : null,
+                'occupation_id' => $work,
+                'suboccupation_id' => ($work == 5 && $age > 17) ? $faker->randomElement($suboccupation) : null,
                 'ethnicity' => $faker->randomElement(['non-ip', 'ip', 'muslim']),
                 'is_4ps_beneficiary' => $faker->randomElement([true, false]),
                 'created_at' => $formattedRandomDate,

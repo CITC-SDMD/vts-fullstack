@@ -26,8 +26,8 @@ return new class extends Migration
             $table->string('educ_attain')->nullable();
             $table->string('home_address');
             $table->string('work_address')->nullable();
-            $table->string('occupation')->nullable();
-            $table->string('suboccupation')->nullable();
+            $table->unsignedBigInteger('occupation_id')->nullable();
+            $table->unsignedBigInteger('suboccupation_id')->nullable();
             $table->string('file')->nullable();
             $table->enum('ethnicity', ['non-ip', 'ip', 'muslim'])->nullable();
             $table->boolean('is_4ps_beneficiary')->nullable();
@@ -36,6 +36,8 @@ return new class extends Migration
 
         Schema::table('clients', function (Blueprint $table) {
             $table->foreign('barangay_id')->references('id')->on('barangays')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('occupation_id')->references('id')->on('occupations')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('suboccupation_id')->references('id')->on('suboccupations')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -28,8 +28,8 @@ class Client extends Model implements HasMedia
         'educ_attain',
         'home_address',
         'work_address',
-        'occupation',
-        'suboccupation',
+        'occupation_id',
+        'suboccupation_id',
         'ethnicity',
         'is_4ps_beneficiary',
     ];
@@ -66,5 +66,15 @@ class Client extends Model implements HasMedia
     public function respondents(): HasMany
     {
         return $this->hasMany(Respondent::class, 'complainant_id');
+    }
+
+    public function occupation(): BelongsTo
+    {
+        return $this->belongsTo(Occupation::class);
+    }
+
+    public function suboccupation(): BelongsTo
+    {
+        return $this->belongsTo(Suboccupation::class);
     }
 }
