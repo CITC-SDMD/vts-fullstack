@@ -34,6 +34,16 @@ class UserSeeder extends Seeder
                 'email' => 'frexwalter1085@yahoo.com',
                 'password' => 'password',
             ],
+            [
+                'agency_id' => 13,
+                'firstname' => 'Reina Grace',
+                'lastname' => 'Ureta',
+                'telephone_number' => '2411000 local 205',
+                'mobile_number' => '09437014989',
+                'agency_address' => 'Room 9, Mezzanine Floor, City Hall Building, San Pedro St., Davao City',
+                'email' => 'rga_guj@yahoo.com.ph',
+                'password' => 'password',
+            ],
         ];
 
         foreach ($users as $user) {

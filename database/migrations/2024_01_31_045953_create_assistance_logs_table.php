@@ -18,6 +18,12 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->text('description');
             $table->enum('status', [
+                'Settled',
+                'Unsettled',
+                'Archive',
+                'Client no show',
+                'Respondent no show',
+                'Both Parties no show',
                 'Complaint Prepared',
                 'Complaint Filed at City Prosecutor’s Office - Dismissed',
                 'Complaint Filed at City Prosecutor’s Office - Info Filed',
