@@ -14,7 +14,7 @@ class OccupationSeeder extends Seeder
     {
         $occupations = [
             [
-                'name' => 'Unemployed',
+                'name' => 'Homemaker/Unemployed',
             ],
             [
                 'name' => 'Student',

@@ -112,4 +112,24 @@ class CaseProfileController extends Controller
             'clients' => $clients,
         ]);
     }
+
+    public function edit(string $uuid)
+    {
+        $caseProfile = $this->caseProfileRepository->showByUuid($uuid);
+        $caseCategories = $this->caseCategoryRepository->index();
+        $abuseCategories = $this->abuseCategoryRepository->index();
+        $abuseSubcategories = $this->abuseSubcategoryRepository->index();
+
+        return view('cases.update-case-profile', [
+            'caseProfile' => $caseProfile,
+            'caseCategories' => $caseCategories,
+            'abuseCategories' => $abuseCategories,
+            'abuseSubcategories' => $abuseSubcategories,
+        ]);
+    }
+
+    public function update(Request $request, string $uuid)
+    {
+        return $this->caseProfileRepository->update($request, $uuid);
+    }
 }

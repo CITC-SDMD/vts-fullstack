@@ -17,8 +17,13 @@ class AbuseSubcategoryRepository implements AbuseSubcategoryRepositoryInterface
         return AbuseSubcategory::where('id', $abuseSubcategoryId)->first();
     }
 
-    public function showManyByAbuseCategoryId($abuseCategoryIds)
+    public function showManyByAbuseCategoryIdArray($abuseCategoryIds)
     {
         return AbuseSubcategory::whereIn('abuse_category_id', $abuseCategoryIds)->get();
+    }
+
+    public function showManyByAbuseCategoryId($abuseCategoryId)
+    {
+        return AbuseSubcategory::where('abuse_category_id', $abuseCategoryId)->get();
     }
 }

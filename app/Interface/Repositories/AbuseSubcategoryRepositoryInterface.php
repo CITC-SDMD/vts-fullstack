@@ -8,5 +8,7 @@ interface AbuseSubcategoryRepositoryInterface
 
     public function showById($abuseSubcategoryId);
 
+    public function showManyByAbuseCategoryIdArray($abuseCategoryId);
+
     public function showManyByAbuseCategoryId($abuseCategoryId);
 }

@@ -31,4 +31,6 @@ interface CaseProfileRepositoryInterface
     public function womenCount();
 
     public function casesCount();
+
+    public function update(object $payload, string $uuid);
 }

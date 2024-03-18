@@ -241,11 +241,10 @@
                                     Sex<span class="text-red-500">*</span>
                                 </label>
                                 <div>
-                                    <select id="sex" name="sex"
+                                    <select id="sex" name="sex" required
                                         class="mt-1 block w-full rounded-md border-0 px-2 py-1.5 pr-10
                                     text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
-                                    focus:ring-violet-600 sm:text-sm sm:leading-6"
-                                        required>
+                                    focus:ring-violet-600 sm:text-sm sm:leading-6">
                                         <option value="" selected disabled>Select option</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
@@ -292,14 +291,14 @@
                                     text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2
                                     focus:ring-violet-600 sm:text-sm sm:leading-6">
                                         <option value="" selected disabled>Select option</option>
-                                        <option value="No formal education">No formal education</option>
-                                        <option value="Primary education">Primary education</option>
-                                        <option value="Secondary education">Secondary education or high school</option>
-                                        <option value="GED">General Education Development</option>
-                                        <option value="Vocational qualification">Vocational qualification</option>
-                                        <option value="Bachelor's degree">Bachelor's degree</option>
-                                        <option value="Master's degree">Master's degree</option>
-                                        <option value="Doctorate or higher">Doctorate or higher</option>
+                                        <option value="Elementary ">Elementary</option>
+                                        <option value="High school">High school</option>
+                                        <option value="Senior Highschool">Senior Highschool</option>
+                                        <option value="Vocational">Vocational</option>
+                                        <option value="College">College</option>
+                                        <option value="Post Graduate">Post Graduate</option>
+                                        <option value="ALS">ALS</option>
+                                        <option value="No Information">No Information</option>
                                     </select>
                                 </div>
                             </div>

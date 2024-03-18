@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbuseSubcategoryController;
 use App\Http\Controllers\AssistanceLogAttachmentController;
 use App\Http\Controllers\AssistanceLogController;
 use App\Http\Controllers\AuthController;
@@ -52,7 +53,9 @@ Route::prefix('child')->group(function () {
 Route::prefix('case-profiles')->group(function () {
     Route::get('/', [CaseProfileController::class, 'index'])->name('caseprofile.index');
     Route::get('/{uuid}/profile', [CaseProfileController::class, 'show'])->name('caseprofile.show');
+    Route::get('/{uuid}/edit', [CaseProfileController::class, 'edit'])->name('caseProfile.edit');
     Route::post('/search', [CaseProfileController::class, 'search'])->name('caseprofile.search');
+    Route::put('/{uuid}/update', [CaseProfileController::class, 'update'])->name('caseProfile.update');
 });
 
 Route::prefix('case-logs')->group(function () {
@@ -96,4 +99,8 @@ Route::prefix('reports')->group(function () {
     Route::get('/second-quarter', [ReportController::class, 'secondQuarterClientSummary'])->name('reports.second-quarter');
     Route::get('/third-quarter', [ReportController::class, 'thirdQuarterClientSummary'])->name('reports.third-quarter');
     Route::get('/fourth-quarter', [ReportController::class, 'fourthQuarterClientSummary'])->name('reports.fourth-quarter');
+});
+
+Route::prefix('abuse-subcategory')->group(function () {
+    Route::get('/{abuseCategoryId}', [AbuseSubcategoryController::class, 'show']);
 });

@@ -199,31 +199,53 @@
                                                 <div class="mt-3 flex items-center justify-start gap-x-4">
                                                     <div>
                                                         <select id="status" name="status" required
-                                                            class="mt-2 block w-full lg:w-60 rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                            class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                                             <option value="" selected disabled>Select status</option>
-                                                            <option value="Complaint Prepared">
-                                                                Complaint Prepared
-                                                            </option>
-                                                            <option
-                                                                value="Complaint Filed at City Prosecutor’s Office - Info Filed">
-                                                                Complaint Filed at City Prosecutor’s Office - Info Filed
-                                                            </option>
-                                                            <option
-                                                                value="Complaint Filed at City Prosecutor’s Office - Dismissed">
-                                                                Complaint Filed at City Prosecutor’s Office - Dismissed
-                                                            </option>
-                                                            <option value="Case Filed at Court - Ongoing">
-                                                                Case Filed at Court - Ongoing
-                                                            </option>
-                                                            <option value="Case Filed at Court - Archived">
-                                                                Case Filed at Court - Archived
-                                                            </option>
-                                                            <option value="Case Filed at Court - Dismissed">
-                                                                Case Filed at Court - Dismissed
-                                                            </option>
-                                                            <option value="Terminated">
-                                                                Terminated
-                                                            </option>
+                                                            <optgroup label="Case Conference">
+                                                                <option value="Settled">
+                                                                    Settled
+                                                                </option>
+                                                                <option value="Unsettled">
+                                                                    Unsettled
+                                                                </option>
+                                                                <option value="Archive">
+                                                                    Archive
+                                                                </option>
+                                                                <option value="Client no show">
+                                                                    Client no show
+                                                                </option>
+                                                                <option value="Respondent no show">
+                                                                    Respondent no show
+                                                                </option>
+                                                                <option value="Both Parties no show">
+                                                                    Both Parties no show
+                                                                </option>
+                                                            </optgroup>
+                                                            <optgroup label="Other Cases">
+                                                                <option value="Complaint Prepared">
+                                                                    Complaint Prepared
+                                                                </option>
+                                                                <option
+                                                                    value="Complaint Filed at City Prosecutor’s Office - Info Filed">
+                                                                    Complaint Filed at City Prosecutor’s Office - Info Filed
+                                                                </option>
+                                                                <option
+                                                                    value="Complaint Filed at City Prosecutor’s Office - Dismissed">
+                                                                    Complaint Filed at City Prosecutor’s Office - Dismissed
+                                                                </option>
+                                                                <option value="Case Filed at Court - Ongoing">
+                                                                    Case Filed at Court - Ongoing
+                                                                </option>
+                                                                <option value="Case Filed at Court - Archived">
+                                                                    Case Filed at Court - Archived
+                                                                </option>
+                                                                <option value="Case Filed at Court - Dismissed">
+                                                                    Case Filed at Court - Dismissed
+                                                                </option>
+                                                                <option value="Terminated">
+                                                                    Terminated
+                                                                </option>
+                                                            </optgroup>
                                                         </select>
                                                     </div>
                                                     <div class="flex mt-1">

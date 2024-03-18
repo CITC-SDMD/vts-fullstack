@@ -6,6 +6,8 @@ use App\Interface\Repositories\CaseProfileRepositoryInterface;
 use App\Models\CaseProfile;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CaseProfileRepository implements CaseProfileRepositoryInterface
 {
@@ -197,5 +199,36 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
         ];
 
         return $data;
+    }
+
+    public function update(object $payload, string $uuid)
+    {
+        if ($payload->abuse_category_id) {
+            $validate = Validator::make($payload->all(), [
+                'case_category_id' => 'required',
+                'abuse_category_id' => 'required',
+                'abuse_subcategory_id' => 'required',
+            ]);
+        } else {
+            $validate = Validator::make($payload->all(), [
+                'case_category_id' => 'required',
+            ]);
+        }
+
+        if ($validate->fails()) {
+            Alert::error('Error', 'Abuse Category and Abuse Subcategory must not be empty.');
+
+            return back();
+        }
+
+        $caseProfile = CaseProfile::where('uuid', $uuid)->first();
+        $caseProfile->case_category_id = $payload->case_category_id;
+        $caseProfile->abuse_category_id = $payload->abuse_category_id ?? null;
+        $caseProfile->abuse_subcategory_id = $payload->abuse_subcategory_id ?? null;
+        $caseProfile->save();
+
+        Alert::success('Success', 'Case Profile successfully updated.');
+
+        return redirect()->route('caseprofile.show', $uuid);
     }
 }
