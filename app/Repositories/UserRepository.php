@@ -45,6 +45,8 @@ class UserRepository implements UserRepositoryInterface
         $user->password = Hash::make($payload->password);
         $user->save();
 
+        $user->assignRole($payload->role);
+
         return $user->fresh();
     }
 

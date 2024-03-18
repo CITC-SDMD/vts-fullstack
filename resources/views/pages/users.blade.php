@@ -192,7 +192,7 @@
                                 </label>
                                 <select id="agency_id" name="agency_id" required
                                     class="block w-full rounded-md border-0 py-1.5 pl-1 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    <option selected disabled>Select agency</option>
+                                    <option value="" selected disabled>Select agency</option>
                                     @foreach ($agencies as $agency)
                                         <option value="{{ $agency->id }}">{{ $agency->agency_name }}</option>
                                     @endforeach
