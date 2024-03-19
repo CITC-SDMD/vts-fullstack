@@ -292,7 +292,7 @@ class ClientController extends Controller
 
     public function getSubcategories(Request $request)
     {
-        $subcategories = $this->abuseSubcategoryRepository->showManyByAbuseCategoryId($request->abuse_category_ids);
+        $subcategories = $this->abuseSubcategoryRepository->showManyByAbuseCategoryIdArray($request->abuse_category_ids);
 
         return $subcategories;
     }
