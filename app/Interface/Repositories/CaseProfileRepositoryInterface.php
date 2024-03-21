@@ -10,6 +10,10 @@ interface CaseProfileRepositoryInterface
 
     public function casePerMonth();
 
+    public function complainantsCount();
+
+    public function complainantsCountPerMonth();
+
     public function showByUuid(string $uuid);
 
     public function showByCaseProfileId(int $caseProfileId);

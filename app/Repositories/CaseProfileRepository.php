@@ -160,6 +160,25 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
             ->toArray();
     }
 
+    public function complainantsCount()
+    {
+        return DB::table('case_profiles')
+            ->whereYear('created_at', now()->year)
+            ->distinct('complainant_id')
+            ->count('complainant_id');
+    }
+
+    public function complainantsCountPerMonth()
+    {
+        return DB::table('case_profiles')
+            ->select(DB::raw('COUNT(DISTINCT complainant_id) AS count'))
+            ->whereYear('created_at', now()->year)
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->orderBy(DB::raw('MONTH(created_at)'))
+            ->pluck('count')
+            ->toArray();
+    }
+
     public function womenCount()
     {
         return CaseProfile::with(['complainant'])

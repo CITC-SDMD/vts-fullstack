@@ -27,10 +27,10 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $clients = $this->clientRepository->clientCount();
+        $clients = $this->caseProfileRepository->complainantsCount();
         $cases = $this->caseProfileRepository->caseCount();
         $caseLogs = $this->caseLogRepository->caseLogCount();
-        $clientsPerMonth = $this->clientRepository->clientPerMonth();
+        $clientsPerMonth = $this->caseProfileRepository->complainantsCountPerMonth();
         $casesPerMonth = $this->caseProfileRepository->casePerMonth();
         $caseLogsPerMonth = $this->caseLogRepository->caseLogPerMonth();
         $womenCount = $this->caseProfileRepository->womenCount();
