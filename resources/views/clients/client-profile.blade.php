@@ -142,8 +142,9 @@
                                 </svg>
                                 Download Signature
                             </a>
+                        @else
+                            N/A
                         @endif
-                        N/A
                     </dd>
                 </div>
             </dl>
