@@ -75,15 +75,15 @@ class AbuseSubcategorySeeder extends Seeder
             ],
             [
                 'abuse_category_id' => 3,
+                'type' => 'Threat',
+            ],
+            [
+                'abuse_category_id' => 3,
                 'type' => 'Deprivation of Custody',
             ],
             [
                 'abuse_category_id' => 4,
                 'type' => 'Rape',
-            ],
-            [
-                'abuse_category_id' => 4,
-                'type' => 'Threat',
             ],
             [
                 'abuse_category_id' => 4,
