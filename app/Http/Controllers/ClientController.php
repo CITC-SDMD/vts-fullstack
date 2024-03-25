@@ -99,10 +99,14 @@ class ClientController extends Controller
     {
         $clients = $this->clientRepository->search($request);
         $barangays = $this->barangayRepository->index();
+        $occupations = $this->occupationRepository->index();
+        $suboccupations = $this->suboccupationRepository->index();
 
         $data = (object) [
             'clients' => $clients,
             'barangays' => $barangays,
+            'occupations' => $occupations,
+            'suboccupations' => $suboccupations,
             'pagination' => $clients->links('components.pagination'),
         ];
 
