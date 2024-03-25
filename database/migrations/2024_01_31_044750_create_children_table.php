@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('middlename');
             $table->string('lastname');
-            $table->integer('age');
+            $table->string('age');
             $table->enum('civil_status', ['single', 'married', 'widowed', 'divorced']);
             $table->string('educ_level');
             $table->timestamps();

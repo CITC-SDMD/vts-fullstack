@@ -83,6 +83,10 @@ class AbuseSubcategorySeeder extends Seeder
             ],
             [
                 'abuse_category_id' => 4,
+                'type' => 'Threat',
+            ],
+            [
+                'abuse_category_id' => 4,
                 'type' => 'Sexual Harassment',
             ],
             [
