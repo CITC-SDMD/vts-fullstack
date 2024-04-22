@@ -4,7 +4,7 @@ namespace App\Interface\Repositories;
 
 interface ClientRepositoryInterface
 {
-    public function index();
+    public function index($idArray);
 
     public function showAllClient();
 

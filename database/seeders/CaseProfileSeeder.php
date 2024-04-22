@@ -6,6 +6,7 @@ use App\Models\CaseCategory;
 use App\Models\CaseProfile;
 use App\Models\Client;
 use App\Models\Relationship;
+use App\Models\Respondent;
 use DateTime;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
@@ -49,6 +50,11 @@ class CaseProfileSeeder extends Seeder
                 'relationship_id' => $faker->randomElement($relationships),
                 'case_profile_id' => 'CASE #'.$caseNumber,
                 'created_at' => $formattedRandomDate,
+            ]);
+
+            Respondent::create([
+                'complainant_id' => $client->id,
+                'respondent_id' => $respondent->id,
             ]);
         }
     }

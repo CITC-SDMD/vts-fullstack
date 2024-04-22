@@ -29,7 +29,8 @@ Route::prefix('dashboard')->group(function () {
 });
 
 Route::prefix('clients')->group(function () {
-    Route::get('/', [ClientController::class, 'index'])->name('client.index');
+    Route::get('/complainants', [ClientController::class, 'index'])->name('client.index');
+    Route::get('/respondents', [ClientController::class, 'showRespondentIndex'])->name('client.respondent.index');
     Route::get('/{uuid}/profile', [ClientController::class, 'show'])->name('client.show');
     Route::get('/{uuid}/edit-profile', [ClientController::class, 'edit'])->name('client.edit');
     Route::get('/{uuid}/profile/cases', [ClientController::class, 'showCases'])->name('client.show.cases');

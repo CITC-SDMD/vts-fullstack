@@ -59,6 +59,14 @@ $(document).ready(function () {
             $('.abusecat').addClass('hidden');
             $('.abusesubcat').addClass('hidden');
         }
+
+        if ($(this).val() == 10) {
+            $('.othercases').removeClass('hidden');
+            $('#others').attr('required', true);
+        } else {
+            $('.othercases').addClass('hidden');
+            $('#others').removeAttr('required');
+        }
     });
 
     $('.caseprofiles-button').addClass('active-link');

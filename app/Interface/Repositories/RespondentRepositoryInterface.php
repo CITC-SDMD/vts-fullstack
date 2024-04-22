@@ -8,5 +8,9 @@ interface RespondentRepositoryInterface
 
     public function showRespondentIdArray(int $complainantId);
 
+    public function showClientIdsArray();
+
+    public function showRespondentIdsArray();
+
     public function showByComplainantIdRespondentId(int $complainantId, int $respondentId);
 }

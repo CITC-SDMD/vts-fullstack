@@ -9,9 +9,10 @@ use illuminate\Support\Str;
 
 class ClientRepository implements ClientRepositoryInterface
 {
-    public function index()
+    public function index($idArray)
     {
         return Client::with(['barangay'])
+            ->whereIn('id', $idArray)
             ->orderBy('id', 'desc')
             ->paginate(config('pagination.paginate'));
     }

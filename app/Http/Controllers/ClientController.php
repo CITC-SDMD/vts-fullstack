@@ -59,7 +59,7 @@ class ClientController extends Controller
         AbuseCategoryRepositoryInterface $abuseCategoryRepository,
         AbuseSubcategoryRepositoryInterface $abuseSubcategoryRepository,
         OccupationRepositoryInterface $occupationRepository,
-        SuboccupationRepositoryInterface $suboccupationRepository
+        SuboccupationRepositoryInterface $suboccupationRepository,
     ) {
         $this->middleware('auth');
         $this->clientRepository = $clientRepository;
@@ -77,7 +77,8 @@ class ClientController extends Controller
 
     public function index()
     {
-        $clients = $this->clientRepository->index();
+        $clientIds = $this->respondentRepository->showClientIdsArray();
+        $clients = $this->clientRepository->index($clientIds);
         $barangays = $this->barangayRepository->index();
         $occupations = $this->occupationRepository->index();
         $suboccupations = $this->suboccupationRepository->index();
@@ -91,6 +92,27 @@ class ClientController extends Controller
         ];
 
         return view('pages.clients', [
+            'data' => $data,
+        ]);
+    }
+
+    public function showRespondentIndex()
+    {
+        $respondentIds = $this->respondentRepository->showRespondentIdsArray();
+        $clients = $this->clientRepository->index($respondentIds);
+        $barangays = $this->barangayRepository->index();
+        $occupations = $this->occupationRepository->index();
+        $suboccupations = $this->suboccupationRepository->index();
+
+        $data = (object) [
+            'clients' => $clients,
+            'barangays' => $barangays,
+            'occupations' => $occupations,
+            'suboccupations' => $suboccupations,
+            'pagination' => $clients->links('components.pagination'),
+        ];
+
+        return view('pages.respondents', [
             'data' => $data,
         ]);
     }

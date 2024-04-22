@@ -23,6 +23,16 @@ class RespondentRepository implements RespondentRepositoryInterface
             ->pluck('respondent_id');
     }
 
+    public function showClientIdsArray()
+    {
+        return Respondent::distinct()->pluck('complainant_id');
+    }
+
+    public function showRespondentIdsArray()
+    {
+        return Respondent::distinct()->pluck('respondent_id');
+    }
+
     public function showByComplainantIdRespondentId(int $complainantId, int $respondentId)
     {
         return Respondent::where('complainant_id', $complainantId)
