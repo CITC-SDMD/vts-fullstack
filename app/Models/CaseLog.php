@@ -19,6 +19,7 @@ class CaseLog extends Model
         'referral_agency_id',
         'service_id',
         'case_log_number',
+        'envelope_number',
     ];
 
     public function latestAssistanceLog()

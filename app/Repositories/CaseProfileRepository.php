@@ -73,6 +73,7 @@ class CaseProfileRepository implements CaseProfileRepositoryInterface
         $caseProfile->received_by_id = $user->id;
         $caseProfile->relationship_id = $payload->relationship_id;
         $caseProfile->case_profile_id = 'CASE #'.$caseNumber;
+        $caseProfile->envelope_number = $payload->envelope_number;
         $caseProfile->others = $payload->others;
         $caseProfile->created_at = $payload->created_at;
         $caseProfile->save();
