@@ -85,4 +85,12 @@ $(document).ready(function () {
         // $("#abuse_subcategory_id")[0].selectize.clear();
         // $("#abuse_category_id")[0].selectize.clear();
     });
+
+    $('#import-button').click(function () {
+        $('#import-modal').toggle('hidden');
+    });
+
+    $('#cancel-import').click(function () {
+        $('#import-modal').toggle('hidden');
+    });
 });

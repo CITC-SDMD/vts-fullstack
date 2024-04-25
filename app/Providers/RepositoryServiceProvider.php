@@ -12,6 +12,7 @@ use App\Interface\Repositories\CaseLogRepositoryInterface;
 use App\Interface\Repositories\CaseProfileRepositoryInterface;
 use App\Interface\Repositories\ChildRepositoryInterface;
 use App\Interface\Repositories\ClientRepositoryInterface;
+use App\Interface\Repositories\ImportRepositoryInterface;
 use App\Interface\Repositories\OccupationRepositoryInterface;
 use App\Interface\Repositories\ReferralAgencyRepositoryInterface;
 use App\Interface\Repositories\RelationshipRepositoryInterface;
@@ -30,6 +31,7 @@ use App\Repositories\CaseLogRepository;
 use App\Repositories\CaseProfileRepository;
 use App\Repositories\ChildRepository;
 use App\Repositories\ClientRepository;
+use App\Repositories\ImportRepository;
 use App\Repositories\OccupationRepository;
 use App\Repositories\ReferralAgencyRepository;
 use App\Repositories\RelationshipRepository;
@@ -66,6 +68,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ReportRepositoryInterface::class, ReportRepository::class);
         $this->app->bind(OccupationRepositoryInterface::class, OccupationRepository::class);
         $this->app->bind(SuboccupationRepositoryInterface::class, SuboccupationRepository::class);
+        $this->app->bind(ImportRepositoryInterface::class, ImportRepository::class);
     }
 
     /**

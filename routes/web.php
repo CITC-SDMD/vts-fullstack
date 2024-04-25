@@ -10,6 +10,7 @@ use App\Http\Controllers\ChildController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ImportController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ResourceController;
@@ -104,4 +105,8 @@ Route::prefix('reports')->group(function () {
 
 Route::prefix('abuse-subcategory')->group(function () {
     Route::get('/{abuseCategoryId}', [AbuseSubcategoryController::class, 'show']);
+});
+
+Route::prefix('import')->group(function () {
+    Route::post('/cases', [ImportController::class, 'store'])->name('import.store');
 });

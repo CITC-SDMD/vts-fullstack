@@ -31,11 +31,19 @@
                 </div>
             </form>
         </div>
-        <div class="flex items-center justify-center mt-4 md:mt-8 lg:mt-8">
-            <button type="button" id="new-case-button"
-                class="block rounded-md w-full bg-violet-600 px-3 py-1.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
-                Create new case
-            </button>
+        <div class="flex items-center justify-center gap-x-4 sm:gap-x-2 mt-4 md:mt-8 lg:mt-8">
+            <div>
+                <button type="button" id="import-button"
+                    class="block rounded-md w-full bg-violet-600 px-3 py-1.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
+                    Import Excel
+                </button>
+            </div>
+            <div>
+                <button type="button" id="new-case-button"
+                    class="block rounded-md w-full bg-violet-600 px-3 py-1.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
+                    Create new case
+                </button>
+            </div>
         </div>
     </div>
 
@@ -149,7 +157,8 @@
                             </button>
                         </div>
                     </div>
-                    <form action="{{ route('client.store.case') }}" method="post" id="new-case-form" autocomplete="off">
+                    <form action="{{ route('client.store.case') }}" method="post" id="new-case-form"
+                        autocomplete="off">
                         @csrf
                         <div class="mt-4 lg:grid lg:grid-cols-2 gap-x-4 gap-y-0 pb-4">
                             <div>
@@ -268,6 +277,55 @@
             </div>
         </div>
     </div>
+
+    <div class="relative z-10 hidden" id="import-modal" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div
+                    class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+                    <form action="{{ route('import.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div>
+                            <div class="col-span-full">
+                                <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">
+                                    Import Excel
+                                </label>
+                                <div
+                                    class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                                    <div class="text-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor"
+                                            class="mx-auto h-12 w-12 text-gray-300">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5" />
+                                        </svg>
+                                        <div class="mt-4 flex text-sm leading-6 justify-center text-gray-600">
+                                            <label for="file-upload"
+                                                class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                                                <span id="buttonSpan">Upload a file</span>
+                                                <span class="hidden" id="fileName"></span>
+                                                <input id="file-upload" name="file-upload" type="file"
+                                                    class="sr-only">
+                                            </label>
+                                        </div>
+                                        <p class="text-xs leading-5 text-gray-600">XLS, XLSX, CSV up to 10MB</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
+                            <button type="submit"
+                                class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2">Deactivate</button>
+                            <button type="button" id="cancel-import"
+                                class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -348,6 +406,22 @@
                 if ($(this).val() == 'Others') {
                     $('.othercases').removeClass('hidden');
                     $('#others').attr('required', true);
+                }
+            });
+
+            const fileUploadInput = document.getElementById('file-upload');
+            const buttonSpan = document.getElementById('buttonSpan');
+            const fileNameSpan = document.getElementById('fileName');
+
+            fileUploadInput.addEventListener('change', function() {
+                if (fileUploadInput.files.length > 0) {
+                    buttonSpan.classList.add('hidden');
+                    fileNameSpan.classList.remove('hidden');
+                    fileNameSpan.textContent = fileUploadInput.files[0].name;
+                } else {
+                    buttonSpan.classList.remove('hidden');
+                    fileNameSpan.classList.add('hidden');
+                    fileNameSpan.textContent = '';
                 }
             });
         });
