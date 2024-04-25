@@ -322,8 +322,7 @@
                                                 class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                                                 <span id="buttonSpan">Upload a file</span>
                                                 <span class="hidden" id="fileName"></span>
-                                                <input id="file-upload" name="file-upload" type="file"
-                                                    class="sr-only">
+                                                <input id="file-upload" name="file" type="file" class="sr-only">
                                             </label>
                                         </div>
                                         <p class="text-xs leading-5 text-gray-600">XLS, XLSX, CSV up to 10MB</p>

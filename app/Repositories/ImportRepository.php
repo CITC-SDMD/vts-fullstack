@@ -16,7 +16,7 @@ class ImportRepository implements ImportRepositoryInterface
         try {
 
             $validator = Validator::make($payload->all(), [
-                'file' => ['required', 'file', 'mimes:xlsx,xls,csv', 'max:5120'],
+                'file' => ['required', 'file', 'mimes:xlsx,xls,csv', 'max:10240'],
             ]);
 
             if ($payload->file) {
