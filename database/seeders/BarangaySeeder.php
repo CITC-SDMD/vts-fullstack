@@ -936,7 +936,7 @@ class BarangaySeeder extends Seeder
             Barangay::create([
                 'brgy_code' => $barangay['brgy_code'],
                 'brgy_name' => $barangay['brgy_name'],
-                'dist_name' => $barangay['dist_name'],
+                'dist_name' => $faker->word(),
                 'cong_dist_name' => $faker->word(),
                 'street_name' => $faker->word(),
             ]);
