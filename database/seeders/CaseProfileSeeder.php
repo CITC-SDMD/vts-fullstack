@@ -10,6 +10,7 @@ use App\Models\Respondent;
 use DateTime;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class CaseProfileSeeder extends Seeder
 {
@@ -49,6 +50,7 @@ class CaseProfileSeeder extends Seeder
                 'received_by_id' => 1,
                 'relationship_id' => $faker->randomElement($relationships),
                 'case_profile_id' => 'CASE #'.$caseNumber,
+                'envelope_number' => strtoupper(Str::random(5)),
                 'created_at' => $formattedRandomDate,
             ]);
 

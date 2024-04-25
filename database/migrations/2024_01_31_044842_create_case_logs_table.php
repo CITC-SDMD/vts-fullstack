@@ -19,7 +19,6 @@ return new class extends Migration
             $table->unsignedBigInteger('referral_agency_id');
             $table->unsignedBigInteger('service_id');
             $table->string('case_log_number');
-            $table->string('envelope_number')->nullable();
             $table->timestamps();
         });
 

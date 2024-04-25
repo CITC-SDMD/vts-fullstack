@@ -22,6 +22,7 @@ class CaseProfile extends Model
         'assessed_by_id',
         'relationship_id',
         'case_profile_id',
+        'envelope_number',
     ];
 
     public function receivedBy(): BelongsTo
