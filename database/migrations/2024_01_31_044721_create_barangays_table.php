@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid();
             $table->string('brgy_code');
             $table->string('brgy_name');
-            $table->string('dist_name');
+            $table->string('dist_name')->nullable();
             $table->string('cong_dist_name');
             $table->string('street_name');
             $table->timestamps();
