@@ -71,7 +71,7 @@ class CaseImport implements ToCollection, WithHeadingRow
                         'referral_agency_id' => $agency->id,
                         'service_id' => $service->id,
                     ]);
-                } elseif ($client && !$respondent) {
+                } elseif ($client && ! $respondent) {
                     $respondentBarangay = Barangay::where('brgy_name', trim($row['respondent_barangay']))->first();
                     if (isset($row['respondent_occupation'])) {
                         $respondentOccupation = Occupation::where('name', trim($row['respondent_occupation']))->first();
