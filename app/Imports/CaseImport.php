@@ -117,6 +117,7 @@ class CaseImport implements ToCollection, WithHeadingRow
                         'respondent_id' => $respondent->id,
                         'received_by_id' => $user->id,
                         'relationship_id' => $relationship->id,
+                        'envelope_number' => $row['envelope_number'] ?? null,
                         'created_at' => Carbon::parse($row['case_date'])->format('yyyy-mm-dd'),
                     ]);
 
@@ -202,6 +203,7 @@ class CaseImport implements ToCollection, WithHeadingRow
                         'respondent_id' => $respondent->id,
                         'received_by_id' => $user->id,
                         'relationship_id' => $relationship->id,
+                        'envelope_number' => $row['envelope_number'] ?? null,
                         'created_at' => Carbon::parse($row['case_date'])->format('yyyy-mm-dd'),
                     ]);
 
