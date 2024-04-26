@@ -98,7 +98,7 @@ class RelationshipSeeder extends Seeder
                 'relationship_type' => 'Half-sister',
             ],
             [
-                'relationship_type' => 'Fiancé/Fiancée',
+                'relationship_type' => 'Fiance',
             ],
             [
                 'relationship_type' => 'Live-in Partner',
