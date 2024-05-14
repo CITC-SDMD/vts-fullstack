@@ -26,22 +26,13 @@ class ServiceSeeder extends Seeder
                 'service_type' => 'Issuance of Certificate of Indigency',
             ],
             [
-                'service_type' => 'Assistance Food',
-            ],
-            [
-                'service_type' => 'Livelihood',
-            ],
-            [
-                'service_type' => 'Financial',
+                'service_type' => 'Food Assistance',
             ],
             [
                 'service_type' => 'Transportation',
             ],
             [
                 'service_type' => 'Case study/home visit',
-            ],
-            [
-                'service_type' => 'Shelter',
             ],
             [
                 'service_type' => 'Psychiatric evaluation',
@@ -81,6 +72,27 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'service_type' => 'Case Assessment',
+            ],
+            [
+                'service_type' => 'Livelihood Assistance',
+            ],
+            [
+                'service_type' => 'Financial Assistance',
+            ],
+            [
+                'service_type' => 'Capability Building',
+            ],
+            [
+                'service_type' => 'Surveillance and Rescue',
+            ],
+            [
+                'service_type' => 'Pychosocial Support Service',
+            ],
+            [
+                'service_type' => 'Pychological First Aid',
+            ],
+            [
+                'service_type' => 'Non-Food Assistance',
             ],
         ];
 

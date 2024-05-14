@@ -246,6 +246,20 @@
                                                                     Terminated
                                                                 </option>
                                                             </optgroup>
+                                                            <optgroup label="Social Welfare Documents">
+                                                                <option value="Certificate of Indigency">
+                                                                    Certificate of Indigency
+                                                                </option>
+                                                                <option value="Certificate of Eligibility">
+                                                                    Certificate of Eligibility
+                                                                </option>
+                                                                <option value="Social Case Study Report">
+                                                                    Social Case Study Report
+                                                                </option>
+                                                                <option value="Brief Case Study Report">
+                                                                    Brief Case Study Report
+                                                                </option>
+                                                            </optgroup>
                                                         </select>
                                                     </div>
                                                     <div class="flex mt-1">
